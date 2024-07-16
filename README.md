@@ -1,131 +1,239 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Introduction
 
-Welcome USER_NAME,
+# Content
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+# Project Set Up
+## User Stories
+## Blog Plan
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
 
-## Gitpod Reminders
+## Mindmap
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+![alt text](image-10.png)
+link to my mindmap: https://miro.com/app/board/uXjVK1IKqsk=/
 
-`python3 -m http.server`
+## Relationship diagram ERD
 
-A blue button should appear to click: _Make Public_,
+![alt text](image-11.png)
 
-Another blue button should appear to click: _Open Browser_.
+Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp=sharing
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+## Wireframes
 
-A blue button should appear to click: _Make Public_,
+Wireframe is created in https://balsamiq.cloud/srvezeo/phn02iw/r3EBE
+Home page:
+![alt text](image-6.png)
+Blog page:
+![alt text](image-7.png)
+Courses:
+![alt text](image-8.png)
 
-Another blue button should appear to click: _Open Browser_.
+Blogpost:
+![alt text](image-9.png)
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
 
-To log into the Heroku toolbelt CLI:
+# Features
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Home Page
+## Blog Page
+In blog page, I would like to have a clean and calm style.
+You would be able to search for a blog by category.
+You have to be logegd in to comment a post, but I want it easy so the comment will be approved right away without 
+the admins approvement.
+You still have a draft and publish choice, so you can read through your comment before publish.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+## Nav Bar
+## Footer
+## Register section
 
-### Connecting your Mongo database
+# Setting up workspace
+### Run this command to install django:
+ pip3 install 'django<4'  
+### Next, install these libraries: 
+pip3 install dj_database_url psycopg2
+pip3 install dj3-cloudinary-storage
+### Create a requirements.txt file to save all the installed libraries:
+pip3 freeze --local > requirements.txt
+### You need to create a project and add my apps:
+django-admin startproject mindfulgrowth
+python3 manage.py startapp blog
+Remember to add your apps in to the 'INSTALLED_APPS' in setting.py
+ ### Add your DB and CLoudinary library to your project:
+ Copy the DATABASE_URL
+ create a new file manual with name: env.py
+ This file need to be placed in the project cataloge
+ Import the os library:
+ import os
+Set environment variables:
+os.environ.setdefault(
+    "DATABASE_URL", "postgres://uottaphddte:1ZsY6k60KNPN@ep-gentle-mountain-a23bxz6h.eu-central-1.aws.neon.tech/vocal_moan_poem_31644")
+ 
+os.environ.setdefault(
+    "SECRET_KEY", "django-insecure-%s0!8rr$!pbkcomh1bmeybs4nldjtws=8n%pffttkm%(-nrrma")    
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
+os.environ.setdefault(
+    "CLOUDINARY_URL", "cloudinary://618768418781469:Q8KVKcOdIzeC4kCaKocmseNCHmM@dvh69l0yv")
 
-------
+os.environ["SECRET_KEY"] = "mysecretkey"
 
-## Release History
+Add the env.py-file to the setting.py file with commando in the file:
+import env
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+You also need to put this in the setting.py file under :
 
-**June 18, 2024,** Add Mongo back into template
+ALLOWED_HOSTS = ['8000-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.net',
+'mindfulgrowth-5f753257331e.herokuapp.com',
+'8080-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.net']
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+CSRF_TRUSTED_ORIGINS = [
+    "https://*8000-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.net",
+    "https://*mindfulgrowth-5f753257331e.herokuapp.com" 
+]
 
-**May 28 2024:** Fix Mongo and Links installs
+Dont forget to add apps and libraries in 
 
-**April 26 2024:** Update node version to 16
+INSTALLED_APPS = []
 
-**September 20 2023:** Update Python version to 3.9.17.
+Before deploying on heroku make sure: DEBUG = False
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### Create 3 new folders on the root directory: media, static, templates
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Create Procfile (needed for Heroku) on the root directory and inside the file type:
+web: gunicorn basic_mind.wsgi
+hint: It´s important to spell Procfile with a capital
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+# Feautures Implementented
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+# Design
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+# Testing
+## Validating Test
+## Python Test
+## Manual Test
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+# Bugs
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+## Solved bugs
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+* It started with a bug I didn´t really understand but suspected it came from a comment I had made in DB and afterwards I had changed user authorization for comments. I tried to solve it by deleted migration 0005.
+At first I also deleted migration 0006 + 0007 and tried to start over migration from 0004, without any result.
+Then I tried to reset the DB and keep the migration by the command "python3 manage.py flush"
+The DB was still kept the error.
+I change the author from 
+('author', models.CharField(max_length=60)), 
+to: ('author', models.ForeignKey(max_length=150, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+in the Postmodel.
+After that I needed to create a new DB + superuser and replace DB-url in env.py and Herokus config Var
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+![alt text](image-12.png)
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+* Migration problem of 0006_initial.py
+Tried a new migration a several times, but got stock on the 0006 migration.
+Tried to remigrate a lot of times, with same result.
+I removed class contact and class courses, since that was my last actions.
+I also deleted every migratefile after 0005, but I got same result over and over again when I tried to make a new migration.
+Then I tried to replace the DB with a new one, but it didn´t recognize DB.
+I search for tutor help and got answered that it was a general problem with the DB and it took a day for resolvment.
+Then I changed back to my old DB again and it worked to migrate!
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+## Fixed Bugs
+## Unfixed Bugs
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+# Technologies
+### Python - Language of this project
+### Javascript
+### HTML
+### CSS
+### Django - 
+### Cloudinary (for external image management)
+### Code Institute Postgres Database server for PostgreSQL 
+### Bootstrap
+### Github - Save the project in a repository
+### Heroku - Deploy it to a public website
 
-------
+# Deployment
 
-## FAQ about the uptime script
+For deploying, I use the Heroku app.
+At first, you commit everything to GitHub.
+In Heroku, you set up an app for the project and deploy the changes you make to the public site.
 
-**Why have you added this script?**
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
 
-**How will this affect me?**
+## Heroku
+You connect the app to your repository in GitHub with the same name.
+I chose to make a manual deployment, so I can see that everything goes ok and have control of my project.
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+You need to create an app for your project in Heroku.
+In settings you also need to fill in the URL:s in Config Var
+![alt text](image-1.png)
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+After that you go to Herokus deployment section 
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+![alt text](image-2.png)
 
-**So….?**
+Scroll down to the bottom and click the "deploy button
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+![alt text](image-3.png)
 
-**Can I opt out?**
+On the top at right hand side, you can click "open app" to see public site.
+If there is any error, you can find the logs if you click "more" button.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+![alt text](image-4.png)
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+## Git Hub / Gitpod
+I created a repository in Git Hub and connected a project to the repository.
+In the project, I worked with the canban and created the user stories there.
+From Gitpod, I pushed my changes to GitHub with the commands 
 
-**Anything more?**
+When I add, deleated or changed anything, I committed them back to GitHub using the following commands in the codespace terminal: Git add .
+Git commit -m"text"
+Git push
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+To run a backend application in Gitpods terminal,
+type: python3 manage.py runserver 
 
----
+To see and implement changes in Django, type:
+python3 manage.py makemigrations
+pyhton3 manage.py migrate
 
-Happy coding!
+## How to Fork
+To fork this repository, click the "Fork" button at the top right corner of the main repository page. On the "Create a Fork" page, you can change the name of the repo if desired. Check the box if you want to copy the main branch or multiple branches (main is selected by default). Then, create the fork.
+
+## How to Clone (An alternative to fork)
+To clone the repository, you create a copy in your repository (with all files and history).
+This creates a remote link to the original repo, allowing you to work in your copy and push changes back to the original.
+Open your repo and click the green "Code" button on the right-hand side. The easiest way is to open it with GitHub Desktop.
+
+You can read more information on cloning at the GitHub : https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+# Media
+## Icons
+## Images
+## Font
+## Databas
+CI Database https://dbs.ci-dbs.net/
+
+## Framework 
+
+# Acknowledgement
+
+### for tutoring Django:
+https://youtube.com/playlist?list=PLXuTq6OsqZjbCSfiLNb2f1FOs8viArjWy&si=9t7TdLJVAM9BM9Ga
+https://realpython.com/build-a-blog-from-scratch-django/#set-up-the-development-environment
+https://www.youtube.com/watch?v=ZUiTiUj-tZw
+https://www.youtube.com/watch?v=PXqRPqDjDgc
+https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg
+
+
+
+
+### Wireframes:
+https://balsamiq.cloud/
+
+### Create ERD: 
+http://draw.io
+
+### ChatGPT.com:
+Suggestion to create sexcerpt automatically save

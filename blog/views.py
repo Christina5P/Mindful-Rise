@@ -1,6 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import path, include
+from django.views import generic, View
+from django.views.generic import DetailView
+from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .models import Category, Post, Comment
+from django.urls import path, include
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -22,3 +29,20 @@ def blog_index(request):
     context = {
         "posts": posts,
     }
+
+    
+@login_required
+def post_like(request, pk):
+    """
+    Handle the liking and unliking of a blog post by the user.
+    """
+    post = get_object_or_404(Post, pk=pk)
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('blog_detail', args=[str(pk)]))
+
+@login_required
+def unlike_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.likes.remove(request.user)
+    return HttpResponseRedirect(reverse('blog_detail', args=[str(pk)]))
+

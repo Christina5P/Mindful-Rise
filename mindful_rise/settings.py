@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mindfulrise.herokuapp.com',
+ALLOWED_HOSTS = ['mindfulrise-f0e0db837715.herokuapp.com',
     '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net']
 
 

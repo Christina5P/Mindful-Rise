@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 from django.conf import settings
 
 
@@ -29,6 +30,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)     # to show short beginning from textfield
+    #featured_images= CloudinaryField('image', default='placeholder')
     likes = models.ManyToManyField(User, related_name='post_like')
     
     class Meta:

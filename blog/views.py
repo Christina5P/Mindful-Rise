@@ -17,7 +17,7 @@ class home_view(TemplateView):
     """
     Home page
     """
-    template_name = 'home.html'
+    template_name = 'blog/home.html'
 
 class PostList(generic.ListView):
     """
@@ -38,18 +38,6 @@ def blog_index(request):
         "posts": posts,
     }
 
-def blog_index(request):
-    """
-    Display all blog posts ordered by creation date in descending order.
-    Render from index.html
-    """
-    posts = Post.objects.all().order_by("-created_on")
-    context = {
-        "posts": posts,
-    }
-
-    return render(request, "blog/index.html", context)
-    
     
 def blog_category(request, category):
     """

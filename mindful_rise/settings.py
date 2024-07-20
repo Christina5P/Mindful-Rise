@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import os
+import sys
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
@@ -20,7 +21,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['mindfulrise-f0e0db837715.herokuapp.com',
-    '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net']
+    '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
+    '8080-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net']
 
 
 # Application definition
@@ -32,10 +34,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'blog',
     'django_summernote',
     'cloudinary',
 ]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,7 +60,7 @@ ROOT_URLCONF = 'mindful_rise.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-         'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -8,7 +8,7 @@ from django.views.generic import ListView, TemplateView
 
 urlpatterns = [
 
-    path('', views.home_view.as_view(), name='home'),
+    
     #path('carousel/', views.carousel, name='carousel'),
     path('blog/', views.PostList.as_view(), name='post_list'),
     path('', views.blog_index, name='blog_index'),

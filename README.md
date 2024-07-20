@@ -115,29 +115,6 @@ hint: It´s important to spell Procfile with a capital
 
 # Bugs
 
-## Solved bugs
-
-* It started with a bug I didn´t really understand but suspected it came from a comment I had made in DB and afterwards I had changed user authorization for comments. I tried to solve it by deleted migration 0005.
-At first I also deleted migration 0006 + 0007 and tried to start over migration from 0004, without any result.
-Then I tried to reset the DB and keep the migration by the command "python3 manage.py flush"
-The DB was still kept the error.
-I change the author from 
-('author', models.CharField(max_length=60)), 
-to: ('author', models.ForeignKey(max_length=150, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-in the Postmodel.
-After that I needed to create a new DB + superuser and replace DB-url in env.py and Herokus config Var
-
-![alt text](image-12.png)
-
-* Migration problem of 0006_initial.py
-Tried a new migration a several times, but got stock on the 0006 migration.
-Tried to remigrate a lot of times, with same result.
-I removed class contact and class courses, since that was my last actions.
-I also deleted every migratefile after 0005, but I got same result over and over again when I tried to make a new migration.
-Then I tried to replace the DB with a new one, but it didn´t recognize DB.
-I search for tutor help and got answered that it was a general problem with the DB and it took a day for resolvment.
-Then I changed back to my old DB again and it worked to migrate!
-
 ## Fixed Bugs
 ## Unfixed Bugs
 
@@ -236,4 +213,4 @@ https://balsamiq.cloud/
 http://draw.io
 
 ### ChatGPT.com:
-Suggestion to create sexcerpt automatically save
+Suggestion to create excerpt automatically save

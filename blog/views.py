@@ -1,16 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import path, include
 from django.views import generic, View
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Category, Post, Comment
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
-
+from django.views.generic import TemplateView
 
 # Create your views here.
-
 
 
 

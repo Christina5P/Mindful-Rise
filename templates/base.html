@@ -1,7 +1,6 @@
 <!-- templates/base.html 
  Other templates inherit from this -->
 
-{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mindful Rise{% endblock %}</title>
-
+  
+{% load static %}
 <!-- Font Awesome -->
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -20,14 +20,13 @@
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
   rel="stylesheet"
 />
-<!-- MDB UI Kit CSS-->
+<!-- MDB -->
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css"
   rel="stylesheet"
-/>
-    
+/>    
 <!-- Custom CSS-->
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 <!-- Icons for Social Media-->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -36,13 +35,56 @@
 
 <body>
 
-  <header> </header>
+  <header>
+  <style>
+    /* Carousel styling */
+    #introCarousel,
+    .carousel-inner,
+    .carousel-item,
+    .carousel-item.active {
+      height: 100vh;
+    }
+
+    .carousel-item:nth-child(1) {
+      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .carousel-item:nth-child(2) {
+      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .carousel-item:nth-child(3) {
+      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    /* Height for devices larger than 576px */
+    @media (min-width: 992px) {
+      #introCarousel {
+        margin-top: -58.59px;
+      }
+    }
+
+    .navbar .nav-link {
+      color: #fff !important;
+    }
+  </style>
+  </header>
+
      <!-- Navbar -->
      <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
       <div class="container-fluid">
         <!-- Navbar brand -->
         <a class="navbar-brand nav-link" target="_blank" href="{% url 'home' %}">
-          <strong>Mindful Growth</strong>
+          <strong>Mindful Rise</strong>
         </a>
         <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
@@ -53,10 +95,10 @@
               <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'courses' %}" rel="nofollow" target="_blank">Courses</a>
+              <a class="nav-link" href="{% url 'blog_index' %}" target="_blank">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog_index' %}" target="_blank">Blog</a>
+              <a class="nav-link" href="{% url 'courses' %}" rel="nofollow" target="_blank">Courses</a>
             </li>
           </ul>
   
@@ -95,17 +137,15 @@
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           © 2020 Copyright:
-          <a class="text-dark" href="https://mdbootstrap.com/">Mindful Growth by Christina Åhman</a>
+          <a class="text-dark">Mindful Growth by Christina Åhman</a>
         </div>
   </footer>
 
-  
-<!-- MDB -->
+ <!-- MDB -->
 <script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
 ></script>
-
 </body>
 
 </html>

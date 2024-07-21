@@ -37,7 +37,7 @@ def blog_index(request):
     context = {
         "posts": posts,
     }
-
+    return render(request, "blog/index.html", context)
     
 def blog_category(request, category):
     """

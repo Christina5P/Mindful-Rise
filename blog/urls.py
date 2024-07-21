@@ -2,7 +2,7 @@
 
 from . import views
 from django.urls import path
-from.views import Post, Comment, Category, Courses
+from.views import Post, Comment, Category, Courses, blog_index
 from django.views.generic import ListView, TemplateView
 
 
@@ -10,8 +10,8 @@ urlpatterns = [
 
     
     #path('carousel/', views.carousel, name='carousel'),
-    path('blog/', views.PostList.as_view(), name='post_list'),
-    path('', views.blog_index, name='blog_index'),
+    path('', views.PostList.as_view(), name='post_list'),
+    path('blog/', views.blog_index, name='blog_index'),
     path('search/', views.category_search, name='category_search'),
     path("category/<category>/", views.blog_category, name="blog_category"),
     path("post/<int:pk>/", views.blog_detail, name ="blog_detail" ),

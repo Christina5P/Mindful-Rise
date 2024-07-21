@@ -4,7 +4,7 @@ from django.views import generic, View
 from django.views.generic import DetailView, ListView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Category, Post, Comment
+from .models import Category, Post, Comment, Courses
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
@@ -104,3 +104,12 @@ def unlike_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.likes.remove(request.user)
     return HttpResponseRedirect(reverse('blog_detail', args=[str(pk)]))
+
+
+def courses_index(request):
+    courses = Post.objects.all().order_by("-created_on")
+    context = {
+        "courses": courses,
+    }
+    return render(request, 'blog/courses.html', context)
+

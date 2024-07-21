@@ -2,7 +2,7 @@
 
 from . import views
 from django.urls import path
-from.views import Post, Comment, Category
+from.views import Post, Comment, Category, Courses
 from django.views.generic import ListView, TemplateView
 
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path('post/<int:pk>/unlike/', views.unlike_post, name='unlike_post'),
     #path('contact/', views.contact_view, name='contact'),
     #path('<slug:slug>/', views.post, name='post'),
-    #path('courses/', views.courses_index, name='courses'),
+    path('courses/', views.courses_index, name='courses'),
     path('index/', views.blog_index, name='blog'),
 
     ]    

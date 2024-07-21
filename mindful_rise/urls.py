@@ -5,9 +5,10 @@ from blog.views import home_view
 
 urlpatterns = [
     
-    path('', home_view.as_view(), name='home'),
+    
     path('admin/', admin.site.urls),
+    path('', home_view.as_view(), name='home'),
     path('summernote/', include('django_summernote.urls')),
     path('', include('blog.urls')),    
-    path('', home_view.as_view(), name='home'),
+   
     ]

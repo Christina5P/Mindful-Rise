@@ -3,11 +3,6 @@
 
  {% load static %}
 
- {% url 'home' as home_url %}
- {% url 'account_login' as login_url %}
- {% url 'account_signup' as signup_url %}
- {% url 'account_logout' as logout_url %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,52 +36,6 @@
 </head>
 
 <body>
-
-  <header>
-  <style>
-    /* Carousel styling */
-    #introCarousel,
-    .carousel-inner,
-    .carousel-item,
-    .carousel-item.active {
-      height: 100vh;
-    }
-
-    .carousel-item:nth-child(1) {
-      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    }
-
-    .carousel-item:nth-child(2) {
-      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    }
-
-    .carousel-item:nth-child(3) {
-      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    }
-
-    /* Height for devices larger than 576px */
-    @media (min-width: 992px) {
-      #introCarousel {
-        margin-top: -58.59px;
-      }
-    }
-
-    .navbar .nav-link {
-      color: #fff !important;
-    }
-  </style>
-  </header>
-
-
      <!-- Navbar -->
      <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
       <div class="container-fluid">
@@ -127,7 +76,8 @@
           </div>
         </div>
         
-          </nav>         
+          </nav>    
+          
 <main>
   
 
@@ -158,7 +108,7 @@
        
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2020 Copyright:
+          © 2024 Copyright:
           <a class="text-dark">Mindful Growth by Christina Åhman</a>
         </div>
   </footer>

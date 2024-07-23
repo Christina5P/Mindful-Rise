@@ -214,3 +214,6 @@ http://draw.io
 
 ### ChatGPT.com:
 Suggestion to create excerpt automatically save
+
+### Inspiration of blogs and teaching equpment
+https://www.progressme.se/sv

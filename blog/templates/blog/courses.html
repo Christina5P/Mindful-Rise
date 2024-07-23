@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{% if user.is_authenticated %}
+<p class="text-end m-3">You are logged in as {{ user }}</p>
+{% else %}
+<p class="text-end m-3">You are not logged in</p>
+{% endif %}
+
+
 {% block page_title %}
     <h2>Courses material</h2>
 {% endblock page_title %}

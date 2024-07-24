@@ -1,4 +1,8 @@
-.full-width-img {
-    width: 100%;
-    height: auto;
-}
+.card img {
+    max-width: 100%; /* Sätter maxbredd till 100% av förälderelementet */
+    max-height: 100px; /* Justera denna storlek efter behov */
+    width: auto; /* Bevarar bildens proportioner */
+    height: auto; /* Bevarar bildens proportioner */
+    object-fit: cover;
+  }
+  

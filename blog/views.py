@@ -8,9 +8,10 @@ from .models import Category, Post, Comment, Courses
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
+from .forms import CommentForm
+
 
 # Create your views here.
-
 
 
 class home_view(TemplateView):
@@ -26,7 +27,7 @@ class PostList(generic.ListView):
     """
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
-    paginate_by = 6
+    paginate_by = 2
 
 def blog_index(request):
     """
@@ -58,7 +59,8 @@ def blog_detail(request, pk):
     Display details of a single blog post and its associated comments and likes
     """
     post = get_object_or_404(Post, pk=pk)
-    comments = Comment.objects.filter(post=post)
+    comments = post.comments.all().order_by("-created_on")
+    comment_count = post.comments.filter(approved=True).count()
     number_of_likes = post.likes.count()
 
     post_is_liked = False
@@ -72,7 +74,17 @@ def blog_detail(request, pk):
         "post_is_liked": post_is_liked,
     }
 
-    return render(request, "blog/detail.html", context)
+    return render(
+        request, 
+    "blog/detail.html",
+      {
+        "post": post,
+        "comments": comments,
+        "comment_count": comment_count,
+        "comment_form": CommentForm()
+
+    },
+)
 
 def category_search(request):
     """

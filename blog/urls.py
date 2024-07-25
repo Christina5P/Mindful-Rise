@@ -2,7 +2,7 @@
 
 from . import views
 from django.urls import path
-from.views import Post, Comment, Category, Courses, blog_index
+from.views import Post, Comment, Category, Courses, blog_index, blog_detail
 from django.views.generic import ListView, TemplateView
 
 

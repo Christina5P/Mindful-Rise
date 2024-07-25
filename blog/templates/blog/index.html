@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block page_title %}
@@ -6,9 +7,10 @@
 {% endblock page_title %}
 
 
-{% block page_content %}
-<style>
-   #intro {
+<header>
+  <!-- Intro settings -->
+  <style>
+    #intro {
       /* Margin to fix overlapping fixed navbar */
       margin-top: 58px;
     }
@@ -20,11 +22,15 @@
       }
     }
   </style>
+</header>
+
+{% block page_content %}
 
   
   <!--Main layout-->
   <main class="my-5">
     <div class="container">
+   
       <!--Section: Content-->
       <section class="text-center">
         <h4 class="mb-5"><strong>Latest posts</strong></h4>
@@ -41,28 +47,27 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">
-                  {{ post.content|slice:":100" }}...
+                <p class="card-text">{{ post.content|safe }}...</p>
                 </p>
                 <a href="{% url 'blog_detail' post.pk %}" class="btn btn-primary" data-mdb-ripple-init>Read</a>
               </div>
             </div>
           </div>
-          {% endfor %}
+     {% endfor %}
         </div>
       </section>
 <!--Section: Content-->
 
 
       <!-- Pagination -->
-      <nav class="my-4" aria-label="...">
-        <ul class="pagination pagination-circle justify-content-center">
-          <li class="page-item">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+      <nav aria-label="...">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
           </li>
           <li class="page-item"><a class="page-link" href="#">1</a></li>
           <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            <a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
           </li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item">
@@ -75,5 +80,5 @@
   <!--Main layout-->
 
 
+  {% endblock page_content %}
 
-{% endblock page_content %}

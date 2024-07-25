@@ -2,10 +2,9 @@
 
 {% load static %}
 
-{% block page_title %}
-    <h2>Blog Posts</h2>
-{% endblock page_title %}
+<!-- index.html content starts here -->
 
+{% block page_content %}
 
 <header>
   <!-- Intro settings -->
@@ -24,61 +23,82 @@
   </style>
 </header>
 
-{% block page_content %}
+{% block content %}
 
-  
+  <body>
   <!--Main layout-->
   <main class="my-5">
     <div class="container">
    
       <!--Section: Content-->
+      
       <section class="text-center">
-        <h4 class="mb-5"><strong>Latest posts</strong></h4>
-
+        <!--<h4 class="mb-5"><strong>Latest posts</strong></h4>-->
+        {% for post in post %}
         <div class="row">
-          {% for post in posts %}
+          
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
               <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-                <img src="{{ post.image_url }}" class="img-fluid" alt="{{ post.title }}" /> <!--rätt url för img?-->
-                <a href="{% url 'blog_detail' post.pk %}">
+                <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.title }}" />
+                <a href="{% url 'post_detail' post.slug %}">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
               </div>
-              <div class="card-body">
+              <div class="card-body">   
                 <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.content|safe }}...</p>
-                </p>
+               <p class="media">{{ post.get_media_type_display }}</p>   
+
+                <p class="card-text">{{ post.excerpt|safe }}</p>
                 <a href="{% url 'blog_detail' post.pk %}" class="btn btn-primary" data-mdb-ripple-init>Read</a>
+                <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i> {{ post.number_of_likes }}</p>
+                     
               </div>
             </div>
           </div>
-     {% endfor %}
+          {% empty %}
+    <p>No publish posts</p>
+            {% endfor %}
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 <!--Section: Content-->
 
 
       <!-- Pagination -->
-      <nav aria-label="...">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
+<nav aria-label="...">
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">{{ num }}</span>
+        </li>
+        {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
     </div>
-  </main>
+    </main>
+  </body>
+
+  {% endblock %}
   <!--Main layout-->
 
 
-  {% endblock page_content %}
-
+{% endblock page_content %}

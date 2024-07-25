@@ -1,18 +1,16 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from django.urls import path, include
 from django.views import generic, View
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Category, Post, Comment, Courses
-from django.urls import path, include
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
 from .forms import CommentForm
 
 
 # Create your views here.
-
 
 class home_view(TemplateView):
     """
@@ -25,9 +23,22 @@ class PostList(generic.ListView):
     A view to list all posts with status 'published'.
     Generic ListView is a standard view. Views in /blog
     """
+    model = Post
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
     paginate_by = 2
+    #page_number = request.GET.get('page')
+    #page_obj = paginator.get_page(page_number)
+
+
+    def get_queryset(self):
+        return Post.objects.filter(status=1).order_by('-created_on')
+
+        
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/detail.html'
+    context_object_name = 'post'
 
 def blog_index(request):
     """
@@ -60,7 +71,7 @@ def blog_detail(request, pk):
     """
     post = get_object_or_404(Post, pk=pk)
     comments = post.comments.all().order_by("-created_on")
-    comment_count = post.comments.filter(approved=True).count()
+    #comment_count = post.comments.filter(approved=True).count()
     number_of_likes = post.likes.count()
 
     post_is_liked = False
@@ -80,7 +91,7 @@ def blog_detail(request, pk):
       {
         "post": post,
         "comments": comments,
-        "comment_count": comment_count,
+        #"comment_count": comment_count,
         "comment_form": CommentForm()
 
     },
@@ -92,7 +103,9 @@ def category_search(request):
     """
     query = request.GET.get('q')
     if query:
-        categories = Category.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+        categories = Category.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
     else:
         categories = Category.objects.all()
     

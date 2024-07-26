@@ -1,7 +1,7 @@
 # blog/urls.py 
 
 from django.urls import path
-from.views import Post, Comment, Category, Courses, blog_index, blog_detail
+from.views import Post, Comment, Category, Courses, blog_index, blog_detail, PostList, PostDetailView
 from django.views.generic import ListView, TemplateView
 from . import views
 

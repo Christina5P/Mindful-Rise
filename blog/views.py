@@ -18,7 +18,7 @@ class home_view(TemplateView):
     """
     template_name = 'blog/home.html'
 
-class PostList(generic.ListView):
+class PostList(ListView):
     """
     A view to list all posts with status 'published'.
     Generic ListView is a standard view. Views in /blog
@@ -26,6 +26,7 @@ class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
+    context_object_name = 'posts'
     paginate_by = 2
     #page_number = request.GET.get('page')
     #page_obj = paginator.get_page(page_number)
@@ -34,7 +35,7 @@ class PostList(generic.ListView):
     def get_queryset(self):
         return Post.objects.filter(status=1).order_by('-created_on')
 
-        
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
@@ -71,7 +72,7 @@ def blog_detail(request, pk):
     """
     post = get_object_or_404(Post, pk=pk)
     comments = post.comments.all().order_by("-created_on")
-    #comment_count = post.comments.filter(approved=True).count()
+    comment_count = post.comments.filter(approved=True).count()
     number_of_likes = post.likes.count()
 
     post_is_liked = False
@@ -91,7 +92,7 @@ def blog_detail(request, pk):
       {
         "post": post,
         "comments": comments,
-        #"comment_count": comment_count,
+        "comment_count": comment_count,
         "comment_form": CommentForm()
 
     },

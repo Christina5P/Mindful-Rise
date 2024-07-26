@@ -116,6 +116,18 @@ hint: It´s important to spell Procfile with a capital
 # Bugs
 
 ## Fixed Bugs
+
+- I struggle with the post views on blogsite. 
+I wanted to have a blogcard with header and the first 100 letters to show and a "Read"button to open the full view.
+When I used syntax "Slice" it showed the first syntax sugns instead of the content.
+With tutorhelp, I changed it to "safe" but then I only could see the header.
+I try to solve it by going through the HTML, models, views and url files.
+Unfortunaly I changed posts to post in view function and the result was that I losed the blogcontent and could only see the text 
+No published posts.
+
+I fixed it and tried to back the other changes I tried out on the way.
+I skip the function with slice, since I got told it need more filter for that and take it as a feature scoop.
+
 ## Unfixed Bugs
 
 # Technologies

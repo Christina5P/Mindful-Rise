@@ -1,11 +1,4 @@
 {% extends 'base.html' %}
-
-{% load static %}
-
-<!-- index.html content starts here -->
-
-{% block page_content %}
-
 <header>
   <!-- Intro settings -->
   <style>
@@ -21,49 +14,57 @@
       }
     }
   </style>
-</header>
+
+<!-- index.html content starts here -->
+{% block page_content %}
 
 {% block content %}
 
-  <body>
-  <!--Main layout-->
+   <!--Main layout-->
+ 
   <main class="my-5">
     <div class="container">
    
       <!--Section: Content-->
-      
+    
       <section class="text-center">
-        <!--<h4 class="mb-5"><strong>Latest posts</strong></h4>-->
-        {% for post in post %}
+      <h4 class="mb-5"><strong>Latest posts</strong></h4>
+      {% for post in posts %}
         <div class="row">
-          
-          <div class="col-lg-4 col-md-6 mb-4">
+          <div class="col-lg-4 col-md-12 mb-4">
             <div class="card">
-              <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-                <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.title }}" />
-                <a href="{% url 'post_detail' post.slug %}">
+              <div class="card-body">
+                <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
+                <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
               </div>
-              <div class="card-body">   
-                <h5 class="card-title">{{ post.title }}</h5>
-               <p class="media">{{ post.get_media_type_display }}</p>   
-
-                <p class="card-text">{{ post.excerpt|safe }}</p>
-                <a href="{% url 'blog_detail' post.pk %}" class="btn btn-primary" data-mdb-ripple-init>Read</a>
-                <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i> {{ post.number_of_likes }}</p>
-                     
+              
+                <div class="image-container">
+                    {% if "placeholder" in post.featured_image.url %}
+                    <img class="card-img-top"
+                        src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
+                    {% else %}
+                    <img class="card-img-top" src=" {{ post.featured_image.url }}">
+                    {% endif %}
+                    <a href="{% url 'post_detail' post.slug  %}" class="post-link">
+                      <h2 class="card-title">{{ post.title }}</h2>
+                      <p class="card-text">{{ post.excerpt|slice:":100" | safe }}</p>
+                  </a>
+                  <p class="card-text text-muted h6">{{ post.created_on}} <i class="far fa-heart"></i>
+                    {{ post.number_of_likes }}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          {% empty %}
-    <p>No publish posts</p>
+            {% empty %}
+            <p>No published posts</p>
             {% endfor %}
-        </div>
-      </div>
-    </div>
+                  </div>
+
   </section>
-<!--Section: Content-->
+ 
 
 
       <!-- Pagination -->
@@ -96,9 +97,7 @@
     </div>
     </main>
   </body>
-
-  {% endblock %}
+   {% endblock %}
   <!--Main layout-->
 
-
-{% endblock page_content %}
+  {% endblock page_content %}

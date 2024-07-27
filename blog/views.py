@@ -8,7 +8,7 @@ from django.urls import reverse
 from .models import Category, Post, Comment, Courses
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -17,21 +17,12 @@ class home_view(TemplateView):
     Home page
     """
     template_name = 'blog/home.html'
-
 class PostList(ListView):
-    """
-    A view to list all posts with status 'published'.
-    Generic ListView is a standard view. Views in /blog
-    """
     model = Post
-    queryset = Post.objects.filter(status=1)
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = "blog/index.html"
     context_object_name = 'posts'
-    paginate_by = 2
-    #page_number = request.GET.get('page')
-    #page_obj = paginator.get_page(page_number)
-
-
+  
     def get_queryset(self):
         return Post.objects.filter(status=1).order_by('-created_on')
 
@@ -40,17 +31,26 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
     context_object_name = 'post'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
 def blog_index(request):
     """
     Display all blog posts ordered by creation date in descending order.
     Render from index.html
     """
-    posts = Post.objects.all().order_by("-created_on")
+    posts_list = Post.objects.filter(status=1).order_by("-created_on")
+    paginator = Paginator(posts_list, 4)  # Show 2 posts per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        "posts": posts,
+        "page_obj": page_obj,
+        "is_paginated": paginator.num_pages > 1,
     }
-    return render(request, "blog/index.html", context)
+    
+    return render(request, "blog/index.html", context,) 
     
 def blog_category(request, category):
     """

@@ -1,19 +1,6 @@
 {% extends 'base.html' %}
-<header>
-  <!-- Intro settings -->
-  <style>
-    #intro {
-      /* Margin to fix overlapping fixed navbar */
-      margin-top: 58px;
-    }
+{% load static %}
 
-    @media (max-width: 991px) {
-      #intro {
-        /* Margin to fix overlapping fixed navbar */
-        margin-top: 45px;
-      }
-    }
-  </style>
 
 <!-- index.html content starts here -->
 {% block page_content %}
@@ -29,75 +16,88 @@
     
       <section class="text-center">
       <h4 class="mb-5"><strong>Latest posts</strong></h4>
-      {% for post in posts %}
+  
         <div class="row">
+          {% for post in page_obj %}
+
           <div class="col-lg-4 col-md-12 mb-4">
             <div class="card">
-              <div class="card-body">
-                <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-                  <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
-                <a href="#!">
-                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-              </div>
-              
+              <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
                 <div class="image-container">
-                    {% if "placeholder" in post.featured_image.url %}
-                    <img class="card-img-top"
-                        src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
-                    {% else %}
-                    <img class="card-img-top" src=" {{ post.featured_image.url }}">
-                    {% endif %}
-                    <a href="{% url 'post_detail' post.slug  %}" class="post-link">
-                      <h2 class="card-title">{{ post.title }}</h2>
-                      <p class="card-text">{{ post.excerpt|slice:":100" | safe }}</p>
-                  </a>
-                  <p class="card-text text-muted h6">{{ post.created_on}} <i class="far fa-heart"></i>
-                    {{ post.number_of_likes }}</p>
+                  {% if "placeholder" in post.featured_image.url %}
+                  <img class="card-img-top" src="{% static 'images/default.jpg' %}"
+                    alt="placeholder image">
+                  {% else %}
+                  <img class="card-img-top" src=" {{ post.featured_image.url }}"
+                    alt="{{ post.title }}">
+                  {% endif %}
+                </div>
+            
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>  
+                </div>
+                  <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                      <p class="card-text">{{ post.excerpt|safe }}...</p>
+                      <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read</a>
+                      <p>Slug: {{ post.slug }}</p> 
                   </div>
                 </div>
               </div>
-            </div>
+            
             {% empty %}
             <p>No published posts</p>
             {% endfor %}
-                  </div>
-
-  </section>
+            </div>
+            </section>
  
+<!-- Pagination 
 
-
-      <!-- Pagination -->
-<nav aria-label="...">
-  <ul class="pagination">
-    {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-      </li>
-    {% endif %}
-
-    {% for num in page_obj.paginator.page_range %}
-      {% if page_obj.number == num %}
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">{{ num }}</span>
-        </li>
-        {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
-        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-      {% endif %}
-    {% endfor %}
-
-    {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-      </li>
-    {% endif %}
+         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+ 
+      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
   </ul>
 </nav>
+</div>
+</main>-->
 
-    </div>
-    </main>
-  </body>
-   {% endblock %}
-  <!--Main layout-->
+ 
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <nav class="my-4" aria-label="...">
+      <ul class="pagination pagination-circle justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
 
-  {% endblock page_content %}
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">{{ num }}</span>
+            </li>
+          {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+</main>
+
+{% endblock %}
+{% endblock page_content %}

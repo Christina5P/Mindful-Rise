@@ -140,10 +140,18 @@
           <div class="row">
             <div class="col-md-4 gx-5 mb-4">
               <div class="bg-image hover-overlay shadow-2-strong" data-mdb-ripple-init data-mdb-ripple-color="light">
-                <img src="{% static 'images/myself.webp' %}" class="img-fluid" alt='myself'>
+                {% if "placeholder" in home.profile_image.url %}
+                <img src="{% static 'images/nobody.jpg' %}" width="75%"
+                  alt="placeholder image" >
+                {% else %}
+                <img src="{{ post.featured_image.url }}" width="75%"
+                  alt="{{ home.title }}">
+                {% endif %}
+
+                <!--<img src="{% static 'images/myself.webp' %}" class="img-fluid" alt='myself'>
                 <a href=""> 
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
+                </a>-->
               </div>
             </div>
 

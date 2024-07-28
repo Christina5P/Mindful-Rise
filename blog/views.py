@@ -191,3 +191,10 @@ def courses_index(request):
     }
     return render(request, 'blog/courses.html', context)
 
+"""
+def my_view(request):
+    # Some logic
+    messages.success(request, 'Your form has been submitted successfully!')
+    # More logic
+    return render(request, 'my_template.html')
+    """ 

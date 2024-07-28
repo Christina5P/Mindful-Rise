@@ -3,6 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+
 <!-- detail.html content starts here -->
 
 {% block page_title %}
@@ -26,6 +27,7 @@
         <div class="card-body"></div>
         <p class="card-text">{{ post.content | safe }}</p>
         <div class="d-flex justify-content-between">
+
 
           <!-- display number of likes -->
           <span>{{ post.likes.count }} likes</span>

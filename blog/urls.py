@@ -5,6 +5,7 @@ from .views import PostDetailView, PostList, blog_index, category_search, blog_c
 from django.views.generic import ListView, TemplateView
 from . import views
 
+
 urlpatterns = [
    
     # path('', PostList.as_view(), name='home'),

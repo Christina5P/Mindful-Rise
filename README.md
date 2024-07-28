@@ -35,6 +35,12 @@ Blogpost:
 # Features
 
 ## Home Page
+
+Homepage is the first impression and decides if you can catch the users interest.
+My Homepage includes halfcarousel with pictures for people who is interested to invest in yourself.
+Under  the pictures, I have a short resume of myself to get close to users and  build confiedence.
+I also put in a picture of myself to strengthen the connection between me and interested users.
+
 ## Blog Page
 In blog page, I would like to have a clean and calm style.
 You would be able to search for a blog by category.
@@ -119,7 +125,7 @@ hint: It´s important to spell Procfile with a capital
 
 - I struggle with the post views on blogsite. 
 I wanted to have a blogcard with header and the first 100 letters to show and a "Read"button to open the full view.
-When I used syntax "Slice" it showed the first syntax sugns instead of the content.
+When I used syntax "Slice" it showed the first syntax signs instead of the content.
 With tutorhelp, I changed it to "safe" but then I only could see the header.
 I try to solve it by going through the HTML, models, views and url files.
 Unfortunaly I changed posts to post in view function and the result was that I losed the blogcontent and could only see the text 
@@ -129,6 +135,8 @@ I fixed it and tried to back the other changes I tried out on the way.
 I skip the function with slice, since I got told it need more filter for that and take it as a feature scoop.
 
 ## Unfixed Bugs
+
+- The navbar only views on home site
 
 # Technologies
 ### Python - Language of this project

@@ -2,7 +2,9 @@
 {% load static %}
 
 
+
 <!-- index.html content starts here -->
+
 {% block page_content %}
 
 {% block content %}
@@ -39,33 +41,17 @@
                     <h2 class="card-title">{{ post.title }}</h2>
                       <p class="card-text">{{ post.excerpt|safe }}...</p>
                       <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read</a>
-                      <p>Slug: {{ post.slug }}</p> 
-                  </div>
+                      <hr>
+                      <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i> {{ post.number_of_likes }}</p>
+                    </div>
                 </div>
               </div>
-            
+              
             {% empty %}
             <p>No published posts</p>
             {% endfor %}
             </div>
-            </section>
- 
-<!-- Pagination 
-
-         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
- 
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-</div>
-</main>-->
+           
 
  
     <!-- Pagination -->
@@ -99,5 +85,5 @@
   </div>
 </main>
 
-{% endblock %}
+{% endblock content %}
 {% endblock page_content %}

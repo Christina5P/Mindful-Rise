@@ -40,7 +40,7 @@ def blog_index(request):
     Render from index.html
     """
     posts_list = Post.objects.filter(status=1).order_by("-created_on")
-    paginator = Paginator(posts_list, 4)  # Show 2 posts per page
+    paginator = Paginator(posts_list, 3)  # Show 2 posts per page
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -66,11 +66,11 @@ def blog_category(request, category):
 
     return render(request, "blog/category.html", context)
 
-def blog_detail(request, pk):
+def blog_detail(request, slug):
     """
     Display details of a single blog post and its associated comments and likes
     """
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(queryset, slug=slug)
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
     number_of_likes = post.likes.count()
@@ -85,6 +85,19 @@ def blog_detail(request, pk):
         "number_of_likes": number_of_likes,
         "post_is_liked": post_is_liked,
     }
+
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Comment submitted and awaiting approval'
+            )
+    comment_form = CommentForm()
 
     return render(
         request, 
@@ -131,7 +144,46 @@ def unlike_post(request, pk):
     post.likes.remove(request.user)
     return HttpResponseRedirect(reverse('blog_detail', args=[str(pk)]))
 
+def comment_edit(request, slug, comment_id):
+    """
+    view to edit comments
+    """
+    if request.method == "POST":
 
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.approved = False
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 'Error updating comment!')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+def comment_delete(request, slug, comment_id):
+    """
+    view to delete comment
+    """
+    queryset = Post.objects.filter(status=1)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+    else:
+        messages.add_message(request, messages.ERROR,
+                             'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+ 
 def courses_index(request):
     courses = Post.objects.all().order_by("-created_on")
     context = {

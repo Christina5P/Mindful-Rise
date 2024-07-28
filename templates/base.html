@@ -1,7 +1,6 @@
 <!-- templates/base.html 
  Other templates inherit from this -->
 
- {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +10,15 @@
     <title>{% block title %}Mindful Rise{% endblock %}</title>
   
 
+    {% load static %}
+
+ <!--To use in href to url links href= -->
+    {% url 'home' as home_url %}
+    {% url 'account_login' as login_url %}
+    {% url 'account_signup' as signup_url %}
+    {% url 'account_logout' as logout_url %}
+    {% url 'index' as blog_url %}
+    
 
 <!-- Font Awesome -->
 <link
@@ -36,7 +44,10 @@
 </head>
 
 <body>
-     <!-- Navbar -->
+
+<header>
+
+    <!-- Navbar -->
      <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
       <div class="container-fluid">
         <!-- Navbar brand -->
@@ -77,6 +88,7 @@
         </div>
         
           </nav>    
+          </header>
           
 <main>
   

@@ -15,6 +15,7 @@
 <!-- Main layout -->
 <main class="my-5">
   <div class="container">
+
   <!-- Post details -->
   <article class="mb-4">
     <div class="card">
@@ -30,59 +31,92 @@
 
 
           <!-- display number of likes -->
-          <span>{{ post.likes.count }} likes</span>
-          <div>
-            {% if post_is_liked %}
-              <a href="{% url 'unlike_post' post.pk %}" class="btn btn-secondary">Unlike</a>
-            {% else %}
-              <a href="{% url 'post_like' post.pk %}" class="btn btn-primary">Like</a>
-            {% endif %}
+         
+          {% if user.is_authenticated %}
+              {% if user in post.likes.all %}
+                <form action="{% url 'like_post' post.id %}" method="post">
+                    {% csrf_token %}
+                   <button type="submit">Unlike</button>
+              </form>
+              {% else %}
+                <form action="{% url 'like_post' post.id %}" method="post">
+                   {% csrf_token %}
+                   <button type="submit">Like</button>
+              </form>
+          {% endif %}
+      {% else %}
+          <form action="{% url 'like_post' post.id %}" method="post">
+              {% csrf_token %}
+              {% if post.id in request.session.liked_posts %}
+                  <button type="submit">Unlike</button>
+              {% else %}
+                  <button type="submit">Like</button>
+              {% endif %}
+          </form>
+      {% endif %}
           </div>
         </div>
-      </div>
-    </div>
+       </div>
+      </div>     
   </article>
 
 
    <!-- Comments Section -->
+
 <section class="mt-4">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 ">
   <h6 class="mb-4">Comments</h6>
+  <div class="card-body">
+  {% for comment in comments %}
+  <div class="p-2 comments
+          {% if not comment.approved and comment.author == user %}
+          faded{% elif not comment.approved %} d-none{% endif %}">
+          <p class="font-weight-bold">
+            {{ comment.author }}
+            <span class="font-weight-normal">
+              {{ comment.created_on }}
+            </span> wrote:
+          </p>
+          <div id="comment{{ comment.id }}">
+            {{ comment.body | linebreaks }}
+          </div>
+          {% if not comment.approved and comment.author == user %}
+          <p class="approval">
+          Your comment is awaiting approval</p>
+                {% endif %}
 
-  {% if commented %}
-  <div class="alert alert-success" role="alert">
-    Your comment is awaiting approval
-  </div>
-  {% endif %}
+            {% if user.is_authenticated and comment.author == user %}
+          <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+          <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+          {% endif %}
+        </div>
+        {% empty %}
+        <p>No comments yet.</p>
+        {% endfor %}
+      </div>
+    </div>
 
-  {% if user.is_authenticated %}
-  <h6>Leave a comment:</h6>
-  <form method="post" style="margin-top: 1.3em;">
-    
-
-    {{ comment_form | crispy }}
-    {% csrf_token %}
+    <!-- Create comments-->
+     <div class="col-md-4 card mb-4 mt-3">
+        <div class="card-body">
+          {% if user.is_authenticated %}<p class="font-weight-bold">
+         <h6>Leave a comment:</h6>
+        <form method="post" style="margin-top: 1.3em;">
+                  {{ comment_form | crispy }}
+                  {% csrf_token %}
     <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-  </form>
-  {% else %}
+              </form>
+          {% else %}
           <p>Log in to leave a comment</p>
           {% endif %}
-
-  {% for comment in comments %}
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">{{ comment.author }}</h5>
-      <p class="card-text">{{ comment.text }}</p>
-      <p class="card-text"><small class="text-muted">{{ comment.created_on }}</small></p>
-    </div>
+        </div>
+      </div>
   </div>
-  {% empty %}
-  <p>No comments yet.</p>
-  {% endfor %}
+</div>
 </section>
 
-  
-
-  <!-- Displaying count of comments -->
+ <!-- Displaying count of comments -->
   <div class="row">
     <div class="col-12">
       <strong class="text-secondary">
@@ -92,13 +126,38 @@
     </div>
     <div class="col-12">
       <hr>
-    </div>
-
+</div>
   </div>
+
 </main>
 <!-- Main layout -->
 {% endblock page_content %}
 
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1"
+  aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"
+          id="deleteModalLabel">Delete comment?</h5>
+        <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete your comment?
+        This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+          data-bs-dismiss="modal">Close</button>
+        <a id="deleteConfirm" href="#" class="btn
+          btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% block extras %}
 <script src="{% static 'js/comments.js' %}"></script>

@@ -33,19 +33,16 @@
           <!-- display number of likes -->
          
           {% if user.is_authenticated %}
-              {% if user in post.likes.all %}
-                <form action="{% url 'like_post' post.id %}" method="post">
-                    {% csrf_token %}
-                   <button type="submit">Unlike</button>
-              </form>
-              {% else %}
-                <form action="{% url 'like_post' post.id %}" method="post">
-                   {% csrf_token %}
-                   <button type="submit">Like</button>
-              </form>
-          {% endif %}
-      {% else %}
           <form action="{% url 'like_post' post.id %}" method="post">
+            {% csrf_token %}
+            {% if user in post.likes.all %}
+                <button type="submit">Unlike</button>
+            {% else %}
+                <button type="submit">Like</button>
+            {% endif %}
+        </form>
+      {% else %}
+          <form action="{% url 'like_post' post_id %}" method="post">
               {% csrf_token %}
               {% if post.id in request.session.liked_posts %}
                   <button type="submit">Unlike</button>
@@ -105,7 +102,7 @@
         <form method="post" style="margin-top: 1.3em;">
                   {{ comment_form | crispy }}
                   {% csrf_token %}
-    <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                <button type="submit" class="btn btn-signup btn-lg">Submit</button>
               </form>
           {% else %}
           <p>Log in to leave a comment</p>
@@ -129,12 +126,27 @@
 </div>
   </div>
 
+
+  <!-- edit or delete comments-->
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-5 col-sm-12 border-bottom">
+        <p>
+            <strong>{{ post.author }}</strong> {{ post.created_on }}
+            {% if request.user == post.author %}
+            <a href="{% url 'post-edit' post.pk %}" style="color: #333;"><i class="far fa-edit"></i></a>
+            <a href="{% url 'post-delete' post.pk %}" style="color: #333;"><i class="fas fa-trash"></i></a>
+            {% endif %}
+        </p>
+        <p>{{ post.body }}</p>
+    </div>
+</div>
+
 </main>
 <!-- Main layout -->
 {% endblock page_content %}
 
 
-<!-- Delete confirmation modal -->
+<!-- Delete confirmation modal 
 <div class="modal fade" id="deleteModal" tabindex="-1"
   aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -161,4 +173,4 @@
 
 {% block extras %}
 <script src="{% static 'js/comments.js' %}"></script>
-{% endblock %}
+{% endblock %}-->

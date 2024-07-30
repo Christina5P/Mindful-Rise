@@ -20,10 +20,16 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     """Admin panel for comments"""
-    list_display = ('post', 'author', 'body', 'created_on')
-    list_filter = ('created_on',)
-    search_fields = ['author', 'body']
+    list_display = ('post', 'author', 'body', 'created_on', 'approved')
+    list_filter = ('created_on', 'approved')
+    search_fields = ['author', 'body', 'approved']
+    actions = ['approve_comments']
 
+    def approve_comments(self, request, queryset):
+        updated_count = queryset.update(approved=True) 
+        self.message_user(request, f'{updated_count}Approved comments')
+    
+    approve_comments.short_description = "Approve comments"
 
 @admin.register(Courses)
 class CoursesAdmin(SummernoteModelAdmin):

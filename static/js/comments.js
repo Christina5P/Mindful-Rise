@@ -3,26 +3,29 @@ const commentText = document.getElementById("id_body");
 const commentForm = document.getElementById("commentForm");
 const submitButton = document.getElementById("submitButton");
 
-
 const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
 const deleteButtons = document.getElementsByClassName("btn-delete");
 const deleteConfirm = document.getElementById("deleteConfirm");
 
-
 for (let button of editButtons) {
     button.addEventListener("click", (e) => {
-      let commentId = e.target.getAttribute("comment_id");
-      let commentContent = document.getElementById(`comment${commentId}`).innerText;
-      commentText.value = commentContent;
-      submitButton.innerText = "Update";
-      commentForm.setAttribute("action", `edit_comment/${commentId}`);
+        let commentId = e.target.getAttribute("data-comment_id");
+        let commentContent = document.getElementById(`comment${commentId}`).innerText;
+        commentText.value = commentContent;
+        submitButton.innerText = "Update";
+        
+        const slug = window.slug;
+        commentForm.setAttribute("action", `/post/${slug}/comment/${commentId}/edit/`);
+        
+        console.log("Editing comment ID:", commentId);
+        console.log("Comment content:", commentContent);
     });
-  }
+}
 
-  for (let button of deleteButtons) {
+for (let button of deleteButtons) {
     button.addEventListener("click", (e) => {
-      let commentId = e.target.getAttribute("comment_id");
-      deleteConfirm.href = `delete_comment/${commentId}`;
-      deleteModal.show();
+        let commentId = e.target.getAttribute("data-comment_id");
+        deleteConfirm.href = `delete_comment/${commentId}`;
+        deleteModal.show();
     });
-  }
+}

@@ -105,19 +105,6 @@ def blog_detail(request, slug):
     return render(request, "blog/detail.html", context)
 
 
-class PostEditView(UpdateView):
-    model = Post
-    fields = ['body']
-    template_name = 'blog/post_edit.html'
-    
-    def get_success_url(self):
-       slug = self.object.slug  
-       return reverse_lazy('post_detail', kwargs={'slug': slug})
-
-class PostDeleteView(TemplateView):
-    model = Post
-    template_name = "post_delete.html"
-    success_url = reverse_lazy('post_list')
 
 @require_POST
 def like_post(request, post_id):

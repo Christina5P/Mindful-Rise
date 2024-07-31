@@ -75,6 +75,9 @@
               {{ comment.created_on }}
             </span> wrote:
           </p>
+          <p class="font-weight-normal">
+            Updated on: {{ comment.updated_on }}
+          </p>
           <div id="comment{{ comment.id }}">
             {{ comment.body | linebreaks }}
           </div>
@@ -126,20 +129,6 @@
 </div>
   </div>
 
-
-  <!-- edit or delete comments-->
-  <div class="row justify-content-center mt-3">
-    <div class="col-md-5 col-sm-12 border-bottom">
-        <p>
-            <strong>{{ post.author }}</strong> {{ post.created_on }}
-            {% if request.user == post.author %}
-            <button class="btn btn-delete" comment_id="{{ comment.id }}">Delete</button>
-            <button class="btn btn-edit" comment_id="{{ comment.id }}">Edit</button>
-            {% endif %}
-        </p>
-        <p>{{ post.body }}</p>
-    </div>
-</div>
 
 
 <!-- Delete confirmation modal -->

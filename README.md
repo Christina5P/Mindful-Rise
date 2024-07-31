@@ -44,9 +44,8 @@ I also put in a picture of myself to strengthen the connection between me and in
 ## Blog Page
 In blog page, I would like to have a clean and calm style.
 You would be able to search for a blog by category.
-You have to be logegd in to comment a post, but I want it easy so the comment will be approved right away without 
-the admins approvement.
-You still have a draft and publish choice, so you can read through your comment before publish.
+You have to be loggedd in to comment a post, in a easy way.
+As an admin, it should be easy to approve comments, so you have a filter choice nad can approve multiple comments at same time.
 
 ## Nav Bar
 ## Footer
@@ -114,6 +113,10 @@ hint: It´s important to spell Procfile with a capital
 
 # Design
 
+I have used MBD for design and a carousel of pictures at home page.
+I want it to be clean and calm too read and use and buttons is indicatuve.
+Blogpage for unauthorized users and courses for signed up users are separated, to make it clean.
+
 # Testing
 ## Validating Test
 ## Python Test
@@ -123,7 +126,7 @@ hint: It´s important to spell Procfile with a capital
 
 ## Fixed Bugs
 
-- I struggle with the post views on blogsite. 
+### I struggle with the post views on blogsite. 
 I wanted to have a blogcard with header and the first 100 letters to show and a "Read"button to open the full view.
 When I used syntax "Slice" it showed the first syntax signs instead of the content.
 With tutorhelp, I changed it to "safe" but then I only could see the header.
@@ -133,6 +136,12 @@ No published posts.
 
 I fixed it and tried to back the other changes I tried out on the way.
 I skip the function with slice, since I got told it need more filter for that and take it as a feature scoop.
+
+### Buttons for edit and delete posts are inactive.
+I thought I missed something in the model och views, so I changed thr relationships between files, created separate edit-template 
+and read tutorials, looked at walk through, asked for help from GPR monica.im.
+After a while, I realized from inspection in browswer, that it was something with my js that didn´t worked.
+I had missed to refer to static/comment.js in base.html and that was a problemsolver. 
 
 ## Unfixed Bugs
 
@@ -206,6 +215,9 @@ Open your repo and click the green "Code" button on the right-hand side. The eas
 You can read more information on cloning at the GitHub : https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
 # Media
+
+- monica.im GPT chat to help explain where to put url and meaning of django functions.
+
 ## Icons
 ## Images
 ## Font
@@ -222,6 +234,7 @@ https://realpython.com/build-a-blog-from-scratch-django/#set-up-the-development-
 https://www.youtube.com/watch?v=ZUiTiUj-tZw
 https://www.youtube.com/watch?v=PXqRPqDjDgc
 https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg
+https://medium.com/@peter.bulyaki/ho-to-edit-or-delete-your-comments-responses-on-medium-com-in-2019-2a87eb8da79b
 
 
 

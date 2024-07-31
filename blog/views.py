@@ -15,6 +15,7 @@ from django.core.paginator import Paginator
 from django.views.generic.edit import UpdateView, DeleteView
 from .models import Comment
 
+
 # Create your views here.
 
 class home_view(TemplateView):
@@ -74,9 +75,8 @@ def blog_detail(request, slug):
     """
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by("-created_on")
-    comment_count = comments.count()
+    comment_count = post.comments.count()
     number_of_likes = post.likes.count()
-
     post_is_liked = post.likes.filter(id=request.user.id).exists() if request.user.is_authenticated else False
 
     context = {
@@ -104,6 +104,8 @@ def blog_detail(request, slug):
         comment_form = CommentForm()
     return render(request, "blog/detail.html", context)
 
+def signup_view(request):
+    return render(request, 'account/login.html')
 
 
 @require_POST
@@ -121,16 +123,18 @@ def like_post(request, post_id):
     else:
         if 'liked_posts' not in request.session:
             request.session['liked_posts'] = []
-        if post_id in request.session['liked_posts']:
-            request.session['liked_posts'].remove(post_id)
+
+        if str(post_id) in request.session['liked_posts']:
+            request.session['liked_posts'].remove(str(post_id))
             post.anonymous_likes -= 1
         else:
-            request.session['liked_posts'].append(post_id)
+            request.session['liked_posts'].append(str(post_id))
             post.anonymous_likes += 1
+        
         request.session.modified = True
 
     post.save()
-    return redirect('_detail.html', slug=post.slug)
+    return redirect('post_detail', slug=post.slug)
 
 def category_search(request):
     """

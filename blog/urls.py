@@ -21,4 +21,5 @@ urlpatterns = [
     path('index/', views.blog_index, name='blog'),
     path('search/', views.category_search, name='category_search'),   #search categories
     path('accounts/', include('allauth.urls')),
+    path('valuation/signup/', views.signup_view, name='signup'),
     ]    

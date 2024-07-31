@@ -1,10 +1,12 @@
 
-form table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 10px 15px; 
+.like-icon {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 50%; 
+    transition: background-color 0.3s;
+    color: red;
 }
 
-form table tr td {
-    padding: 10px;
+.like-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* hover-effect */
 }

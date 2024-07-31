@@ -24,99 +24,106 @@
         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
       </div>
       
-        <h5 class="card-title">{{ post.title }}</h5>
-        <div class="card-body"></div>
-        <p class="card-text">{{ post.content | safe }}</p>
-        <div class="d-flex justify-content-between">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <div class="card-body"></div>
+      <p class="card-text">{{ post.content | safe }}</p>
+      <div class="d-flex justify-content-between">
 
-
-          <!-- display number of likes -->
-         
-          {% if user.is_authenticated %}
-          <form action="{% url 'like_post' post.id %}" method="post">
+        <!-- like post -->
+        {% if user.is_authenticated %}
+          <form action="{% url 'like_post' post.id %}" method="post" class="like-form" style="display:inline;">
             {% csrf_token %}
-            {% if user in post.likes.all %}
-                <button type="submit">Unlike</button>
-            {% else %}
-                <button type="submit">Like</button>
-            {% endif %}
-        </form>
-      {% else %}
-          <form action="{% url 'like_post' post_id %}" method="post">
-              {% csrf_token %}
-              {% if post.id in request.session.liked_posts %}
-                  <button type="submit">Unlike</button>
+            <span class="like-icon" data-post-id="{{ post.id }}" style="cursor: pointer;">
+              {% if user in post.likes.all %}
+                <i class="fas fa-heart"></i> 
               {% else %}
-                  <button type="submit">Like</button>
+                <i class="far fa-heart"></i> 
               {% endif %}
+            </span>
           </form>
-      {% endif %}
-          </div>
-        </div>
-       </div>
-      </div>     
-  </article>
-
-
-   <!-- Comments Section -->
-
-<section class="mt-4">
-  <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 ">
-  <h6 class="mb-4">Comments</h6>
-  <div class="card-body">
-  {% for comment in comments %}
-  <div class="p-2 comments
-          {% if not comment.approved and comment.author == user %}
-          faded{% elif not comment.approved %} d-none{% endif %}">
-          <p class="font-weight-bold">
-            {{ comment.author }}
-            <span class="font-weight-normal">
-              {{ comment.created_on }}
-            </span> wrote:
-          </p>
-          <p class="font-weight-normal">
-            Updated on: {{ comment.updated_on }}
-          </p>
-          <div id="comment{{ comment.id }}">
-            {{ comment.body | linebreaks }}
-          </div>
-          {% if not comment.approved and comment.author == user %}
-          <p class="approval">
-          Your comment is awaiting approval</p>
-                {% endif %}
-
-            {% if user.is_authenticated and comment.author == user %}
-          <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-          <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
-          {% endif %}
-        </div>
-        {% empty %}
-        <p>No comments yet.</p>
-        {% endfor %}
+        {% else %}
+          <form action="{% url 'like_post' post.id %}" method="post" class="like-form" style="display:inline;">
+            {% csrf_token %}
+            <span class="like-icon" data-post-id="{{ post.id }}" style="cursor: pointer;">
+              {% if post.id|stringformat:"s" in request.session.liked_posts %}
+                <i class="fas fa-heart"></i>
+              {% else %}
+                <i class="far fa-heart"></i> 
+              {% endif %}
+            </span>
+          </form>
+        {% endif %}
       </div>
     </div>
+  </article>
 
-    <!-- Create comments-->
-     <div class="col-md-4 card mb-4 mt-3">
+  <!-- number of likes -->
+  <div class="likes-section">
+    <span class="likes-count">{{ number_of_likes }}</span> 
+    <span class="likes-label">Likes</span>
+    {% if post_is_liked %}
+      <a class="like-button unlike" href="{% url 'like_post' post.id %}"> <i class="fas fa-heart"></i> </a>
+    {% else %}
+      <a class="like-button like" href="{% url 'like_post' post.id %}"> <i class="far fa-heart"></i></a>
+    {% endif %}
+  </div>
+
+  <!-- Comments Section -->
+  <section class="mt-4">
+    <div class="row">
+      <div class="col-md-8 card mb-4 mt-3">
+        <h6 class="mb-4">Comments</h6>
         <div class="card-body">
-          {% if user.is_authenticated %}<p class="font-weight-bold">
-         <h6>Leave a comment:</h6>
-        <form method="post" style="margin-top: 1.3em;">
-                  {{ comment_form | crispy }}
-                  {% csrf_token %}
-                <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-              </form>
+          {% for comment in comments %}
+            <div class="p-2 comments
+              {% if not comment.approved and comment.author == user %}
+                faded{% elif not comment.approved %} d-none{% endif %}">
+              <p class="font-weight-bold">
+                {{ comment.author }}
+                <span class="font-weight-normal">
+                  {{ comment.created_on }}
+                </span> wrote:
+              </p>
+              <p class="font-weight-normal">
+                Updated on: {{ comment.updated_on }}
+              </p>
+              <div id="comment{{ comment.id }}">
+                {{ comment.body | linebreaks }}
+              </div>
+              {% if not comment.approved and comment.author == user %}
+                <p class="approval">Your comment is awaiting approval</p>
+              {% endif %}
+
+              {% if user.is_authenticated and comment.author == user %}
+                <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+                <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+              {% endif %}
+            </div>
+          {% empty %}
+            <p>No comments yet.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Create comments -->
+      <div class="col-md-4 card mb-4 mt-3">
+        <div class="card-body">
+          {% if user.is_authenticated %}
+            <h6>Leave a comment:</h6>
+            <form method="post" style="margin-top: 1.3em;">
+              {{ comment_form | crispy }}
+              {% csrf_token %}
+              <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+            </form>
           {% else %}
-          <p>Log in to leave a comment</p>
+            <p>Please Log in to write a comment.<hr>If your not a member yet?<a href="{% url 'signup' %}"><br>Sign up here.</a></p>
           {% endif %}
         </div>
       </div>
-  </div>
-</div>
-</section>
+    </div>
+  </section>
 
- <!-- Displaying count of comments -->
+  <!-- Displaying count of comments -->
   <div class="row">
     <div class="col-12">
       <strong class="text-secondary">
@@ -126,39 +133,28 @@
     </div>
     <div class="col-12">
       <hr>
-</div>
+    </div>
   </div>
 
-
-
-<!-- Delete confirmation modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1"
-  aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"
-          id="deleteModalLabel">Delete comment?</h5>
-        <button type="button" class="btn-close"
-          data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete your comment?
-        This action cannot be undone.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-          data-bs-dismiss="modal">Close</button>
-        <a id="deleteConfirm" href="#" class="btn
-          btn-danger">Delete</a>
+  <!-- Delete confirmation modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete your comment? This action cannot be undone.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
 
 </main>
 <!-- Main layout -->
 {% endblock page_content %}
-
- 

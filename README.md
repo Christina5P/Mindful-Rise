@@ -143,6 +143,15 @@ and read tutorials, looked at walk through, asked for help from GPR monica.im.
 After a while, I realized from inspection in browswer, that it was something with my js that didn´t worked.
 I had missed to refer to static/comment.js in base.html and that was a problemsolver. 
 
+### You could only see the navbar on home page 
+I tried to inspect the navbar onother pages and check so I had { block page on right spot}
+I also tried to put in a navbar on the other pages, but you couldn`t see anything.
+Then I realized it was a stylingproblem, wich came from bootstrap:
+<nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+I had only carousel on Home page, so it just showed on that page.
+I resolved it by make a rule to use it if the page had carousel or not.
+
+
 ## Unfixed Bugs
 
 - The navbar only views on home site

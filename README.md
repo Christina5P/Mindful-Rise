@@ -235,7 +235,7 @@ https://www.youtube.com/watch?v=ZUiTiUj-tZw
 https://www.youtube.com/watch?v=PXqRPqDjDgc
 https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg
 https://medium.com/@peter.bulyaki/ho-to-edit-or-delete-your-comments-responses-on-medium-com-in-2019-2a87eb8da79b
-
+https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc
 
 
 

@@ -1,15 +1,6 @@
 <!-- templates/base.html 
  Other templates inherit from this -->
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mindful Rise{% endblock %}</title>
-  
-
     {% load static %}
 
  <!--To use in href to url links href= -->
@@ -18,6 +9,15 @@
     {% url 'account_signup' as signup_url %}
     {% url 'account_logout' as logout_url %}
     
+    
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mindful Rise{% endblock %}</title>
+  
     
 
 <!-- Font Awesome -->
@@ -54,26 +54,39 @@
 <header>
 
     <!-- Navbar -->
-     <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+    <nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %} d-none d-lg-block" style="z-index: 2000;">
       <div class="container-fluid">
         <!-- Navbar brand -->
-        <a class="navbar-brand nav-link" target="_blank" href="{% url 'home' %}">
+        <a class="navbar-brand nav-link"  href="{% url 'home' %}">
           <strong>Mindful Rise</strong>
         </a>
-        <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarExample01">
+        <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item {% if request.path == '/' %}active{% endif %}">
-              <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog_index' %}" target="_blank">Blog</a>
+              <a class="nav-link {% if request.path == blog_index__url %}active{% endif %}" aria-current="page"
+              href="{% url 'blog_index' %}">Blog</a>
             </li>
+
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'courses' %}" rel="nofollow" target="_blank">Courses</a>
+              <a class="nav-link {% if request.path == courses_url %}active{% endif %}" aria-current="page" 
+              href="{% url 'courses' %}">Courses</a>
+          </li>
+
+            {% else %}
+            <li class="nav-item"><p>Sign up to be a member</p>
+              <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
+            href="{% url 'account_signup' %}">Register</a>
             </li>
+            {% endif %}
+           
             {% if user.is_authenticated %}
 <li class="nav-item">
 	<a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>

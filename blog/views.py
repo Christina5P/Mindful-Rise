@@ -83,6 +83,7 @@ def blog_detail(request, slug):
         "post": post,
         "comments": comments,
         "number_of_likes": number_of_likes,
+        "comment_count": comment_count,
         "post_is_liked": post_is_liked,
         "comment_form": CommentForm(),
     }
@@ -110,16 +111,36 @@ def signup_view(request):
 
 @require_POST
 def like_post(request, post_id):
+    
     """
     Handle the liking and unliking of a blog post by the user or anonymous.
     """
     post = get_object_or_404(Post, id=post_id)
+    user = request.user
 
-    if request.user.is_authenticated:
+    if user.is_authenticated:
         if post.likes.filter(id=request.user.id).exists():
-            post.likes.remove(request.user)
+            post.likes.remove(user)
+            liked = False 
         else:
-            post.likes.add(request.user)
+            post.likes.add(user)
+            liked=True 
+
+    else:
+        # Hantera anonyma användare om det behövs
+        return JsonResponse({'success': False, 'error': 'Authentication required'})
+
+    new_like_count = post.likes.count()
+    post.number_of_likes = new_like_count
+    post.save()
+
+    return JsonResponse({
+        'success': True,
+        'new_like_count': new_like_count,
+        'liked': liked
+    })
+            
+    """
     else:
         if 'liked_posts' not in request.session:
             request.session['liked_posts'] = []
@@ -134,7 +155,7 @@ def like_post(request, post_id):
         request.session.modified = True
 
     post.save()
-    return redirect('post_detail', slug=post.slug)
+    return redirect('post_detail', slug=post.slug)"""
 
 def category_search(request):
     """

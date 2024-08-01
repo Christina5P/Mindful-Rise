@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteButtons = document.getElementsByClassName("btn-delete");
     const deleteConfirm = document.getElementById("deleteConfirm");
     const likeIcons = document.querySelectorAll('.like-icon');
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     console.log("everything loaded");
 
@@ -42,18 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
         icon.addEventListener('click', function() {
             const postId = this.getAttribute('data-post-id');
             const form = this.closest('.like-form');
+            const likeCountElement = document.getElementById(`like-count-${postId}`);
 
             fetch(form.action, {
                 method: 'POST',
                 headers: {
-                    'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
                 },
-                body: JSON.stringify({ post_id: postId })
+                body: JSON.stringify({ })
             })
-            .then(response => {
-                if (response.ok) {
-                    // Ändra ikonen baserat på gillande-status
+            .then(response => response.json())
+            .then(data => {
+                console.log('Received data:', data);
+                if (data.success) {
+                    likeCountElement.textContent = data.new_like_count;
+                    
+                    if (this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas');
+                    } else {
+                        this.classList.remove('fas');
+                        this.classList.add('far');
+                    }
+
+                    /* Ändra ikonen baserat på gillande-status
                     const iconElement = this.querySelector('i');
                     if (iconElement.classList.contains('far')) {
                         iconElement.classList.remove('far');
@@ -61,7 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     } else {
                         iconElement.classList.remove('fas');
                         iconElement.classList.add('far');
-                    }
+                    } */
+                    
                 } else {
                     console.error('Något gick fel.');
                 }

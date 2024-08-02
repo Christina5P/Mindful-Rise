@@ -149,7 +149,15 @@ I also tried to put in a navbar on the other pages, but you couldn`t see anythin
 Then I realized it was a stylingproblem, wich came from bootstrap:
 <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
 I had only carousel on Home page, so it just showed on that page.
-I resolved it by make a rule to use it if the page had carousel or not.
+I resolved it by make a rule to use it if the page had carousel or not:
+  <nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %} d-none d-lg-block" style="z-index: 2000;">
+
+### Nexpproblem with navbar was the text "Welcome..." was dark, even if the rest of the navbar was white.
+At first I fixed it by my own styling i style.css, butlater on I found out that I had missed to put in 
+ .navbar .nav-link {
+      color: #fff !important;
+    } in the template.
+
 
 
 ## Unfixed Bugs

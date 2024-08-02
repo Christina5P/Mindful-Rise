@@ -1,7 +1,8 @@
-{% extends 'base.html' %}
+  
+    {% extends 'base.html' %}
 
-{% load static %}
-{% load crispy_forms_tags %}
+    {% load static %}
+    {% load crispy_forms_tags %}
 
 
 <!-- detail.html content starts here -->
@@ -20,52 +21,30 @@
   <article class="mb-4">
     <div class="card">
       <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-        <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.title }}" />
+        <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.title }}">
         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
       </div>
       
       <h5 class="card-title">{{ post.title }}</h5>
-      <div class="card-body"></div>
-      <p class="card-text">{{ post.content | safe }}</p>
-      <div class="d-flex justify-content-between">
+      <div class="card-body">
+        <p class="card-text">{{ post.content | safe }}</p>
+        <div class="d-flex justify-content-between">
 
-        <!-- like post -->
-        {% if user.is_authenticated %}
-          <form action="{% url 'like_post' post.id %}" method="post" class="like-form" style="display:inline;">
-            {% csrf_token %}
-            <span class="like-icon" data-post-id="{{ post.id }}" style="cursor: pointer;">
-              {% if user in post.likes.all %}
-                <i class="fas fa-heart"></i> 
-              {% else %}
-                <i class="far fa-heart"></i> 
-              {% endif %}
-            </span>
-          </form>
-        {% else %}
-          <form action="{% url 'like_post' post.id %}" method="post" class="like-form" style="display:inline;">
-            {% csrf_token %}
-            <span class="like-icon" data-post-id="{{ post.id }}" style="cursor: pointer;">
-              {% if post.id|stringformat:"s" in request.session.liked_posts %}
-                <i class="fas fa-heart"></i>
-              {% else %}
-                <i class="far fa-heart"></i> 
-              {% endif %}
-            </span>
-          </form>
-        {% endif %}
-      </div>
-    </div>
-  </article>
+          <!-- like post 
+    
+<button class="like-btn"><i class="far fa-heart"></i></button>-->
 
   <!-- number of likes -->
   <div class="likes-section">
-    <span class="likes-count">{{ number_of_likes }}</span> 
+ 
     <span class="likes-label">Likes</span>
+    
     {% if post_is_liked %}
-      <a class="like-button unlike" href="{% url 'like_post' post.id %}"> <i class="fas fa-heart"></i> </a>
+      <a class="like-button unlike" href="{% url 'like_post' post.id %}"><i class="fas fa-heart" style="color: red;"></i></a>
     {% else %}
-      <a class="like-button like" href="{% url 'like_post' post.id %}"> <i class="far fa-heart"></i></a>
+      <a class="like-button like" href="{% url 'like_post' post.id %}"><i class="far fa-heart"></i></a>
     {% endif %}
+    <span class="likes-count">{{ number_of_likes }}</span> 
   </div>
 
   <!-- Comments Section -->
@@ -80,20 +59,15 @@
                 faded{% elif not comment.approved %} d-none{% endif %}">
               <p class="font-weight-bold">
                 {{ comment.author }}
-                <span class="font-weight-normal">
-                  {{ comment.created_on }}
-                </span> wrote:
+                <span class="font-weight-normal">{{ comment.created_on }}</span> wrote:
               </p>
-              <p class="font-weight-normal">
-                Updated on: {{ comment.updated_on }}
-              </p>
+              <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
               <div id="comment{{ comment.id }}">
                 {{ comment.body | linebreaks }}
               </div>
               {% if not comment.approved and comment.author == user %}
                 <p class="approval">Your comment is awaiting approval</p>
               {% endif %}
-
               {% if user.is_authenticated and comment.author == user %}
                 <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
                 <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
@@ -111,12 +85,12 @@
           {% if user.is_authenticated %}
             <h6>Leave a comment:</h6>
             <form method="post" style="margin-top: 1.3em;">
-              {{ comment_form | crispy }}
               {% csrf_token %}
+              {{ comment_form | crispy }}
               <button type="submit" class="btn-submit">Submit</button>
             </form>
           {% else %}
-            <p>Please Log in to write a comment.<hr>If your not a member yet?<a href="{% url 'signup' %}"><br>Sign up here.</a></p>
+            <p>Please Log in to write a comment.<hr>If you're not a member yet?<a href="{% url 'signup' %}"><br>Sign up here.</a></p>
           {% endif %}
         </div>
       </div>
@@ -157,4 +131,37 @@
 
 </main>
 <!-- Main layout -->
+<script>
+  $(document).ready(function() {
+    $(".like-button").click(function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        var url = $this.attr('href');
+        
+        $.ajax({
+            url: url,
+            type: "POST",
+            beforeSend: function(xhr, settings) {
+                var csrftoken = $('[name=csrfmiddlewaretoken]').val();
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            dataType: "json",
+            success: function(data) {
+                if (data.status === 'liked') {
+                    $this.html('<i class="fas fa-heart"></i>');
+                } else {
+                    $this.html('<i class="far fa-heart"></i>');
+                }
+                $('.likes-count').text(data.likes_count);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+  });
+</script>
+
 {% endblock page_content %}
+</body>
+</html>

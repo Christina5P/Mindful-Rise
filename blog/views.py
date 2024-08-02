@@ -14,7 +14,9 @@ from .forms import CommentForm
 from django.core.paginator import Paginator
 from django.views.generic.edit import UpdateView, DeleteView
 from .models import Comment
-
+from django.http import JsonResponse                        #need for ajax to likes
+from django.views.decorators.csrf import csrf_exempt        #need for ajax to likes
+from django.core.exceptions import ObjectDoesNotExist       #need for ajax to likes
 
 # Create your views here.
 
@@ -109,71 +111,40 @@ def signup_view(request):
     return render(request, 'account/login.html')
 
 
-@require_POST
+@csrf_exempt
 def like_post(request, post_id):
-    
-    """
-    Handle the liking and unliking of a blog post by the user or anonymous.
-    """
-    post = get_object_or_404(Post, id=post_id)
-    user = request.user
-
-    if user.is_authenticated:
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+    try:
+        post = Post.objects.get(id=post_id)
         if post.likes.filter(id=request.user.id).exists():
-            post.likes.remove(user)
-            liked = False 
+            post.likes.remove(request.user)
+            result = {'status': 'unliked', 'likes_count': post.likes.count()}
         else:
-            post.likes.add(user)
-            liked=True 
-
-    else:
-        # Hantera anonyma användare om det behövs
-        return JsonResponse({'success': False, 'error': 'Authentication required'})
-
-    new_like_count = post.likes.count()
-    post.number_of_likes = new_like_count
-    post.save()
-
-    return JsonResponse({
-        'success': True,
-        'new_like_count': new_like_count,
-        'liked': liked
-    })
-            
-    """
-    else:
-        if 'liked_posts' not in request.session:
-            request.session['liked_posts'] = []
-
-        if str(post_id) in request.session['liked_posts']:
-            request.session['liked_posts'].remove(str(post_id))
-            post.anonymous_likes -= 1
-        else:
-            request.session['liked_posts'].append(str(post_id))
-            post.anonymous_likes += 1
-        
-        request.session.modified = True
-
-    post.save()
-    return redirect('post_detail', slug=post.slug)"""
-
+            post.likes.add(request.user)
+            result = {'status': 'liked', 'likes_count': post.likes.count()}
+        return JsonResponse(result)
+    except ObjectDoesNotExist:
+        return JsonResponse({'error': 'Post does not exist', 'post_id': post_id}, status=404)
+    
 def category_search(request):
-    """
-    Search for categories based on a query string.
-    """
-    query = request.GET.get('q')
-    if query:
-        categories = Category.objects.filter(
-            Q(name__icontains=query) | Q(description__icontains=query)
-        )
-    else:
-        categories = Category.objects.all()
+        """
+        Search for categories based on a query string.
+        """
 
-    context = {
-        'categories': categories,
-        'query': query,
-    }
-    return render(request, 'blog/category.html', context)
+        query = request.GET.get('q')
+        if query:
+            categories = Category.objects.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+        else:
+            categories = Category.objects.all()
+
+        context = {
+            'categories': categories,
+            'query': query,
+        }
+        return render(request, 'blog/category.html', context)
 
 def courses_index(request):
     courses = Courses.objects.all().order_by("-created_on")

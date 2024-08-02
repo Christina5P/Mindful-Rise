@@ -45,29 +45,30 @@
                       <hr>
                       <p class="card-text text-muted h6">
                         {{ post.created_on }} 
-                        <span class="like-section">
+                       <!-- <span class="like-section">
                             <i class="far fa-heart like-icon" data-post-id="{{ post.id }}"></i>
                             <span id="like-count-{{ post.id }}" class="like-count">{{ post.number_of_likes }}</span>
-                        </span>
+                        </span>-->
                     </p>
                     </div>
                 </div>
               </div>
-                   <!-- Displaying count of comments -->
+                    
             <div class="row">
               <div class="col-12">
                 <strong class="text-secondary">
-                  <i class="far fa-comments"></i> {{ comment_count }}
+                <!--  <i class="far fa-comments"></i> {{ comment_count }}-->
                 </strong>
               </div>
               <div class="col-12">
                 <hr>
               </div>
             </div>
+
                       {% empty %}
             <p>No published posts</p>
             {% endfor %}
-            </div>
+            </div> 
             
            
 

@@ -12,7 +12,7 @@ urlpatterns = [
     path('blog/', views.blog_index, name='blog_index'),  # url for posts from navbar
     path('post/<slug:slug>/', views.blog_detail, name='post_detail'),  #detail view by slug  
     path("category/<category>/", views.blog_category, name="blog_category"),   #filter categories
-    path('like/<int:post_id>/', like_post, name='like_post'),  # like/unlike post
+    path('like-post/<int:post_id>/', like_post, name='like_post'), # like/unlike post
     path('post/<slug:slug>/edit_comment/<int:comment_id>',
        views.comment_edit, name='comment_edit'),
     path('post/<slug:slug>/delete_comment/<int:comment_id>',

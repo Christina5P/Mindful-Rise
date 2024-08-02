@@ -7,10 +7,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-   
+
     <header>
       <style>
- 
+
 
         /* Carousel styling */
         #introCarousel,
@@ -19,13 +19,12 @@
         .carousel-item.active {
           height: 100vh;
         }
-
         .carousel-item:nth-child(1) {
           background-image: url("{% static 'images/invest in yourself.png' %}");
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center center;
-         
+
         }
         .carousel-item:nth-child(2) {
           background-image: url("{% static 'images/img 2 carousel.png' %}");
@@ -39,7 +38,6 @@
           background-size: cover;
           background-position: center center;
         }
-
         /* Height for devices larger than 576px */
         @media (min-width: 992px) {
           #introCarousel {
@@ -58,9 +56,7 @@
     }
            </style>
 
-   
-
-      <!-- Carousel wrapper -->
+<!-- Carousel wrapper -->
       <div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong" data-mdb-carousel-init>
         <!-- Indicators -->
         <div class="carousel-indicators">
@@ -96,7 +92,6 @@
               </div>
             </div>
           </div>
-
           <!-- Single item -->
           <div class="carousel-item">
             <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
@@ -107,7 +102,6 @@
               </div>
             </div>
           </div>
-
            <!-- Single item --> 
           <div class="carousel-item">
             <div
@@ -122,7 +116,6 @@
           </div>
         </div>
         <!-- Inner -->
-
         <!-- Controls -->
         <a class="carousel-control-prev" href="#introCarousel" role="button" data-mdb-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -135,7 +128,7 @@
       </div>
       <!-- Carousel wrapper -->
     </header>
-   
+
 
     <!--Main layout-->
     <main class="mt-5">
@@ -154,20 +147,17 @@
                 <img src="{{ post.featured_image.url }}" width="75%"
                   alt="{{ home.title }}">
                 {% endif %}
-
                 <!--<img src="{% static 'images/myself.webp' %}" class="img-fluid" alt='myself'>
                 <a href=""> 
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>-->
               </div>
             </div>
-
             <div class="col-md-8 gx-5 mb-4">
               <h4><strong>My story</strong></h4>
              
               <p><strong>I am!</strong></p>
               <p class="text-muted">
-
                 I am a curious person who has lived a rich and varied life so far.
                 <br> I grew up in a dysfunctional family, which I once believed was "normal." 
                 <br>I lost my father when I was 17,
@@ -192,27 +182,19 @@
           </div>
         </section>
         <!--Section: Content-->
-
-
-
-
        <!-- <hr class="my-5" />
-
        
                 sign up for newsletter 
-
                  Email input 
                 <div class="form-outline mb-4" data-mdb-input-init>
                   <input type="email" id="form3Example3" class="form-control" />
                   <label class="form-label" for="form3Example3">Email address</label>
                 </div>
-
                 Password input 
                 <div class="form-outline mb-4" data-mdb-input-init>
                   <input type="password" id="form3Example4" class="form-control" />
                   <label class="form-label" for="form3Example4">Password</label>
                 </div>
-
                  Checkbox 
                 <div class="form-check d-flex justify-content-center mb-4">
                   <input
@@ -226,27 +208,22 @@
                     Subscribe to our newsletter
                   </label>
                 </div>
-
                 Submit button 
                 <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
                   Sign up
                 </button>
-
                  Register buttons 
                 <div class="text-center">
                   <p>or sign up with:</p>
                   <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
                     <i class="fab fa-facebook-f"></i>
                   </button>
-
                   <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
                     <i class="fab fa-google"></i>
                   </button>
-
                   <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
                     <i class="fab fa-twitter"></i>
                   </button>
-
                   <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
                     <i class="fab fa-github"></i>
                   </button>
@@ -266,8 +243,6 @@
     {% endblock %}
     
 <footer>  
-
 </footer>
-
 </body>
 </html>

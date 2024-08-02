@@ -29,11 +29,8 @@ class Post(models.Model):
     class Meta:
         ordering = ["-created_on"]
 
-    # Automatically save Excerpt automatically
-    def save(self, *args, **kwargs):
-        if not self.excerpt:
-            self.excerpt = self.content[:100]    
-        super().save(*args, **kwargs)
+    def number_of_likes(self):
+        return self.likes.count()
 
 class Category(models.Model):
     """

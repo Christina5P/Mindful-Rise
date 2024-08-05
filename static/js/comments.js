@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const commentText = document.getElementById("id_body");
     const commentForm = document.getElementById("commentForm");
     const submitButton = document.getElementById("submitButton");
-    //const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+    const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
     const deleteButtons = document.getElementsByClassName("btn-delete");
     const deleteConfirm = document.getElementById("deleteConfirm");
-    const likeIcons = document.querySelectorAll('.like-icon');
+    //const likeIcons = document.querySelectorAll('.like-icon');
     //const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     console.log("everything loaded");
@@ -29,11 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let button of deleteButtons) {
         button.addEventListener("click", (e) => {
             let commentId = e.target.getAttribute("data-comment_id");
-            deleteConfirm.href = `delete_comment/${commentId}`;
-            deleteModal.show();
+            
+            if (commentId) {
+                deleteConfirm.href = `delete_comment/${commentId}`;
+                deleteModal.show();
+            } else {
+                console.error("Comment ID not found.");
+            }
         });
     }
-   
     
     /*event listeners for span likeIcons
     likeIcons.forEach(icon => {

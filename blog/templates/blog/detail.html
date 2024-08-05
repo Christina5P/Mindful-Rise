@@ -1,51 +1,76 @@
-  
-    {% extends 'base.html' %}
-
-    {% load static %}
-    {% load crispy_forms_tags %}
-
-
-<!-- detail.html content starts here -->
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}
-    <h2>{{ post.title }}</h2>
+<h2>{{ post.title }}</h2>
 {% endblock page_title %}
 
 {% block page_content %}
-
-<!-- Main layout -->
 <main class="my-5">
   <div class="container">
+    <!-- Post details -->
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <!-- Post Image and Title -->
+        <section class="border-bottom mb-4">
+          <div class="text-center mb-3">
+            <div class="image-container">
+              {% if "placeholder" in post.featured_image.url %}
+              <img class="card-img-top" src="{% static 'images/default.jpg' %}"
+                alt="placeholder image">
+              {% else %}
+              <img class="card-img-top" src=" {{ post.featured_image.url }}"
+                alt="{{ post.title }}">
+              {% endif %}
+              
+          </div>
+        </section>
 
-  <!-- Post details -->
-  <article class="mb-4">
-    <div class="card">
-      <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-        <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.title }}">
-        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-      </div>
-      
-      <h5 class="card-title">{{ post.title }}</h5>
-      <div class="card-body">
-        <p class="card-text">{{ post.content | safe }}</p>
-        <div class="d-flex justify-content-between">
+        <!-- Post Content -->
+        <div class="card-body">
+          <p class="card-text">{{ post.content | safe }}</p>
+        </div>
+        <hr>
 
-          <!-- like post 
-    
-<button class="like-btn"><i class="far fa-heart"></i></button>-->
+        
+          <!-- Like Post -->
+          <div class="likes-section text-center mb-4">
+            <span class="likes-label">Likes</span>
+            <div class="like-form" action="{% url 'like_post' post.id %}">
+              {% if post_is_liked %}
+              <a class="like-button unlike" href="{% url 'like_post' post.id %}"><i class="fas fa-heart" style="color: red;"></i></a>
+              {% else %}
+              <a class="like-button like" href="{% url 'like_post' post.id %}"><i class="far fa-heart" style="color: red;"></i></a>
+              {% endif %}
+              <span class="likes-count">{{ number_of_likes }}</span>
+            </div>
+          </div>
 
-  <!-- number of likes -->
-  <div class="likes-section">
-    <span class="likes-label">Likes</span>
-    <div class="like-form" action="{% url 'like_post' post.id %}">
-        {% if post_is_liked %}
-            <a class="like-button unlike" href="{% url 'like_post' post.id %}"><i class="fas fa-heart" style="color: red;"></i></a>
-        {% else %}
-            <a class="like-button like" href="{% url 'like_post' post.id %}"><i class="far fa-heart" style="color: red;"></i></a>
-        {% endif %}
-        <span class="likes-count">{{ number_of_likes }}</span> 
-    </div>
-</div>
+        <!-- Share buttons -->
+        <section class="text-center border-top border-bottom py-4 mb-4">
+          <p><strong>Share with your friends:</strong></p>
+          <button type="button" class="btn btn-primary m-1" data-mdb-ripple-init role="button" rel="nofollow" target="_blank">
+            <a href="https://www.facebook.com/christina.ahman.5"  class="btn btn-primary m-1" >
+         <i class="fab fa-facebook-f"></i> 
+        </a>
+          </button>
+
+          <button type="button" class="btn btn-primary m-1" data-mdb-ripple-init role="button" rel="nofollow" target="_blank">
+            <a href="https://www.linkedin.com/in/christina-%C3%A5hman-2115101b2/"  class="btn btn-primary m-1" >
+            <i class="fab fa-linkedin"></i>
+          </a>
+         </button>
+
+         
+         <button type="button" class="btn btn-primary m-1" data-mdb-ripple-init role="button" rel="nofollow" target="_blank">
+          <a href="https://www.instagram.com/chrahm/"  class="btn btn-primary m-1" >
+          <i class="fab fa-instagram"></i>
+        </a>
+       </button>
+        </section>
+
+  
 
 
   <!-- Comments Section -->
@@ -54,7 +79,7 @@
       <div class="col-md-8 card mb-4 mt-3">
         <h6 class="mb-4">Comments</h6>
         <div class="card-body">
-          {% for comment in comments %}
+                {% for comment in comments %}
             <div class="p-2 comments
               {% if not comment.approved and comment.author == user %}
                 faded{% elif not comment.approved %} d-none{% endif %}">
@@ -62,41 +87,41 @@
                 {{ comment.author }}
                 <span class="font-weight-normal">{{ comment.created_on }}</span> wrote:
               </p>
-              <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
+                  <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
               <div id="comment{{ comment.id }}">
                 {{ comment.body | linebreaks }}
               </div>
-              {% if not comment.approved and comment.author == user %}
-                <p class="approval">Your comment is awaiting approval</p>
-              {% endif %}
-              {% if user.is_authenticated and comment.author == user %}
+                  {% if not comment.approved and comment.author == user %}
+                  <p class="approval">Your comment is awaiting approval</p>
+                  {% endif %}
+                  {% if user.is_authenticated and comment.author == user %}
                 <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-                <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
-              {% endif %}
+                  <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+                  {% endif %}
+                </div>
+                {% empty %}
+                <p>No comments yet.</p>
+                {% endfor %}
+              </div>
             </div>
-          {% empty %}
-            <p>No comments yet.</p>
-          {% endfor %}
-        </div>
-      </div>
 
       <!-- Create comments -->
       <div class="col-md-4 card mb-4 mt-3">
-        <div class="card-body">
-          {% if user.is_authenticated %}
-            <h6>Leave a comment:</h6>
-            <form method="post" style="margin-top: 1.3em;">
-              {% csrf_token %}
-              {{ comment_form | crispy }}
+              <div class="card-body">
+                {% if user.is_authenticated %}
+                <h6>Leave a comment:</h6>
+                <form method="post" style="margin-top: 1.3em;">
+                  {% csrf_token %}
+                  {{ comment_form | crispy }}
               <button type="submit" class="btn-submit">Submit</button>
-            </form>
-          {% else %}
-            <p>Please Log in to write a comment.<hr>If you're not a member yet?<a href="{% url 'signup' %}"><br>Sign up here.</a></p>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </section>
+                </form>
+                {% else %}
+                <p>Please Log in to write a comment.<hr>If you're not a member yet?<a href="{% url 'signup' %}"><br>Sign up here.</a></p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </section>
 
   <!-- Displaying count of comments -->
   <div class="row">
@@ -112,61 +137,52 @@
   </div>
 
   <!-- Delete confirmation modal -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
         <div class="modal-body">
           Are you sure you want to delete your comment? This action cannot be undone.
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
       </div>
     </div>
   </div>
-
- <!-- Response for likes-->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-
+</div>
 </main>
-<!-- Main layout --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Like Button Script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
     $(".like-button").click(function(e) {
-        e.preventDefault(); // Förhindra standardbeteende
-        var $this = $(this);
-        var url = $this.attr('href');
+      e.preventDefault();
+      var $this = $(this);
+      var url = $this.attr('href');
 
-        $.ajax({
-            url: url,
-            type: "POST",
-            beforeSend: function(xhr) {
-                var csrftoken = $('[name=csrfmiddlewaretoken]').val();
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            },
-            dataType: "json",
-            success: function(data) {
-                if (data.status === 'liked') {
-                    $this.html('<i class="fas fa-heart" style="color: red;"></i>');
-                } else {
-                    $this.html('<i class="far fa-heart" style="color: red;"></i>');
-                }
-                $('.likes-count').text(data.likes_count);
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-        });
+      $.ajax({
+        url: url,
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+          if (data.status === 'liked') {
+            $this.html('<i class="fas fa-heart" style="color: red;"></i>');
+          } else {
+            $this.html('<i class="far fa-heart" style="color: red;"></i>');
+          }
+          $('.likes-count').text(data.likes_count);
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
     });
   });
 </script>
 
 {% endblock page_content %}
-</body>
-</html>

@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from .models import Category, Post, Comment, Courses
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from django.views.decorators.http import require_POST
 from django.utils.decorators import method_decorator
 from django.contrib import messages
@@ -42,7 +43,7 @@ def blog_index(request):
     Render from index.html
     """
     posts_list = Post.objects.filter(status=1).order_by("-created_on")
-    paginator = Paginator(posts_list, 3)  # Show 3 posts per page
+    paginator = Paginator(posts_list, 4)  # Show 4 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

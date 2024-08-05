@@ -35,7 +35,7 @@
                     alt="{{ post.title }}">
                   {% endif %}
                 </div>
-            
+                          
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>  
                 </div>
                   <div class="card-body">
@@ -49,26 +49,14 @@
                     </div>
                 </div>
               </div>
-                    
-            <div class="row">
-              <div class="col-12">
-                <strong class="text-secondary">
-                <!--  <i class="far fa-comments"></i> {{ comment_count }}-->
-                </strong>
-              </div>
-              <div class="col-12">
-                <hr>
-              </div>
-            </div>
-
-                      {% empty %}
+            {% empty %}
             <p>No published posts</p>
             {% endfor %}
             </div> 
             
            
 
- 
+      
     <!-- Pagination -->
     {% if is_paginated %}
     <nav class="my-4" aria-label="...">

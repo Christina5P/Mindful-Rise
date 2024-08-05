@@ -1,9 +1,10 @@
 # blog/urls.py 
 
 from django.urls import path, include
-from .views import PostDetailView, PostList, blog_index, category_search, blog_category, like_post, courses_index
+from .views import PostDetailView, PostList, blog_index, category_search, blog_category, like_post, courses_index, home_view
 from django.views.generic import DetailView, ListView, TemplateView
 from . import views
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -22,4 +23,6 @@ urlpatterns = [
     path('search/', views.category_search, name='category_search'),   #search categories
     path('accounts/', include('allauth.urls')),
     path('valuation/signup/', views.signup_view, name='signup'),
+    path('', home_view.as_view(), name='home'), 
     ]    
+

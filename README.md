@@ -91,8 +91,8 @@ ALLOWED_HOSTS = ['8000-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.
 '8080-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.net']
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*8000-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.net",
-    "https://*mindfulgrowth-5f753257331e.herokuapp.com" 
+    "https://*8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net",
+    "https://*mindfulrise-hzzi4mxch9a.herokuapp.com" 
 ]
 
 Dont forget to add apps and libraries in 
@@ -152,17 +152,18 @@ I had only carousel on Home page, so it just showed on that page.
 I resolved it by make a rule to use it if the page had carousel or not:
   <nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %} d-none d-lg-block" style="z-index: 2000;">
 
-### Nexpproblem with navbar was the text "Welcome..." was dark, even if the rest of the navbar was white.
-At first I fixed it by my own styling i style.css, butlater on I found out that I had missed to put in 
+### Next problem with navbar was the text "Welcome..." was dark, even if the rest of the navbar was white and the arrows to turn over where multiple
+At first I fixed it by my own styling i style.css, but later on I found out that I had missed to put in 
  .navbar .nav-link {
       color: #fff !important;
     } in the template.
-
+To fix the muliple arrows, I found out that it doesn´t work wih both bootstrap and MDB, so I had to remove all the bootstrap links.
+Then I was back to the "Welcome-issue" and resolved it by an own styleshhet for home.html
 
 
 ## Unfixed Bugs
 
-- The navbar only views on home site
+
 
 # Technologies
 ### Python - Language of this project
@@ -172,7 +173,7 @@ At first I fixed it by my own styling i style.css, butlater on I found out that 
 ### Django - 
 ### Cloudinary (for external image management)
 ### Code Institute Postgres Database server for PostgreSQL 
-### Bootstrap
+### MDB
 ### Github - Save the project in a repository
 ### Heroku - Deploy it to a public website
 

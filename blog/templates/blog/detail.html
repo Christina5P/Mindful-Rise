@@ -36,16 +36,17 @@
 
   <!-- number of likes -->
   <div class="likes-section">
- 
     <span class="likes-label">Likes</span>
-    
-    {% if post_is_liked %}
-      <a class="like-button unlike" href="{% url 'like_post' post.id %}"><i class="fas fa-heart" style="color: red;"></i></a>
-    {% else %}
-      <a class="like-button like" href="{% url 'like_post' post.id %}"><i class="far fa-heart"></i></a>
-    {% endif %}
-    <span class="likes-count">{{ number_of_likes }}</span> 
-  </div>
+    <div class="like-form" action="{% url 'like_post' post.id %}">
+        {% if post_is_liked %}
+            <a class="like-button unlike" href="{% url 'like_post' post.id %}"><i class="fas fa-heart" style="color: red;"></i></a>
+        {% else %}
+            <a class="like-button like" href="{% url 'like_post' post.id %}"><i class="far fa-heart" style="color: red;"></i></a>
+        {% endif %}
+        <span class="likes-count">{{ number_of_likes }}</span> 
+    </div>
+</div>
+
 
   <!-- Comments Section -->
   <section class="mt-4">
@@ -129,28 +130,32 @@
     </div>
   </div>
 
+ <!-- Response for likes-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 </main>
-<!-- Main layout -->
+<!-- Main layout --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
     $(".like-button").click(function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Förhindra standardbeteende
         var $this = $(this);
         var url = $this.attr('href');
-        
+
         $.ajax({
             url: url,
             type: "POST",
-            beforeSend: function(xhr, settings) {
+            beforeSend: function(xhr) {
                 var csrftoken = $('[name=csrfmiddlewaretoken]').val();
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             },
             dataType: "json",
             success: function(data) {
                 if (data.status === 'liked') {
-                    $this.html('<i class="fas fa-heart"></i>');
+                    $this.html('<i class="fas fa-heart" style="color: red;"></i>');
                 } else {
-                    $this.html('<i class="far fa-heart"></i>');
+                    $this.html('<i class="far fa-heart" style="color: red;"></i>');
                 }
                 $('.likes-count').text(data.likes_count);
             },

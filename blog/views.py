@@ -13,12 +13,13 @@ from django.contrib import messages
 from .forms import CommentForm
 from django.core.paginator import Paginator
 from django.views.generic.edit import UpdateView, DeleteView
-from .models import Comment
+from .models import Comment, Home
 from django.http import JsonResponse                        #need for ajax to likes
 from django.views.decorators.csrf import csrf_exempt        #need for ajax to likes
 from django.core.exceptions import ObjectDoesNotExist       #need for ajax to likes
 
 # Create your views here.
+
 
 class home_view(TemplateView):
     """

@@ -18,7 +18,7 @@
       <!--Section: Content-->
     
       <section class="text-center">
-      <h4 class="mb-5"><strong>Latest posts</strong></h4>
+      <h4 class="mb-5"><strong>Category search</strong></h4>
   
         <div class="row">
           {% for post in page_obj %}
@@ -45,11 +45,7 @@
                       <hr>
                       <p class="card-text text-muted h6">
                         {{ post.created_on }} 
-                       <!-- <span class="like-section">
-                            <i class="far fa-heart like-icon" data-post-id="{{ post.id }}"></i>
-                            <span id="like-count-{{ post.id }}" class="like-count">{{ post.number_of_likes }}</span>
-                        </span>-->
-                    </p>
+                       </p>
                     </div>
                 </div>
               </div>

@@ -15,6 +15,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="posts"
     )
+    featured_image = CloudinaryField('image', default='https://res.cloudinary.com/dvh69l0yv/image/upload/v1234567890/your_placeholder_image.jpg')
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
@@ -22,7 +23,6 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)     # to show short beginning from textfield
-    featured_images= CloudinaryField('image', default='placeholder')
     likes = models.ManyToManyField(User, related_name='like_post')
     anonymous_likes = models.IntegerField(default=0)
     
@@ -95,7 +95,7 @@ class Courses(models.Model):
         
 class Home(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    profile_image = CloudinaryField('image', default='placeholder')
+    profile_image = CloudinaryField('image', blank=True, null=True)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
 

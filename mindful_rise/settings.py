@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 import sys
+from django.utils.text import slugify
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
@@ -41,14 +42,14 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'blog',
-   
-]
+   ]
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'home'
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,9 +58,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+  
 ]
 
 ROOT_URLCONF = 'mindful_rise.urls'
@@ -67,7 +69,7 @@ ROOT_URLCONF = 'mindful_rise.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+         'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,7 +145,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

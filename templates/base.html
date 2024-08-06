@@ -3,13 +3,15 @@
  
     {% load static %}
 
- <!--To use in href to url links href= -->
+ <!--To use in href to url links href= denna kan jag ta bort om jag inte ändrar i html:erna-->
     {% url 'home' as home_url %}
     {% url 'account_login' as login_url %}
     {% url 'account_signup' as signup_url %}
     {% url 'account_logout' as logout_url %}
+    {% url 'account_email' as email_url %}
     {% url 'category' as category_url %}
     {% url 'category_search' as category_search_url %}
+    {% url 'courses' as courses_url %}
     
 
 <!DOCTYPE html>
@@ -87,11 +89,11 @@
 </li>
 {% else %}
 <li class="nav-item">
-	<a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
-		href="{% url 'account_signup' %}">Register</a>
+	 <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
+		                href="{% url 'account_signup' %}">Register</a>
 </li>
 <li class="nav-item">
-	<a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
+  <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
 </li>
 {% endif %}
 

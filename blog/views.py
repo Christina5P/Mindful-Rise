@@ -6,8 +6,8 @@ from django.views.generic import DetailView, ListView, TemplateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from .models import Category, Post, Comment, Courses
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+#from django.contrib.auth.decorators import login_required
+#from django.contrib.auth import authenticate, login 
 from django.views.decorators.http import require_POST
 from django.utils.decorators import method_decorator
 from django.contrib import messages
@@ -18,7 +18,7 @@ from .models import Comment, Home
 from django.http import JsonResponse                        #need for ajax to likes
 from django.views.decorators.csrf import csrf_exempt        #need for ajax to likes
 from django.core.exceptions import ObjectDoesNotExist       #need for ajax to likes
-
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 
@@ -110,8 +110,24 @@ def blog_detail(request, slug):
     return render(request, "blog/detail.html", context)
 
 def signup_view(request):
-    return render(request, 'account/login.html')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('home')
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
 
 @csrf_exempt
 def like_post(request, post_id):
@@ -146,7 +162,24 @@ def category_search(request):
             'categories': categories,
             'query': query,
         }
-        return render(request, 'blog/category.html', context)
+        return render(request, 'blog/category_search.html', context)
+
+class CatListView(ListView):
+    template_name = 'category.html'
+    context_object_name = 'catlist'
+
+    def get_queryset(self):
+        content = {
+            'cat': self.kwargs['category'],
+            'posts': Post.objects.filter(category__name=self.kwargs['category']).filter(status=1)
+        }
+        return content
+def category_list(request):
+    category_list = Category.objects.exclude(name='default')
+    context = {
+        "category_list": category_list,
+    }
+    return context
 
 def courses_index(request):
     courses = Courses.objects.all().order_by("-created_on")

@@ -1,9 +1,9 @@
-{% extends "account/base.html" %}
-{% load i18n %} <!-- Ensure to load the i18n template tag library for translations -->
+{% extends "base.html" %}
+{% load i18n %} 
 
 {% block head_title %}Sign Out{% endblock %}
 
-{% block content %}
+{% block page_content %}
 <h1>{% trans "Sign Out" %}</h1>
 
 <p>{% trans "Are you sure you want to sign out?" %}</p>

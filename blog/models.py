@@ -34,12 +34,9 @@ class Post(models.Model):
         return self.likes.count()
 
 class Category(models.Model):
-    """
-    Model for Categories with fields for category name, description,
-    created, updated 
-    """
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=60, unique=True)
     description = models.TextField(blank=True, null=True)
+    slug = models.SlugField(max_length=60, unique=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -49,7 +46,12 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+        
 class Comment(models.Model):
     """
     Model for Comments with fields for author,content,
@@ -83,7 +85,6 @@ class Courses(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(max_length=255, unique=True)
     status = models.IntegerField(choices=STATUS, default=0)
     categories = models.ManyToManyField("Category", related_name="courses")
      

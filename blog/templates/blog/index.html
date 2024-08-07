@@ -14,12 +14,32 @@
   <main class="my-5">
     <div class="container">
    
-      
+    <h1 class="mb-4">Blog Posts</h1>
+
       <!--Section: Content-->
-    
-      <section class="text-center">
-      <h4 class="mb-5"><strong>Category search</strong></h4>
-  
+
+      
+<!-- Category search form -->
+<form method="GET" action="{% url 'category_search' %}" class="mb-4">
+  <div class="input-group">
+      <input type="text" name="q" class="form-control" placeholder="Search categories...">
+      <button class="btn btn-primary" type="submit">Search</button>
+  </div>
+</form>
+
+<!-- Category list -->
+<div class="mb-4">
+  <h2>Categories</h2>
+  <div class="row">
+      {% for category in categories %}
+      <div class="col-md-4 mb-3">
+          <a href="{% url 'blog_category' category.slug %}" class="btn btn-outline-primary btn-block">{{ category.name }}</a>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+
         <div class="row">
           {% for post in page_obj %}
 

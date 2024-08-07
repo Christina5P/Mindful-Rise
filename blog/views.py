@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import Q
-from django.urls import path, include
+from django.shortcuts import render, get_object_or_404, redirect # basic to render
+from django.db.models import Q   # for category search
+from django.urls import path, include # importing url
 from django.views import generic, View
 from django.views.generic import DetailView, ListView, TemplateView
 from django.http import HttpResponseRedirect
@@ -42,29 +42,18 @@ def blog_index(request):
     Display all blog posts ordered by creation date in descending order.
     Render from index.html
     """
+    posts = Post.objects.filter(status=1).order_by('-created_on')
     posts_list = Post.objects.filter(status=1).order_by("-created_on")
     paginator = Paginator(posts_list, 4)  # Show 4 posts per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    categories = Category.objects.all()
 
     context = {
         "page_obj": page_obj,
         "is_paginated": paginator.num_pages > 1,
     }
-    return render(request, "blog/index.html", context)
-
-def blog_category(request, category):
-    """
-    Display blog posts filtered by category name.
-    """
-    posts = Post.objects.filter(
-        categories__name__contains=category
-    ).order_by("-created_on")
-    context = {
-        "category": category,
-        "posts": posts,
-    }
-    return render(request, "blog/category.html", context)
+    return render(request, "blog/index.html",  {'posts': posts, 'categories': categories})
 
 class PostDetailView(DetailView):
     model = Post
@@ -145,26 +134,25 @@ def like_post(request, post_id):
         return JsonResponse(result)
     except ObjectDoesNotExist:
         return JsonResponse({'error': 'Post does not exist', 'post_id': post_id}, status=404)
-    
+
+def blog_category(request, category_slug):
+    """
+    Display blog posts filtered by category name.
+    """
+    category = get_object_or_404(Category, slug=category_slug)
+    posts = Post.objects.filter(categories=category, status=1).order_by('-created_on')
+    return render(request, 'blog/category.html', {'category': category, 'posts': posts})
+
+        
 def category_search(request):
-        """
-        Search for categories based on a query string.
-        """
+    query = request.GET.get('q')
+    categories = Category.objects.filter(
+        Q(name__icontains=query) | Q(description__icontains=query))
+    
+    return render(request, 'blog/category_search.html', {'categories': categories, 'query': query})
 
-        query = request.GET.get('q')
-        if query:
-            categories = Category.objects.filter(
-                Q(name__icontains=query) | Q(description__icontains=query)
-            )
-        else:
-            categories = Category.objects.all()
 
-        context = {
-            'categories': categories,
-            'query': query,
-        }
-        return render(request, 'blog/category_search.html', context)
-
+"""
 class CatListView(ListView):
     template_name = 'category.html'
     context_object_name = 'catlist'
@@ -175,12 +163,14 @@ class CatListView(ListView):
             'posts': Post.objects.filter(category__name=self.kwargs['category']).filter(status=1)
         }
         return content
+
 def category_list(request):
     category_list = Category.objects.exclude(name='default')
     context = {
         "category_list": category_list,
     }
     return context
+"""    
 
 def courses_index(request):
     courses = Courses.objects.all().order_by("-created_on")

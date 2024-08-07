@@ -16,7 +16,9 @@ class PostAdmin(SummernoteModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at', 'updated_at')
+    prepopulated_fields = {'slug': ('name',)}
 
+    
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     """Admin panel for comments"""
@@ -30,13 +32,10 @@ class CommentAdmin(admin.ModelAdmin):
         self.message_user(request, f'{updated_count}Approved comments')
     
     approve_comments.short_description = "Approve comments"
-
+    
 @admin.register(Courses)
 class CoursesAdmin(SummernoteModelAdmin):
-    prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'slug', 'status','created_on')
+    list_display = ('title', 'status', 'created_on')  # Ta bort 'slug'
     search_fields = ['title', 'content']
     list_filter = ('categories',)
     summernote_fields = ('content',)
-
-  

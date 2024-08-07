@@ -21,51 +21,23 @@ from django.core.exceptions import ObjectDoesNotExist       #need for ajax to li
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
-
 class home_view(TemplateView):
-    """
-    Home page
-    """
     template_name = 'blog/home.html'
 
-class PostList(ListView):
-    model = Post
-    queryset = Post.objects.filter(status=1).order_by('-created_on')
-    template_name = "blog/index.html"
-    context_object_name = 'posts'
-
-    def get_queryset(self):
-        return Post.objects.filter(status=1).order_by('-created_on')
-
 def blog_index(request):
-    """
-    Display all blog posts ordered by creation date in descending order.
-    Render from index.html
-    """
     posts = Post.objects.filter(status=1).order_by('-created_on')
-    posts_list = Post.objects.filter(status=1).order_by("-created_on")
-    paginator = Paginator(posts_list, 4)  # Show 4 posts per page
+    paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     categories = Category.objects.all()
 
-    context = {
-        "page_obj": page_obj,
-        "is_paginated": paginator.num_pages > 1,
-    }
-    return render(request, "blog/index.html",  {'posts': posts, 'categories': categories})
-
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blog/detail.html'
-    context_object_name = 'post'
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
+    return render(request, "blog/index.html", {
+        'page_obj': page_obj,
+        'categories': categories,
+        'is_paginated': page_obj.has_other_pages(),
+    })
 
 def blog_detail(request, slug):
-    """
-    Display details of a single blog post and its associated comments and likes
-    """
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.count()
@@ -94,30 +66,8 @@ def blog_detail(request, slug):
             )
             return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
-    else:
-        comment_form = CommentForm()
     return render(request, "blog/detail.html", context)
 
-def signup_view(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('/')
-
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/')
-            
 
 @csrf_exempt
 def like_post(request, post_id):
@@ -136,41 +86,27 @@ def like_post(request, post_id):
         return JsonResponse({'error': 'Post does not exist', 'post_id': post_id}, status=404)
 
 def blog_category(request, category_slug):
-    """
-    Display blog posts filtered by category name.
-    """
     category = get_object_or_404(Category, slug=category_slug)
     posts = Post.objects.filter(categories=category, status=1).order_by('-created_on')
-    return render(request, 'blog/category.html', {'category': category, 'posts': posts})
+    paginator = Paginator(posts, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-        
+    return render(request, 'blog/index.html', {
+        'page_obj': page_obj,
+        'categories': Category.objects.all(),
+        'current_category': category,
+        'is_paginated': page_obj.has_other_pages(),
+    })
+
 def category_search(request):
     query = request.GET.get('q')
-    categories = Category.objects.filter(
-        Q(name__icontains=query) | Q(description__icontains=query))
-    
-    return render(request, 'blog/category_search.html', {'categories': categories, 'query': query})
+    categories = Category.objects.filter(name__icontains=query)
 
-
-"""
-class CatListView(ListView):
-    template_name = 'category.html'
-    context_object_name = 'catlist'
-
-    def get_queryset(self):
-        content = {
-            'cat': self.kwargs['category'],
-            'posts': Post.objects.filter(category__name=self.kwargs['category']).filter(status=1)
-        }
-        return content
-
-def category_list(request):
-    category_list = Category.objects.exclude(name='default')
-    context = {
-        "category_list": category_list,
-    }
-    return context
-"""    
+    return render(request, 'blog/category_search.html', {
+        'categories': categories,
+        'query': query,
+    })
 
 def courses_index(request):
     courses = Courses.objects.all().order_by("-created_on")

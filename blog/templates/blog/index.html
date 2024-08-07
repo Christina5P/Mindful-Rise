@@ -1,98 +1,113 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- index.html content starts here -->
 {% block page_content %}
 {% block content %}
 
+<!-- Main layout -->
 <main class="my-5">
-    <div class="container">
-        <h1 class="mb-4">Blog Posts</h1>
+  <div class="container">
 
-        <!-- Category search form -->
-        <form method="GET" action="{% url 'category_search' %}" class="mb-4">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search categories...">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </div>
-        </form>
+    <!-- Blog Posts Header -->
+    <h1 class="mb-4 text-primary">Blog Posts</h1>
 
-      <!-- Category list -->
-<div class="mb-4">
-    <h2>Categories</h2>
-    <div class="row">
-      <div class="col-md-4 mb-3">
-      <a href="{% url 'blog_category' 'all' %}" class="btn btn-outline-primary btn-block">All</a>
-        </div>
-      </div>
-      {% for category in categories %}
-      <div class="col-md-4 mb-3">
-        <a href="{% url 'blog_category' category.slug %}" class="btn btn-outline-primary btn-block">
-          {{ category.name }}
-        </a>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
+    <!-- Section: Content -->
 
-      <div class="row">
-        {% for post in page_obj %}
-        <div class="col-lg-4 col-md-12 mb-4">
-          <div class="card">
-            <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-              <div class="image-container">
-                {% if "placeholder" in post.featured_image.url %}
-                <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
-                {% else %}
-                <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-                {% endif %}
-              </div>
-              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-            </div>
-            <div class="card-body">
-              <h2 class="card-title">{{ post.title }}</h2>
-              <p class="card-text">{{ post.excerpt|safe }}...</p>
-              <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read</a>
-              <hr>
-              <p class="card-text text-muted h6">{{ post.created_on }}</p>
-            </div>
-          </div>
-        </div>
-        {% empty %}
-        <p>No published posts</p>
-        {% endfor %}
-      </div>
-  
-      <!-- Pagination -->
-      {% if is_paginated %}
-      <nav class="my-4" aria-label="...">
-        <ul class="pagination pagination-circle justify-content-center">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Previous</a>
-          </li>
-          {% endif %}
-  
-          {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-          <li class="page-item active" aria-current="page">
-            <span class="page-link">{{ num }}</span>
-          </li>
-          {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
-          <li class="page-item"><a class="page-link" href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}">{{ num }}</a></li>
-          {% endif %}
-          {% endfor %}
-  
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Next</a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
+    <!-- Category search form  -->
+    <div class="d-flex mb-4 align-items-center">
+      <form method="GET" action="{% url 'category_search' %}" class="d-flex flex-grow-1">
+        <input type="text" name="q" class="form-control me-2" placeholder="Search categories..." value="{{ query }}">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+      
+      <!-- Clear search link (only show if there's a query) -->
+      {% if query %}
+      <a href="{% url 'blog_index' %}" class="btn btn-secondary ms-2">Clear Search</a>
       {% endif %}
     </div>
-  </main>
-  
-  {% endblock content %}
+    
+    <!-- Category list -->
+    <div class="mb-4">
+      <h2>Categories</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <a href="{% url 'blog_index' %}" class="btn btn-outline-primary btn-block {% if not current_category %}active{% endif %}">
+            All Categories
+          </a>
+        </div>
+        {% for category in categories %}
+        <div class="col-md-4 mb-3">
+          <a href="{% url 'blog_category' category.slug %}" class="btn btn-outline-primary btn-block {% if category == current_category %}active{% endif %}">
+            {{ category.name }}
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Blog posts -->
+    <div class="row">
+      {% for post in page_obj %}
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="card">
+          <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+            <div class="image-container">
+              {% if "placeholder" in post.featured_image.url %}
+              <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
+              {% else %}
+              <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+              {% endif %}
+            </div>
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title h5">{{ post.title }}</h2>
+            <p class="card-text">{{ post.excerpt|safe }}...</p>
+            <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read</a>
+            <hr>
+            <p class="card-text text-muted h6">{{ post.created_on }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No published posts</p>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <nav class="my-4" aria-label="...">
+      <ul class="pagination pagination-circle justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">{{ num }}</span>
+            </li>
+          {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+</main>
+
+{% endblock content %}
 {% endblock page_content %}
 
+{% block extras %}
+{% endblock %}

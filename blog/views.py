@@ -186,7 +186,7 @@ def courses_index(request):
     courses = Courses.objects.all().order_by("-created_on")
     context = {
         "courses": courses,
-        'is_logged_in': request.user.is_authenticated,
+        'logged_in': request.user.is_authenticated,
         'login_url': '/login/',
         'signup_url': '/signup/'  
     }

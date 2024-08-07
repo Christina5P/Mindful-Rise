@@ -22,6 +22,35 @@
         </div>
     </div>
 </div>
+
+<!-- Pagination -->
+{% if is_paginated %}
+<nav class="my-4" aria-label="...">
+  <ul class="pagination pagination-circle justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Previous</a>
+      </li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">{{ num }}</span>
+        </li>
+      {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Next</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
 </main>
 
 {% endblock content %}

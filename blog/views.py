@@ -86,22 +86,45 @@ def like_post(request, post_id):
         return JsonResponse({'error': 'Post does not exist', 'post_id': post_id}, status=404)
 
 def blog_category(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    posts = Post.objects.filter(categories=category, status=1).order_by('-created_on')
+    if category_slug == 'all':
+        posts = Post.objects.filter(status=1).order_by('-created_on')
+        current_category = None  # Ingen specifik kategori vald
+    else:
+        category = get_object_or_404(Category, slug=category_slug)
+        posts = Post.objects.filter(categories=category, status=1).order_by('-created_on')
+        current_category = category
+
     paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    # Samla alla GET-parametrar för att inkludera dem i pagineringslänkar
+    get_params = request.GET.copy()
+    if 'page' in get_params:
+        del get_params['page']
+    querystring = get_params.urlencode()
+
+    categories = Category.objects.all()
     return render(request, 'blog/index.html', {
         'page_obj': page_obj,
-        'categories': Category.objects.all(),
-        'current_category': category,
+        'categories': categories,
+        'current_category': current_category,
         'is_paginated': page_obj.has_other_pages(),
+        'querystring': querystring,
     })
+
 
 def category_search(request):
     query = request.GET.get('q')
     categories = Category.objects.filter(name__icontains=query)
+    paginator = Paginator(categories, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    get_params = request.GET.copy()
+    if 'page' in get_params:
+        del get_params['page']
+    querystring = get_params.urlencode()
 
     return render(request, 'blog/category_search.html', {
         'categories': categories,

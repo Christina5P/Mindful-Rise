@@ -116,7 +116,7 @@
               <button type="submit" class="btn-submit">Submit</button>
                 </form>
                 {% else %}
-                <p>Please Log in to write a comment.<hr>If you're not a member yet?<a href="{% url 'signup' %}"><br>Sign up here.</a></p>
+                <p>Please Log in to write a comment.<hr>If you're not a member yet?<a href='{{ signup_url}}'><br>Sign up here.</a></p>
                 {% endif %}
               </div>
             </div>
@@ -135,6 +135,7 @@
       <hr>
     </div>
   </div>
+
 <!-- Delete confirmation modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">

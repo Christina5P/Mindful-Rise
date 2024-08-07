@@ -118,7 +118,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('home')
+            return redirect('/')
 
 def login_view(request):
     if request.method == 'POST':
@@ -127,7 +127,8 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('/')
+            
 
 @csrf_exempt
 def like_post(request, post_id):
@@ -185,6 +186,9 @@ def courses_index(request):
     courses = Courses.objects.all().order_by("-created_on")
     context = {
         "courses": courses,
+        'is_logged_in': request.user.is_authenticated,
+        'login_url': '/login/',
+        'signup_url': '/signup/'  
     }
     return render(request, 'blog/courses.html', context)
 

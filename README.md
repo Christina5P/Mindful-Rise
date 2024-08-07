@@ -160,6 +160,12 @@ At first I fixed it by my own styling i style.css, but later on I found out that
 To fix the muliple arrows, I found out that it doesn´t work wih both bootstrap and MDB, so I had to remove all the bootstrap links.
 Then I was back to the "Welcome-issue" and resolved it by an own styleshhet for home.html
 
+### I tried to style register and login page, but result was that I couldn´t access them.
+My tries to resolve it, I got through every file and url. I compared my reqirements with other works and installed missing auth compenents, whitenoise.
+I moved the account folder to the root template.
+I created an account/base.html to structure the codes, so you don´t have to repeat the codes in every template.
+What I missed was that I used {% block content%} in onte template and {% block page_content%} in another, so they didn´t match.
+I got help from tutor to find out, so when I chenged, everything was working well.
 
 ## Unfixed Bugs
 

@@ -2,8 +2,7 @@
 {% load static %}
 
 
-<!-- courses
- .html content starts here -->
+<!-- courses .html content starts here -->
 
  
 {% block page_content %}
@@ -13,7 +12,7 @@
 <header>
     <style>
       #intro {
-        background-image: url(https://mdbootstrap.com/img/new/fluid/city/008.jpg);
+        background-image: url("/static/images/mindful_course.jpg");
         height: 100vh;
       }
   
@@ -28,75 +27,50 @@
         color: #fff !important;
       }
     </style>
-
+     <script>
+      console.log("Logged in status: '{{ logged_in }}'");
+    </script>
+</header>
 
   <!-- Background image -->
   <div id="intro" class="bg-image shadow-2-strong">
-    <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+    <div class="mask d-flex align-items-center h-100" style="background-color: rgba(165, 163, 147, 0.8);">
+     
+      {% if logged_in %}
+      <div>Logged In: {{ logged_in }}</div> 
+      <div class="container">
+          <div class="row" style="margin-top: 20px;">
+              <div class="col-xl-5 col-md-8 text-center">
+                  <p class="h4" style="color: #4d5157; font-weight: bold;">Welcome to your Teching equipment</p>  
+              </div>
+          </div>
+      </div>
+      {% else %}
+
+      <!--  Log In form for unauthorized users-->
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-5 col-md-8">
-            
-            {% if user.is_authenticated and comment.author == user %}
-          <p><span>Welcome to your equipment</span></p>
-            {% endif %}
-            <p class="text-white">
-              This is a member page. Please Log In or 
-              <a href="{{ signup_url }}">sign up</a> first.
-          </p>
-          
-          <form class="bg-white rounded shadow-5-strong p-5" method="POST" action="{% url 'account_login' %}">
-              {% csrf_token %}
-              
-              {% if redirect_field_value %}
-                  <!-- Name input -->
-                  <div class="form-outline mb-4" data-mdb-input-init>
-                      <input type="username" username="{{ redirect_field_name }}" value="{{ redirect_field_value }}" id="form1Example1" class="form-control" />
-                      <label class="form-label" for="form1Example1">Name</label>
-                  </div>
-              {% else %}
-                  <!-- Optional placeholder if no redirect value -->
-                  <div class="form-outline mb-4" data-mdb-input-init>
-                      <input type="name" name="{{ redirect_field_name }}" id="form1Example1" class="form-control" placeholder="Enter your name" />
-                      <label class="form-label" for="form1Example1">Name</label>
-                  </div>
-              {% endif %}
-              
-              <!-- Password input -->
-              <div class="form-outline mb-4" data-mdb-input-init>
-                  <input type="password" id="form1Example2" class="form-control" />
-                  <label class="form-label" for="form1Example2">Password</label>
+            <form class="bg-white rounded shadow-5-strong p-5">
+              <p style="color: #4d5157;"> This is a memberpage. <br>Please Log In or Sign Up:</p>
+              <div class="form-outline mb-4" data-mdb-input-init style="background-color: #386bc0;">
+                <input type="text" id="form1Example1" class="form-control" onclick="window.location.href='{{ login_url }}'" />
+                <label class="form-label" for="form1Example1"style="color:white;" >Log In</label>
               </div>
-          
-              <!-- 2 column grid layout for inline styling -->
-              <div class="row mb-4">
-                  <div class="col d-flex justify-content-center">
-                      <!-- Checkbox -->
-                      <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                          <label class="form-check-label" for="form1Example3">
-                              Remember me
-                          </label>
-                      </div>
-                  </div>
-          
-                  <div class="col text-center">
-                      <!-- Simple link -->
-                      <a href="#!">Forgot password?</a>
-                  </div>
+              <div class="form-outline mb-4" data-mdb-input-init style="background-color: #386bc0;">
+                <input type="text" id="form1Example2" class="form-control" onclick="window.location.href='{{ signup_url }}'" />
+                <label class="form-label" for="form1Example2" style="color:white;" >Sign Up</label>
               </div>
-          
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block" data-mdb-ripple-init>Sign in to Courses</button>
           </form>
-                   
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+{% endif %}
+
     </div>
   </div>
   <!-- Background image -->
-</header>
+
 
 
 {% endblock content %}

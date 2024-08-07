@@ -21,10 +21,10 @@ urlpatterns = [
       views.comment_delete, name='comment_delete'),
    path('courses/', views.courses_index, name='courses'),
    path('index/', views.blog_index, name='blog'),
-   path('accounts/', include('allauth.urls')),
+   path('accounts/', include('allauth.urls')),  # Djangos path incl to register and login
    path('', home_view.as_view(), name='home'), 
    #path('category/<str:category>/', CatListView.as_view(), name='category'),
-   #path('login/', login_view, name='login'),  # Login URL
    #path('signup/', signup_view, name='signup'),  # Signup URL
+   # path('login/', auth_views.LoginView.as_view(), name='account_login'),
     ]    
 

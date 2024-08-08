@@ -23,16 +23,17 @@ from django.contrib.auth.forms import UserCreationForm
 
 class home_view(TemplateView):
     template_name = 'blog/home.html'
-
 def blog_index(request):
     search_query = request.GET.get('q', '')
     category_slug = request.GET.get('category', 'all')
 
     if category_slug == 'all':
         posts = Post.objects.filter(status=1).order_by('-created_on')
+        current_category = None
     else:
         category = get_object_or_404(Category, slug=category_slug)
         posts = Post.objects.filter(categories=category, status=1).order_by('-created_on')
+        current_category = category
 
     if search_query:
         posts = posts.filter(Q(title__icontains=search_query) | Q(excerpt__icontains=search_query))
@@ -46,10 +47,10 @@ def blog_index(request):
         "page_obj": page_obj,
         "categories": categories,
         "query": search_query,
+        "current_category": current_category,
         "is_paginated": page_obj.has_other_pages(),
     }
     return render(request, "blog/index.html", context)
-
 
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)

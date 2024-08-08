@@ -70,36 +70,36 @@
   </div>
   <!-- Background image -->
 
-    <!-- Course material posts -->
-    <div class="row">
+  {% if user.is_authenticated %}
+  <div class="row">
       {% for course in courses %}
-      <div class="col-lg-4 col-md-12 mb-4">
-        <div class="card">
-          <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
-            <div class="image-container">
-              {% if "placeholder" in course.featured_image.url %}
-              <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
-              {% else %}
-              <img class="card-img-top" src="{{ course.featured_image.url }}" alt="{{ course.title }}">
-              {% endif %}
-            </div>
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          <div class="col-lg-4 col-md-12 mb-4">
+              <div class="card">
+                  <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                      <div class="image-container">
+                          {% if "placeholder" in course.featured_image.url %}
+                              <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
+                          {% else %}
+                              <img class="card-img-top" src="{{ course.featured_image.url }}" alt="{{ course.title }}">
+                          {% endif %}
+                      </div>
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </div>
+                  <div class="card-body">
+                      <h2 class="card-title h5">{{ course.title }}</h2>
+                      <p class="card-text">{{ course.excerpt|safe }}...</p>
+                      <a href="{% url 'course_detail' course.slug %}" class="btn btn-primary">View Course</a>
+                      <hr>
+                      <p class="card-text text-muted h6">{{ course.created_on }}</p>
+                  </div>
+              </div>
           </div>
-          <div class="card-body">
-            <h2 class="card-title h5">{{ course.title }}</h2>
-            <p class="card-text">{{ course.excerpt|safe }}...</p>
-            <a href="{% url 'course_detail' course.slug %}" class="btn btn-primary">View Course</a>
-            <hr>
-            <p class="card-text text-muted h6">{{ course.created_on }}</p>
-          </div>
-        </div>
-      </div>
       {% empty %}
-      <p>No availible courses</p>
+          <p>No available courses</p>
       {% endfor %}
-    </div>
+  </div>
 
-
+    {% endif %}
 {% endblock content %}
 {% endblock page_content %}
 

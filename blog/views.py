@@ -30,8 +30,8 @@ def blog_index(request):
     category_slug = request.GET.get('category', 'all')
 
     if category_slug == 'all':
-        posts = Post.objects.filter(status=1).order_by('-created_on')
-        current_category = None
+          posts = Post.objects.filter(status=1, is_course_material=False).order_by('-created_on')
+          current_category = None
     else:
         category = get_object_or_404(Category, slug=category_slug)
         posts = Post.objects.filter(categories=category, status=1, is_course_material=False).order_by('-created_on')
@@ -158,9 +158,16 @@ def course_detail(request, slug):
 
     return render(request, 'courses/courses_detail.html', {'course': course})
 
+
 def courses_view(request):
     courses = Post.objects.filter(is_course_material=True, status=1)
-    return render(request, 'courses/courses.html', {'courses': courses})
+    logged_in = request.user.is_authenticated
+
+    return render(request, 'courses/courses.html', {
+        'courses': courses,
+        'logged_in': logged_in,
+        
+    })
 
 
 def comment_edit(request, slug, comment_id):

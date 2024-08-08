@@ -1,19 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block page_title %}
+    <h2>{{ course.title }}</h2>
+{% endblock page_title %}
 
 {% block page_content %}
-
 {% block content %}
-
-
-<!-- courses_detail.html -->
-<h1>{{ course.title }}</h1>
-<img src="{{ course.featured_image.url }}" alt="{{ course.title }}">
-<p>{{ course.content }}</p>
-
-
+<main class="my-5">
+    <div class="container">
+        <!-- courses_detail.html -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-init data-mdb-ripple-color="light">
+                    <div class="image-container"></div>
+                        {% if "placeholder" in course.featured_image.url %}
+                            <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
+                        {% else %}
+                            <img class="card-img-top" src="{{ course.featured_image.url }}" alt="{{ course.title }}">
+                        {% endif %}
+                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.title }}</h5>
+                        <p class="card-text">{{ course.content | saf}}</p>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock content %}
 {% endblock page_content %}
-
- 

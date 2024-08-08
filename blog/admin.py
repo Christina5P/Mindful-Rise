@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Category, Comment, Post, Courses 
+from blog.models import Category, Comment, Post
 from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here for administrative interface
@@ -8,9 +8,9 @@ from django_summernote.admin import SummernoteModelAdmin
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'slug', 'status','created_on')
+    list_display = ('title', 'slug', 'is_course_material', 'status','created_on')
     search_fields = ['title', 'content']
-    list_filter = ('categories',)
+    list_filter = ('categories', 'is_course_material')
     summernote_fields = ('content',)
 
 @admin.register(Category)
@@ -32,10 +32,3 @@ class CommentAdmin(admin.ModelAdmin):
         self.message_user(request, f'{updated_count}Approved comments')
     
     approve_comments.short_description = "Approve comments"
-    
-@admin.register(Courses)
-class CoursesAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'status', 'created_on')  # Ta bort 'slug'
-    search_fields = ['title', 'content']
-    list_filter = ('categories',)
-    summernote_fields = ('content',)

@@ -26,7 +26,8 @@ class Post(models.Model):
     excerpt = models.TextField(blank=True)     # to show short beginning from textfield
     likes = models.ManyToManyField(User, related_name='like_post')
     anonymous_likes = models.IntegerField(default=0)
-    
+    is_course_material = models.BooleanField(default=False)
+
     class Meta:
         ordering = ["-created_on"]
 
@@ -73,28 +74,6 @@ class Comment(models.Model):
         return f"Comment {self.body} by {self.author}"
   
 
-class Courses(models.Model):
-    """
-    Model for courses with fields for unique title,author,content,
-    created, modified, many categories, draft or published
-    """
-    title = models.CharField(max_length=255, unique=True)
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="courses"
-    )
-    content = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=STATUS, default=0)
-    categories = models.ManyToManyField("Category", related_name="courses")
-     
-    class Meta:
-        ordering = ["-created_on"]
-
-    def __str__(self):
-            return self.title
-        
-        
 class Home(models.Model):
     title = models.CharField(max_length=200, unique=True)
     profile_image = CloudinaryField('image', blank=True, null=True)

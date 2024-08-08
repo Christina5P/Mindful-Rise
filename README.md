@@ -43,9 +43,17 @@ I also put in a picture of myself to strengthen the connection between me and in
 
 ## Blog Page
 In blog page, I would like to have a clean and calm style.
-You would be able to search for a blog by category.
+You would be able to choose a category you are interested in and you should see on the buttons which choice you have done.
+I made that with a calm headlight color.
+It also starts with "All Categories" button, so its clear and easy too navigate.
+I also implemented a feee text search bar (check of containing letters ) for a blog by category. And you have a clear button to quickly navigate to all posts and get easy to make searches.
+When you open  a post, you see a button to quickly come back to the index again.
+
+If you find an interersting post, you have an option to share it in social media below the posts.
+
 You have to be loggedd in to comment a post, in a easy way.
-As an admin, it should be easy to approve comments, so you have a filter choice nad can approve multiple comments at same time.
+As an admin, it should be easy to approve comments, so you have a filter choice and can approve multiple comments at same time.
+You are also able to deit or delete your comment and receive alerts of update or a flag if you are sure that you want to delete a post.
 
 ## Nav Bar
 ## Footer
@@ -167,6 +175,12 @@ I created an account/base.html to structure the codes, so you don´t have to rep
 What I missed was that I used {% block content%} in onte template and {% block page_content%} in another, so they didn´t match.
 I got help from tutor to find out, so when I chenged, everything was working well.
 
+### Problem with migration of category model 
+I add and changed the logic of categories and search in models. When I migrated, I got an error because of existing posts without category slug. Step 1 was to try to make a migrationfile to change. When it didn´t work, I deleted the last file and tried to migrate again. Mu third tried was to delete the new category model and to prevent the clash and migrate again.
+When nothing of that worked, I got tutorhelp, but the only suggestion was to delete the db and recover with a new.
+I wasn´t happy withthat suggestion, since I worked with the db in several weeks.
+In the end, it appeared that it was a general db problem, so when that was resolved, I could reach my db, erase all the categories of posts and migrate my new function and everything worked!
+
 ## Unfixed Bugs
 
 
@@ -241,6 +255,7 @@ You can read more information on cloning at the GitHub : https://docs.github.com
 # Media
 
 - monica.im GPT chat to help explain where to put url and meaning of django functions.
+- GPT Chat to help me with adding category search button and clear search button with MDB style
 
 ## Icons
 ## Images
@@ -274,3 +289,5 @@ Suggestion to create excerpt automatically save
 
 ### Inspiration of blogs and teaching equpment
 https://www.progressme.se/sv
+https://www.everydayhealth.com/mindfulness/
+

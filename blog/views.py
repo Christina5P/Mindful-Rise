@@ -5,7 +5,7 @@ from django.views import generic, View
 from django.views.generic import DetailView, ListView, TemplateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from .models import Category, Post, Comment, Courses
+from .models import Category, Post, Comment
 #from django.contrib.auth.decorators import login_required
 #from django.contrib.auth import authenticate, login 
 from django.views.decorators.http import require_POST
@@ -19,10 +19,12 @@ from django.http import JsonResponse                        #need for ajax to li
 from django.views.decorators.csrf import csrf_exempt        #need for ajax to likes
 from django.core.exceptions import ObjectDoesNotExist       #need for ajax to likes
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 class home_view(TemplateView):
     template_name = 'blog/home.html'
+
 def blog_index(request):
     search_query = request.GET.get('q', '')
     category_slug = request.GET.get('category', 'all')
@@ -32,7 +34,7 @@ def blog_index(request):
         current_category = None
     else:
         category = get_object_or_404(Category, slug=category_slug)
-        posts = Post.objects.filter(categories=category, status=1).order_by('-created_on')
+        posts = Post.objects.filter(categories=category, status=1, is_course_material=False).order_by('-created_on')
         current_category = category
 
     if search_query:
@@ -150,15 +152,16 @@ def category_search(request):
         'query': query,
     })
 
-def courses_index(request):
-    courses = Courses.objects.all().order_by("-created_on")
-    context = {
-        "courses": courses,
-        'logged_in': request.user.is_authenticated,
-        'login_url': '/login/',
-        'signup_url': '/signup/'  
-    }
-    return render(request, 'blog/courses.html', context)
+@login_required
+def course_detail(request, slug):
+    course = get_object_or_404(Post, slug=slug, is_course_material=True)
+
+    return render(request, 'courses/courses_detail.html', {'course': course})
+
+def courses_view(request):
+    courses = Post.objects.filter(is_course_material=True, status=1)
+    return render(request, 'courses/courses.html', {'courses': courses})
+
 
 def comment_edit(request, slug, comment_id):
     """

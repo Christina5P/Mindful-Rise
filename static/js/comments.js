@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+        
+});
     
     /*event listeners for span likeIcons
     likeIcons.forEach(icon => {
@@ -77,5 +79,3 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => console.error('Fel:', error));
         });
     });*/
-    
-});

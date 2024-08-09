@@ -24,15 +24,14 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)     # to show short beginning from textfield
-    likes = models.ManyToManyField(User, related_name='like_post')
-    anonymous_likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name='like_post', blank=True)
     is_course_material = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-created_on"]
 
-    def number_of_likes(self):
-        return self.likes.count()
+def number_of_likes(self):
+    return self.likes.count()
 
 class Category(models.Model):
     name = models.CharField(max_length=60, unique=True)

@@ -254,8 +254,19 @@ You can read more information on cloning at the GitHub : https://docs.github.com
 
 # Media
 
-- monica.im GPT chat to help explain where to put url and meaning of django functions.
-- GPT Chat to help me with adding category search button and clear search button with MDB style
+https://www.youtube.com/watch?v=et55Kc_G-1o
+https://deepeddypsychotherapy.com/self-esteem/
+https://www.verywellhealth.com/what-is-self-esteem-5205044
+https://www.wfla.com/bloom-tampa-bay/unlocking-your-inner-confidence-the-power-of-self-esteem/
+https://www.yin-yoga.se/yinyoga/
+https://www.masterclass.com/articles/how-to-value-yourself
+https://www.psychalive.org/self-worth/
+
+
+
+
+
+
 
 ## Icons
 ## Images
@@ -275,6 +286,8 @@ https://www.youtube.com/watch?v=PXqRPqDjDgc
 https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg
 https://medium.com/@peter.bulyaki/ho-to-edit-or-delete-your-comments-responses-on-medium-com-in-2019-2a87eb8da79b
 https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc
+- monica.im GPT chat to help explain where to put url and meaning of django functions.
+- GPT Chat to help me with adding category search button and clear search button with MDB style
 
 
 

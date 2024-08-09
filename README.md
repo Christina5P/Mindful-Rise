@@ -1,10 +1,64 @@
 # Introduction
 
 # Content
+## Introduction
+## Project Set Up
+### User stories
+### Mindmap
+### ERD
+### Wireframes
+### CRUD
+## Features
+### Homepage
+### Blog Page
+### Courses
+### Nav Bar
+### Footer
+### Register section
+## Setting up workspace
+## Design
+## Testing
+## Bugs
+## Technologies
+### Packages
+## Deployment
+## Media
+## Images
+## Font
+## Database
+## Framework
+## ERD
+## Media
+## Images
+## Acknowledgements
 
 # Project Set Up
+
+I Started this project with an idea to create a blog with posts only for me.
+And to ad more exclusive content, I choosed to make a page eith Courses, to deep down with the development of yourself.
+
+I started with a mindmap to brainstorm and draw wireframes of content and look of the site.
+I started making a project in GitHub, there I created user stories.
+
+After that, I created an ERD to plan how to build the project.
+
+In Gitpod, I decided to only have one app, because Blog and Courses are mixed, but filtered on their pages.
+I created different templates, to make it easy to work with.
+
 ## User Stories
-## Blog Plan
+
+There is a project in GitHub, linked to Mindful_Rise repository
+https://github.com/users/Christina5P/projects/5/views/1
+
+In the backlog I worked with different stories/task and moved them in steps until they where done.
+
+I created user stories with acceptance critera to get MVP.
+
+![alt text](image.png)
+
+I also made some tasks
+
+![alt text](image-1.png)
 
 
 ## Mindmap
@@ -31,6 +85,15 @@ Courses:
 Blogpost:
 ![alt text](image-9.png)
 
+## CRUD 
+
+In use the operation CRUD :
+
+Create - Users can create comments and like posts
+       - User can register an account
+Read - Users can read the homepage, blogpost and Course material
+Update- Users can edit their own comments or unlike their likes if they have created an account and are logged in.
+Delete - Users can delete their own comments if  they have created an account and are logged in.
 
 # Features
 
@@ -42,24 +105,51 @@ Under  the pictures, I have a short resume of myself to get close to users and  
 I also put in a picture of myself to strengthen the connection between me and interested users.
 
 ## Blog Page
+Blog page is for all visitors and if you havn´t signed up, you can use it for readable.
 In blog page, I would like to have a clean and calm style.
 You would be able to choose a category you are interested in and you should see on the buttons which choice you have done.
 I made that with a calm headlight color.
 It also starts with "All Categories" button, so its clear and easy too navigate.
-I also implemented a feee text search bar (check of containing letters ) for a blog by category. And you have a clear button to quickly navigate to all posts and get easy to make searches.
+I also implemented a free text search bar (check of containing letters ) for a blog by category. And you have a clear button to quickly navigate to all posts and get easy to make searches.
 When you open  a post, you see a button to quickly come back to the index again.
 
 If you find an interersting post, you have an option to share it in social media below the posts.
 
-You have to be loggedd in to comment a post, in a easy way.
+You have to be loggedd in to like or comment a post, in a easy way.
 As an admin, it should be easy to approve comments, so you have a filter choice and can approve multiple comments at same time.
-You are also able to deit or delete your comment and receive alerts of update or a flag if you are sure that you want to delete a post.
+You are also able to edit or delete your comment and receive alerts of update or a flag if you are sure that you want to delete a post.
+There is also a vounter of likes and comments.
+
+If there´s no post in a category, you get a message,so you understand that there is no published posts.
+
+## Courses
+There is also a page for courses.
+I want that page to be more exclusive and is only for members.
+When you enter this page as logged in, you welcome with a message.
+You also have the course material under the picture with the message.
+
+If you´re not signed in, you´ll se a form in the center of the page with links to log in or sign up form.
+The course material will not be able for unauthorized users and you will not see them.
+ 
+
 
 ## Nav Bar
+
+There is a navbar on top of page.
+Its the same information, but it changes color when you move to another page, too keep the contrast.
+At right you can see if you are logged in or not.
+If you are logged in, you have a "Logout" option and if you are not logged in, there is a "Register" and "Login" option instead.
+It´s too keep you informed of your status.
+
 ## Footer
+
+
+
+
 ## Register section
 
 # Setting up workspace
+
 ### Run this command to install django:
  pip3 install 'django<4'  
 ### Next, install these libraries: 
@@ -115,15 +205,13 @@ Before deploying on heroku make sure: DEBUG = False
 web: gunicorn basic_mind.wsgi
 hint: It´s important to spell Procfile with a capital
 
-
-
-# Feautures Implementented
-
 # Design
 
 I have used MBD for design and a carousel of pictures at home page.
 I want it to be clean and calm too read and use and buttons is indicatuve.
 Blogpage for unauthorized users and courses for signed up users are separated, to make it clean.
+
+I didnt install anything from MDB since I used CDN installment. It is the easiest way, since you only need to add MDB:s link tap in <head> in your base.html 
 
 # Testing
 ## Validating Test
@@ -183,11 +271,15 @@ In the end, it appeared that it was a general db problem, so when that was resol
 
 ## Unfixed Bugs
 
+### Showing course material in blog post when choosing category 
+I have make a filter function that blog index should never view post "is course_material" and it works with all blog posts, but if you filter of one category, it views anyway.
+
 
 
 # Technologies
 ### Python - Language of this project
 ### Javascript
+### JQuery
 ### HTML
 ### CSS
 ### Django - 
@@ -196,6 +288,11 @@ In the end, it appeared that it was a general db problem, so when that was resol
 ### MDB
 ### Github - Save the project in a repository
 ### Heroku - Deploy it to a public website
+
+## Package
+### Whitenoise
+### Summernote
+### Cloudinary
 
 # Deployment
 
@@ -252,29 +349,45 @@ Open your repo and click the green "Code" button on the right-hand side. The eas
 
 You can read more information on cloning at the GitHub : https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
+## Font
+* Roboto
+
+## Databas
+CI Database https://dbs.ci-dbs.net/
+
+## Framework 
+* Django
+
+### Wireframes:
+https://balsamiq.cloud/
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+
+### ERD: 
+I created an ERD:
+http://draw.io
+
+![alt text](image-2.png)
+
+
+
 # Media
 
 https://www.youtube.com/watch?v=et55Kc_G-1o
 https://deepeddypsychotherapy.com/self-esteem/
 https://www.verywellhealth.com/what-is-self-esteem-5205044
-https://www.wfla.com/bloom-tampa-bay/unlocking-your-inner-confidence-the-power-of-self-esteem/
 https://www.yin-yoga.se/yinyoga/
 https://www.masterclass.com/articles/how-to-value-yourself
+
+
+## Images
+https://deepeddypsychotherapy.com/self-esteem/
+https://www.wfla.com/bloom-tampa-bay/unlocking-your-inner-confidence-the-power-of-self-esteem/
+https://www.yin-yoga.se/yinyoga/
 https://www.psychalive.org/self-worth/
 
-
-
-
-
-
-
-## Icons
-## Images
-## Font
-## Databas
-CI Database https://dbs.ci-dbs.net/
-
-## Framework 
 
 # Acknowledgement
 
@@ -288,14 +401,6 @@ https://medium.com/@peter.bulyaki/ho-to-edit-or-delete-your-comments-responses-o
 https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc
 - monica.im GPT chat to help explain where to put url and meaning of django functions.
 - GPT Chat to help me with adding category search button and clear search button with MDB style
-
-
-
-### Wireframes:
-https://balsamiq.cloud/
-
-### Create ERD: 
-http://draw.io
 
 ### ChatGPT.com:
 Suggestion to create excerpt automatically save

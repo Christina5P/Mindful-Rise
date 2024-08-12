@@ -30,6 +30,7 @@
 * Database
 * Framework
 * Media
+* Icons
 * Images
 * Acknowledgements
 
@@ -196,9 +197,9 @@ import env
 
 You also need to put this in the setting.py file under :
 
-ALLOWED_HOSTS = ['8000-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.net',
-'mindfulgrowth-5f753257331e.herokuapp.com',
-'8080-christina5p-mindfulgrow-0ffy6j8ksnb.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['rise-f0e0db837715.herokuapp.com',
+    '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
+    '8080-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net",
@@ -369,6 +370,10 @@ CI Database https://dbs.ci-dbs.net/
 
 ## Framework 
 * Django
+
+## Icons
+
+* https://www.flaticon.com/free-icons/author
 
 # Media
 

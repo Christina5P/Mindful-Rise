@@ -76,58 +76,63 @@
        </button>
         </section>
 
-  
-
-
   <!-- Comments Section -->
-  <section class="mt-4">
-    <div class="row">
-      <div class="col-md-8 card mb-4 mt-3">
-        <h6 class="mb-4">Comments</h6>
-        <div class="card-body">
-                {% for comment in comments %}
-            <div class="p-2 comments
-              {% if not comment.approved and comment.author == user %}
-                faded{% elif not comment.approved %} d-none{% endif %}">
-              <p class="font-weight-bold">
-                {{ comment.author }}
-                <span class="font-weight-normal">{{ comment.created_on }}</span> wrote:
-              </p>
-                  <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
-              <div id="comment{{ comment.id }}">
-                {{ comment.body | linebreaks }}
-              </div>
-                  {% if not comment.approved and comment.author == user %}
-                  <p class="approval">Your comment is awaiting approval</p>
-                  {% endif %}
-                  {% if user.is_authenticated and comment.author == user %}
-                <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-                  <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
-                  {% endif %}
-                </div>
-                {% empty %}
-                <p>No comments yet.</p>
-                {% endfor %}
-              </div>
-            </div>
-
-      <!-- Create comments -->
-      <div class="col-md-4 card mb-4 mt-3">
-              <div class="card-body">
-                {% if user.is_authenticated %}
-                <h6>Leave a comment:</h6>
-                <form method="post" style="margin-top: 1.3em;">
-                  {% csrf_token %}
-                  {{ comment_form | crispy }}
-              <button type="submit" class="btn-submit">Submit</button>
-                </form>
-                {% else %}
-                <p>Please <a href='{{ login_url}}'>login</a> to write a comment.<hr>If you're not a member yet?<a href='{{ signup_url}}'><br>Sign up here.</a></p>
-                {% endif %}
-              </div>
-            </div>
+<section class="mt-4">
+  <div class="row">
+    <div class="col-md-8 card mb-4 mt-3">
+      <h6 class="mb-4">Comments</h6>
+      <div class="card-body">
+        {% for comment in comments %}
+        <div class="p-2 comments
+          {% if not comment.approved and comment.author == user %}
+            faded
+          {% elif not comment.approved %}
+            d-none
+          {% endif %}">
+          <p class="font-weight-bold">
+            <span>{{ comment.author }}</span>
+            <span>
+              <img src="static/images/copywriter.png" alt="Author Icon" style="width: 20px; height: 20px;">
+            </span>
+            <span class="font-weight-normal">{{ comment.created_on }}</span> wrote:
+          </p>
+          <div id="comment{{ comment.id }}">
+            {{ comment.body | linebreaks }}
           </div>
-        </section>
+          {% if not comment.approved and comment.author == user %}
+            <p class="approval">Your comment is awaiting approval</p>
+          {% endif %}
+          {% if user.is_authenticated and comment.author == user %}
+            <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+            <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+            {% if comment.updated_on != comment.created_on %}
+              <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
+            {% endif %}
+          {% endif %}
+        </div>
+        {% empty %}
+        <p>No comments yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Create comments -->
+    <div class="col-md-4 card mb-4 mt-3">
+      <div class="card-body">
+        {% if user.is_authenticated %}
+        <h6>Leave a comment:</h6>
+        <form method="post" style="margin-top: 1.3em;">
+          {% csrf_token %}
+          {{ comment_form | crispy }}
+          <button type="submit" class="btn-submit">Submit</button>
+        </form>
+        {% else %}
+        <p>Please <a href='{{ login_url }}'>login</a> to write a comment.<hr>If you're not a member yet? <a href='{{ signup_url }}'>Sign up here.</a></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Displaying count of comments -->
   <div class="row">

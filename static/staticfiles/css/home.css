@@ -1,0 +1,10 @@
+
+.navbar-light .navbar-text{
+    color: white;
+}
+
+.btn-outline-primary.active {
+    background-color: #007bff; /* Adjust color as needed */
+    color: #fff;
+    border-color: #007bff;
+  }

@@ -146,21 +146,20 @@
       <hr>
     </div>
   </div>
-
 <!-- Delete confirmation modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         Are you sure you want to delete your comment? This action cannot be undone.
       </div>
       <div class="modal-footer">
         <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -169,7 +168,7 @@
 </main>
 
 <!-- Like Button Script -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
     $(".like-button").click(function(e) {

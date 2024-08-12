@@ -3,9 +3,6 @@
 
 
 {% block page_content %}
-
-<!DOCTYPE html>
-<html lang="en">
 <body>
 
   
@@ -22,25 +19,27 @@
         .carousel-item.active {
           height: 100vh;
         }
-        .carousel-item:nth-child(1) {
-          background-image: url("{% static 'images/invest in yourself.png' %}");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: center center;
+.carousel-item:nth-child(1) {
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1/static/images/invest in yourself.f70c996c2708.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+}
 
-        }
-        .carousel-item:nth-child(2) {
-          background-image: url("{% static 'images/img 2 carousel.png' %}");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: center center;
-        }
-        .carousel-item:nth-child(3) {
-          background-image: url("{% static 'images/img 3 carousel.png' %}");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: center center;
-        }
+.carousel-item:nth-child(2) {
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723497686/img2carousel_x7vsij.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.carousel-item:nth-child(3) {
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723497686/img3carousel_cdijtc.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
         /* Height for devices larger than 576px */
         @media (min-width: 992px) {
           #introCarousel {
@@ -146,7 +145,7 @@
           <div class="row">
             <div class="col-md-2 gx-5 mb-2">
               <div class="bg-image hover-overlay shadow-2-strong" data-mdb-ripple-init data-mdb-ripple-color="light">
-                <img src="static/images/profile.jpg" class="img-fluid" />
+                <img src="{% static 'images/profile.jpg' %}" class="img-fluid" />
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
@@ -184,58 +183,6 @@
             </div>
           </div>
         </section>
-        <!--Section: Content-->
-       <!-- <hr class="my-5" />
-       
-                sign up for newsletter 
-                 Email input 
-                <div class="form-outline mb-4" data-mdb-input-init>
-                  <input type="email" id="form3Example3" class="form-control" />
-                  <label class="form-label" for="form3Example3">Email address</label>
-                </div>
-                Password input 
-                <div class="form-outline mb-4" data-mdb-input-init>
-                  <input type="password" id="form3Example4" class="form-control" />
-                  <label class="form-label" for="form3Example4">Password</label>
-                </div>
-                 Checkbox 
-                <div class="form-check d-flex justify-content-center mb-4">
-                  <input
-                    class="form-check-input me-2"
-                    type="checkbox"
-                    value=""
-                    id="form2Example3"
-                    checked
-                  />
-                  <label class="form-check-label" for="form2Example3">
-                    Subscribe to our newsletter
-                  </label>
-                </div>
-                Submit button 
-                <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                  Sign up
-                </button>
-                 Register buttons 
-                <div class="text-center">
-                  <p>or sign up with:</p>
-                  <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
-                    <i class="fab fa-facebook-f"></i>
-                  </button>
-                  <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
-                    <i class="fab fa-google"></i>
-                  </button>
-                  <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
-                    <i class="fab fa-twitter"></i>
-                  </button>
-                  <button type="button" class="btn btn-primary btn-floating mx-1" data-mdb-ripple-init>
-                    <i class="fab fa-github"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
-        Section: Content-->
          
         {% endblock page_content %}
       </div>
@@ -244,8 +191,5 @@
  
     {% block extras %}
     {% endblock %}
-    
-<footer>  
-</footer>
+
 </body>
-</html>

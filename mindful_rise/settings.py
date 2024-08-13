@@ -17,7 +17,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['mindfulrise-f0e0db837715.herokuapp.com',
     '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
@@ -48,7 +48,7 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'home'
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+#CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 MIDDLEWARE = [

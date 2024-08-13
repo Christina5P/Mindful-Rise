@@ -9,7 +9,6 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
  
-    #path('', PostList.as_view(), name='home'),
    path('blog/', views.blog_index, name='blog_index'),  # url for posts from navbar
    path('post/<slug:slug>/', views.blog_detail, name='post_detail'),  #detail view by slug  
    path('category/<slug:category_slug>/', views.blog_category, name='blog_category'),
@@ -24,8 +23,5 @@ urlpatterns = [
    path('index/', views.blog_index, name='blog'),
    path('accounts/', include('allauth.urls')),  # Djangos path incl to register and login
    path('', home_view.as_view(), name='home'), 
-   #path('category/<str:category>/', CatListView.as_view(), name='category'),
-   #path('signup/', signup_view, name='signup'),  # Signup URL
-   # path('login/', auth_views.LoginView.as_view(), name='account_login'),
     ]    
 

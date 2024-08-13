@@ -57,21 +57,19 @@ In the backlog I worked with different stories/task and moved them in steps unti
 
 I created user stories with acceptance critera to get MVP.
 
-![alt text](image.png)
 
 I also made some tasks
 
-![alt text](image-1.png)
 
 
 ## Mindmap
+![Screenshot of Mindmap](static/img_readme/mindmap.png)
 
-![alt text](image-7.png)
 
 link to my mindmap: https://miro.com/app/board/uXjVK1IKqsk=/
 
 ## Relationship diagram ERD
-![alt text](image-2.png)
+![Screenshot of ERD](static/img_readme/erd.png)
 
 Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp=sharing
 
@@ -79,16 +77,16 @@ Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp
 
 Wireframe is created in https://balsamiq.cloud/srvezeo/phn02iw/r3EBE
 Home page:
-![alt text](image-6.png)
+![Screenshot of Home](static/img_readme/wireframehome.png)
 
 Blog page:
-![alt text](image-7.png)
+![Screenshot of Blog](static/img_readme/wireframeblog.png)
 
 Courses:
-![alt text](image-8.png)
+![Screenshot of Courses](static/img_readme/wireframecourses.png)
 
 Blogpost:
-![alt text](image-9.png)
+![Screenshot of Post](static/img_readme/wireframedetail.png)
 
 ## CRUD 
 
@@ -150,7 +148,7 @@ It´s too keep you informed of your status.
 
 There is links to social media in footer and a copyright text
 
-![alt text](image-9.png)
+![Screenshot of footer](static/img_readme/footer.png)
 
 ## Register section
 
@@ -284,6 +282,13 @@ In the end, it appeared that it was a general db problem, so when that was resol
 
 ### Unfixed Bugs
 
+* I get an errormessage in browser/inspect 
+It has been there through the project and I think it has something with the MDB modal to do.
+It doesn´t effekr any functions and I tried to ger rid of it by mark out different nfunctions, but can´t diagnos how to solve it.
+It still a unfixed bug, since it doesn´t effect something in my project.
+
+![Screenshot of Bug](static/img_readme/bug.png)
+
 * Showing course material in blog post when choosing category 
 I have make a filter function that blog index should never view post "is course_material" and it works with all blog posts, but if you filter of one category, it views anyway.
 
@@ -321,20 +326,21 @@ I chose to make a manual deployment, so I can see that everything goes ok and ha
 
 You need to create an app for your project in Heroku.
 In settings you also need to fill in the URL:s in Config Var
-![alt text](image-1.png)
+![Screenshot of settings](static/img_readme/herokusettings.png)
+
+![Screenshot of deployment1](static/img_readme/configvars.png)
 
 After that you go to Herokus deployment section 
-
-![alt text](image-2.png)
+![Screenshot of deployment1](static/img_readme/herokudeploy1.png)
 
 Scroll down to the bottom and click the "deploy button
 
-![alt text](image-3.png)
+![Screenshot of deployment1](static/img_readme/herokudeploy.png)
 
 On the top at right hand side, you can click "open app" to see public site.
 If there is any error, you can find the logs if you click "more" button.
 
-![alt text](image-4.png)
+![Screenshot of app](static/img_readme/herokuapp.png)
 
 ## Git Hub / Gitpod
 I created a repository in Git Hub and connected a project to the repository.

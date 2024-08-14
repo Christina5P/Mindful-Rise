@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
-
 {% load static %}
 {% load crispy_forms_tags %}
-
 
 {% block page_title %}
 <h2>{{ post.title }}</h2>
 {% endblock %}
 
 {% block page_content %}
+
 <main class="my-5">
   <div class="container">
 
@@ -20,7 +19,6 @@
     <!-- Post details -->
     <div class="row">
       <div class="col-md-8 mb-4">
-
         <!-- Post Image and Title -->
         <section class="border-bottom mb-4">
           <div class="text-center mb-3">
@@ -32,8 +30,8 @@
               {% endif %}
             </div>
           </div>
-        </section>
 
+        </section>
         <!-- Post Content -->
         <div class="card-body">
           <p class="card-text">{{ post.content | safe }}</p>
@@ -42,11 +40,13 @@
 
 <!-- Comment and Likes -->
 <div class="row align-items-center mb-2">
+
   <!-- Like Button -->
   <div class="col-auto">
       <div class="likes-section d-flex align-items-center">
           <div class="like-form">
             <a href="{% url 'like_post' post.id %}" class="like-button">
+              {% csrf_token %}
               {% if user in post.likes.all %}
                   <i class="fas fa-heart" style="color: red;"></i>
               {% else %}
@@ -54,7 +54,6 @@
               {% endif %}
           </a>
           <span class="likes-count">{{ post.likes.count }}</span>
-          
           </div>
       </div>
   </div>
@@ -66,8 +65,8 @@
           <strong class="text-secondary">{{ comment_count }}</strong>
       </div>
   </div>
-</div>
 
+</div>  <!-- div to div class row align-->
 
         <!-- Share buttons -->
         <section class="text-center border-top border-bottom py-4 mb-4">
@@ -85,7 +84,6 @@
 
        <!-- Comments Section -->
        <section>
-       
         <div class="row d-flex justify-content-center">
           <div class="col-md-8 col-lg-6">
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
@@ -108,35 +106,73 @@
               </div>
 
 
-                <!-- Existing comments -->
-                {% for comment in comments %}
-                  <div class="card mb-4">
-                    <div class="card-body">
-                      <span>{{ comment.author }}</span>
-                      <span>
-                        <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
-                      </span>
-                      <p class="font-weight-normal">{{ comment.created_on }} wrote:</p>
-                      <div id="comment{{ comment.id }}">
-                        {{ comment.body | linebreaks }}
-                      </div>
-                      {% if not comment.approved and comment.author == user %}
-                        <p class="approval">Your comment is awaiting approval</p>
-                      {% endif %}
-                      {% if user.is_authenticated and comment.author == user %}
-                        <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-                        <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
-                      {% endif %}
-                    </div>
-                  </div>
-                {% empty %}
-                  <p>No comments yet.</p>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </section>
+              <!-- Existing comments -->
+        {% for comment in comments %}
 
+  <div class="card mb-4">
+    <div class="card-body">
+      <span>{{ comment.author }}</span>
+      <span>
+        <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
+      </span>
+      <p class="font-weight-normal">{{ comment.created_on }} wrote:</p>
+      <div id="comment{{ comment.id }}">
+        {{ comment.body | linebreaks }}
+      </div>
+      {% if comment.updated_on %}
+        <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
+      {% endif %}
+
+      {% if not comment.approved and comment.author == user %}
+        <p class="approval">Your comment is awaiting approval</p>
+      {% endif %}
+
+      {% if user.is_authenticated and comment.author == user %}
+        <button class="btn btn-edit" onclick="showEditForm ({{ comment.id }})">Update</button>
+        
+    <!-- Hidden edit form -->
+ 
+<div id="editForm{{ comment.id }}" style="display: none;">
+  <br>
+  <form method="post" action="{% url 'comment_edit' post.slug comment.id %}">
+    {% csrf_token %}
+    <textarea name="body" class="form-control mb-3">{{ comment.body }}</textarea>
+    <button type="submit" class="btn btn-primary me-2">Save Changes</button>
+  </form>
+</div>
+<hr>
+    {% endif %}
+
+       <!-- Delete a comment with deletemodal-->
+       <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+       <hr>
+
+       {% empty %}
+       <p>No comments yet.</p>
+     {% endfor %}
+
+   </div>
+ </div>
+</div>
+</section>
+
+  </div>  <!-- div to comment and likes row-->
+</div>  <!-- div to container-->
+
+
+
+
+<script>
+function showEditForm(commentId) {
+  var form = document.getElementById('editForm' + commentId);
+  if (form.style.display === 'none') {
+      form.style.display = 'block';
+  } else {
+      form.style.display = 'none';
+  }
+}
+</script>
+                          
 
         <!-- Delete confirmation modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -144,7 +180,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 Are you sure you want to delete your comment? This action cannot be undone.
@@ -156,13 +192,5 @@
             </div>
           </div>
         </div>
-
-      </div> <!-- End of col-md-8 -->
-    </div> <!-- End of row -->
-  </div> <!-- End of container -->
-</main>
-
-</main>
-
-
+     
 {% endblock page_content %}

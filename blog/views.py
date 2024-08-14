@@ -16,6 +16,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt        #need for ajax to likes
 from django.core.exceptions import ObjectDoesNotExist       #need for ajax to likes
 from django.core.paginator import Paginator
+from django.utils import timezone
 
 # Create your views here.
 
@@ -102,23 +103,22 @@ def blog_detail(request, slug):
     return render(request, "blog/detail.html", context)
 
 def like_post(request, post_id):
-    if not request.user.is_authenticated:
-        return JsonResponse({'status': 'error'}, status=403)
-
     post = get_object_or_404(Post, id=post_id)
-    
-    if request.user not in post.likes.all():
-        post.likes.add(request.user)
+
+    if request.method == 'POST':
+        if request.user in post.likes.all():
+            post.likes.remove(request.user)
+            status = 'unliked'
+        else:
+            post.likes.add(request.user)
+            status = 'liked'
+
         return JsonResponse({
-            'status': 'liked',
+            'status': status,
             'likes_count': post.likes.count()
         })
-    else:
-        post.likes.remove(request.user)  # Lägg till detta för att ogilla om det redan är gillat
-        return JsonResponse({
-            'status': 'unliked',
-            'likes_count': post.likes.count()
-        })
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
 def blog_category(request, category_slug):
@@ -194,6 +194,7 @@ def comment_edit(request, slug, comment_id):
     View to edit comments
     """
     if request.method == "POST":
+
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
@@ -203,16 +204,15 @@ def comment_edit(request, slug, comment_id):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.approved = False
+            comment.updated_on = timezone.now()
             comment.save()
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
             return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
-        else:
-            messages.add_message(request, messages.ERROR, 'Error updating comment!')
     else:
         comment_form = CommentForm(instance=comment)
 
-    return render(request, "blog/edit_comment.html", {'comment_form': comment_form, 'post': post})
+    return render(request, "post_detail", {'comment_form': comment_form, 'post': post})
 
 def comment_delete(request, slug, comment_id):
     """

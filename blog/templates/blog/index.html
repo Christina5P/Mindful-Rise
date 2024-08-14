@@ -34,7 +34,7 @@
       <h2>Categories</h2>
       <div class="row">
         <div class="col-md-4 mb-3">
-          <a href="{% url 'blog_index' %}" class="btn btn-outline-primary btn-block {% if not current_category %}active{% endif %}">
+          <a href="{% url 'blog_index' %}" class="btn btn-outline-primary btn btn-block {% if not current_category %}active{% endif %}">
             All Categories
           </a>
         </div>
@@ -70,8 +70,13 @@
             <hr>
             <p class="card-text text-muted h6">{{ post.created_on }}</p>
 
+            
+
+  <!-- Like and Comment Section -->
+  <div class="d-flex justify-content-start align-items-center">
+
             <!-- Like Button -->
-            <div class="like-section">
+            <div class="d-flex align-items-center me-4">
               <a href="{% url 'like_post' post.id %}" class="like-button">
                 {% if user in post.likes.all %}
                     <i class="fas fa-heart" style="color: red;"></i> <!-- Gillat -->
@@ -83,7 +88,7 @@
             </div>
 
             <!-- Comment Count -->
-            <div class="col-auto">
+          
               <div class="comments-section d-flex align-items-center">
                 <i class="far fa-comments me-2"></i>
                 <strong class="text-secondary">{{ post.comments.count }}</strong>
@@ -92,6 +97,8 @@
           </div>
         </div>
       </div>
+
+      <!-- No Posts Message -->
       {% empty %}
       <p>No published posts</p>
       {% endfor %}

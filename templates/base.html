@@ -1,8 +1,7 @@
-<!-- templates/base.html 
+   <!-- templates/base.html 
  Other templates inherit from this -->
  {% load static %}
 
- <!-- To use in href to url links; denna kan jag ta bort om jag inte ändrar i html:erna -->
  {% url 'home' as home_url %}
  {% url 'account_login' as login_url %}
  {% url 'account_signup' as signup_url %}
@@ -115,6 +114,9 @@
 
      <!-- MDB JS-->
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+
+ 
+ <script src="{% static 'js/ajax.js' %}"></script> 
  
  <script src="{% static 'js/comments.js' %}"></script>
  

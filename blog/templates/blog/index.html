@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<script src="{% static 'js/ajax.js' %}"></script>
+
+
 <!-- index.html content starts here -->
 {% block page_content %}
-{% block content %}
+
 
 <!-- Main layout -->
 <main class="my-5">
@@ -15,19 +18,16 @@
     <!-- Section: Content -->
 
     <!-- Category search form  -->
-      <div class="d-flex mb-4 align-items-center">
-        <form method="GET" action="{% url 'blog_index' %}" class="d-flex flex-grow-1">
-          <input type="text" name="q" class="form-control me-2" placeholder="Search categories..." value="{{ query }}">
-          <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-        
-       
+    <div class="d-flex mb-4 align-items-center">
+      <form method="GET" action="{% url 'blog_index' %}" class="d-flex flex-grow-1">
+        <input type="text" name="q" class="form-control me-2" placeholder="Search categories..." value="{{ query }}">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
       <!-- Clear search link (show if there's a query or a category selected) -->
       {% if query or current_category %}
       <a href="{% url 'blog_index' %}" class="btn btn-secondary ms-2">Clear Search</a>
       {% endif %}
     </div>
-
 
     <!-- Category list -->
     <div class="mb-4">
@@ -47,7 +47,7 @@
         {% endfor %}
       </div>
     </div>
-
+    
     <!-- Blog posts -->
     <div class="row">
       {% for post in page_obj %}
@@ -69,6 +69,26 @@
             <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read</a>
             <hr>
             <p class="card-text text-muted h6">{{ post.created_on }}</p>
+
+            <!-- Like Button -->
+            <div class="like-section">
+              <a href="{% url 'like_post' post.id %}" class="like-button">
+                {% if user in post.likes.all %}
+                    <i class="fas fa-heart" style="color: red;"></i> <!-- Gillat -->
+                {% else %}
+                    <i class="far fa-heart" style="color: red;"></i> <!-- Inte gillat -->
+                {% endif %}
+            </a>
+            <span class="likes-count">{{ post.likes.count }}</span>
+            </div>
+
+            <!-- Comment Count -->
+            <div class="col-auto">
+              <div class="comments-section d-flex align-items-center">
+                <i class="far fa-comments me-2"></i>
+                <strong class="text-secondary">{{ post.comments.count }}</strong>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -84,25 +104,23 @@
     <nav class="my-4" aria-label="...">
       <ul class="pagination pagination-circle justify-content-center">
         {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-          </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        </li>
         {% endif %}
-
         {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-            <li class="page-item active" aria-current="page">
-              <span class="page-link">{{ num }}</span>
-            </li>
-          {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
-            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-          {% endif %}
+        {% if page_obj.number == num %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">{{ num }}</span>
+        </li>
+        {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
         {% endfor %}
-
         {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-          </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
         {% endif %}
       </ul>
     </nav>
@@ -110,5 +128,4 @@
   </div>
 </main>
 
-{% endblock content %}
 {% endblock page_content %}

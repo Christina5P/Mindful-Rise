@@ -6,6 +6,17 @@ from django.utils.text import slugify
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
+
+class Home(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    profile_image = CloudinaryField('image', blank=True, null=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
 class Post(models.Model):
     """
     Model for blogpost with fields for unique title,author,content,
@@ -33,25 +44,7 @@ class Post(models.Model):
 def number_of_likes(self):
     return self.likes.count()
 
-class Category(models.Model):
-    name = models.CharField(max_length=60, unique=True)
-    description = models.TextField(blank=True, null=True)
-    slug = models.SlugField(max_length=60, unique=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name_plural = "categories"
-
-    def __str__(self):
-        return self.name
-
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-        
+       
 class Comment(models.Model):
     """
     Model for Comments with fields for author,content,
@@ -71,13 +64,29 @@ class Comment(models.Model):
    
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
-  
 
-class Home(models.Model):
-    title = models.CharField(max_length=200, unique=True)
-    profile_image = CloudinaryField('image', blank=True, null=True)
-    updated_on = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+class Category(models.Model):
+    """
+    slug field with ctegory name for category list and Q-search
+    """
+
+    name = models.CharField(max_length=60, unique=True)
+    description = models.TextField(blank=True, null=True)
+    slug = models.SlugField(max_length=60, unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "categories"
 
     def __str__(self):
-        return self.title
+        return self.name
+
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+        
+
+  

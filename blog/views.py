@@ -1,29 +1,30 @@
-from django.shortcuts import render, get_object_or_404, redirect # basic to render
-from django.db.models import Q   # for category search
-from django.urls import path, include # importing url
-from django.views import generic, View
-from django.views.generic import DetailView, ListView, TemplateView
-from django.http import HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
-from .models import Category, Post, Comment
-#from django.contrib.auth.decorators import login_required
-#from django.contrib.auth import authenticate, login 
-from django.views.decorators.http import require_POST
-from django.utils.decorators import method_decorator
-from django.contrib import messages
+
+from django.urls import path, reverse, reverse_lazy, include # importing url
+from .models import Category, Post, Comment, Home
+from django.db.models import Count, F, Q   # for category search
 from .forms import CommentForm
-from django.core.paginator import Paginator
-from django.views.generic.edit import UpdateView, DeleteView
-from .models import Comment, Home
-from django.http import JsonResponse                        #need for ajax to likes
-from django.views.decorators.csrf import csrf_exempt        #need for ajax to likes
-from django.core.exceptions import ObjectDoesNotExist       #need for ajax to likes
+from django.shortcuts import render, get_object_or_404, redirect # basic to render
+from django.http import HttpResponseRedirect, JsonResponse # Json need for ajax to likes
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.views import generic, View
+from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic.edit import UpdateView, DeleteView
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt        #need for ajax to likes
+from django.core.exceptions import ObjectDoesNotExist       #need for ajax to likes
+from django.core.paginator import Paginator
+
 # Create your views here.
+
+# View for home-page
 
 class home_view(TemplateView):
     template_name = 'blog/home.html'
+
+# View for class Post with category search, paginator,post likes
 
 def blog_index(request):
     search_query = request.GET.get('q', '')
@@ -45,47 +46,36 @@ def blog_index(request):
     page_obj = paginator.get_page(page_number)
     categories = Category.objects.all()
 
+    if request.user.is_authenticated:
+        user_liked_posts = set(request.user.like_post.values_list('id', flat=True))
+    else:
+        user_liked_posts = set()
+
+    # Annotate posts with likes and comments counts
+    posts = posts.annotate(
+        likes_count=Count('likes'),
+        comments_count=Count('comments')
+    )
+
     context = {
         "page_obj": page_obj,
         "categories": categories,
         "query": search_query,
         "current_category": current_category,
         "is_paginated": page_obj.has_other_pages(),
+         'user_liked_posts': user_liked_posts,
     }
     return render(request, "blog/index.html", context)
-def signup_view(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('home')
-        else:
-            # Om formuläret inte är giltigt, rendera om sidan med formulärfel
-            return render(request, 'account/signup.html', {'form': form})
-    else:
-        # Om det inte är en POST-förfrågan, rendera en tom version av formuläret
-        form = UserCreationForm()
-        return render(request, 'account/signup.html', {'form': form})
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-    if user is not None:
-            login(request, user)
-            return redirect('home')
-
+# 
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.count()
     number_of_likes = post.likes.count()
-    post_is_liked = post.likes.filter(id=request.user.id).exists() if request.user.is_authenticated else False
+    
+    # Determine if the current user has liked the post
+    post_is_liked = request.user.is_authenticated and post.likes.filter(id=request.user.id).exists()
 
     context = {
         "post": post,
@@ -111,22 +101,25 @@ def blog_detail(request, slug):
 
     return render(request, "blog/detail.html", context)
 
-
-@csrf_exempt
 def like_post(request, post_id):
-    if request.method != 'POST':
-        return JsonResponse({'error': 'Invalid request method'}, status=400)
-    try:
-        post = Post.objects.get(id=post_id)
-        if post.likes.filter(id=request.user.id).exists():
-            post.likes.remove(request.user)
-            result = {'status': 'unliked', 'likes_count': post.likes.count()}
-        else:
-            post.likes.add(request.user)
-            result = {'status': 'liked', 'likes_count': post.likes.count()}
-        return JsonResponse(result)
-    except ObjectDoesNotExist:
-        return JsonResponse({'error': 'Post does not exist', 'post_id': post_id}, status=404)
+    if not request.user.is_authenticated:
+        return JsonResponse({'status': 'error'}, status=403)
+
+    post = get_object_or_404(Post, id=post_id)
+    
+    if request.user not in post.likes.all():
+        post.likes.add(request.user)
+        return JsonResponse({
+            'status': 'liked',
+            'likes_count': post.likes.count()
+        })
+    else:
+        post.likes.remove(request.user)  # Lägg till detta för att ogilla om det redan är gillat
+        return JsonResponse({
+            'status': 'unliked',
+            'likes_count': post.likes.count()
+        })
+
 
 def blog_category(request, category_slug):
     """
@@ -236,3 +229,33 @@ def comment_delete(request, slug, comment_id):
         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+    
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('home')
+        else:
+            # Om formuläret inte är giltigt, rendera om sidan med formulärfel
+            return render(request, 'account/signup.html', {'form': form})
+    else:
+        # Om det inte är en POST-förfrågan, rendera en tom version av formuläret
+        form = UserCreationForm()
+        return render(request, 'account/signup.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+    if user is not None:
+            login(request, user)
+            return redirect('home')
+            

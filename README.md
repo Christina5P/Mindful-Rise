@@ -284,7 +284,12 @@ In the end, it appeared that it was a general db problem, so when that was resol
 
 * I get an errormessage in browser/inspect 
 It has been there through the project and I think it has something with the MDB modal to do.
-It doesn´t effekr any functions and I tried to ger rid of it by mark out different nfunctions, but can´t diagnos how to solve it.
+It doesn´t effect any functions and I tried to ger rid of it by mark out different functions, but can´t diagnos how to solve it.
+What I tried:
+- mark out different functions to see if I still get error.
+- check compatiblebetween different versions
+- Tutorhelp
+
 It still a unfixed bug, since it doesn´t effect something in my project.
 
 ![Screenshot of Bug](static/img_readme/bug.png)

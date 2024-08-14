@@ -3,6 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+
 {% block page_title %}
 <h2>{{ post.title }}</h2>
 {% endblock %}
@@ -39,31 +40,31 @@
         </div>
         <hr>
 
-    <!-- Comment and Likes -->
+<!-- Comment and Likes -->
 <div class="row align-items-center mb-2">
- <!-- Like Button -->
-<div class="col-auto">
-  <div class="likes-section d-flex align-items-center">
-    <div class="like-form" action="{% url 'like_post' post.id %}">
-      {% if post_is_liked %}
-        <a class="like-button unlike" href="{% url 'like_post' post.id %}">
-          <i class="fas fa-heart" style="color: red;"></i>
-        </a>
-      {% else %}
-        <a class="like-button like" href="{% url 'like_post' post.id %}">
-          <i class="far fa-heart" style="color: red;"></i>
-        </a>
-      {% endif %}
-      <span class="likes-count ms-2">{{ number_of_likes }}</span>
-    </div>
+  <!-- Like Button -->
+  <div class="col-auto">
+      <div class="likes-section d-flex align-items-center">
+          <div class="like-form">
+            <a href="{% url 'like_post' post.id %}" class="like-button">
+              {% if user in post.likes.all %}
+                  <i class="fas fa-heart" style="color: red;"></i>
+              {% else %}
+                  <i class="far fa-heart" style="color: red;"></i>
+              {% endif %}
+          </a>
+          <span class="likes-count">{{ post.likes.count }}</span>
+          
+          </div>
+      </div>
   </div>
-</div>
 
-<!-- Comment Count -->
-<div class="col-auto">
-  <div class="comments-section d-flex align-items-center">
-    <i class="far fa-comments me-2"></i>
-    <strong class="text-secondary">{{ comment_count }}</strong>
+  <!-- Comment Count -->
+  <div class="col-auto">
+      <div class="comments-section d-flex align-items-center">
+          <i class="far fa-comments me-2"></i>
+          <strong class="text-secondary">{{ comment_count }}</strong>
+      </div>
   </div>
 </div>
 
@@ -163,35 +164,5 @@
 
 </main>
 
-
-
-<!-- Like Button Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $(".like-button").click(function(e) {
-      e.preventDefault();
-      var $this = $(this);
-      var url = $this.attr('href');
-
-      $.ajax({
-        url: url,
-        type: "POST",
-        dataType: "json",
-        success: function(data) {
-          if (data.status === 'liked') {
-            $this.html('<i class="fas fa-heart" style="color: red;"></i>');
-          } else {
-            $this.html('<i class="far fa-heart" style="color: red;"></i>');
-          }
-          $('.likes-count').text(data.likes_count);
-        },
-        error: function(xhr, status, error) {
-          console.error(error);
-        }
-      });
-    });
-  });
-</script>
 
 {% endblock page_content %}

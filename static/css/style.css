@@ -12,3 +12,11 @@
 
 #memberpage { color: white;
 }
+
+#intro {
+    background-image: url("{% static 'images/backgroundimg.png' %}");
+    height: 100vh;
+    background-size: cover; /* Lägg till detta för att se till att bilden fyller */
+    background-position: center; /* Centrerar bilden */
+    background-repeat: no-repeat; /* Förhindrar upprepning */
+ }

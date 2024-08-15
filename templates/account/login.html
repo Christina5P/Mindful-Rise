@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}{% trans "Log In" %}{% endblock %}
 
 {% block page_content %}
 
@@ -28,7 +28,7 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
       
-<button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">{% trans "Sign In" %}</button>
+<button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">{% trans "Log In" %}</button>
       </form>
     </div>
   </div>

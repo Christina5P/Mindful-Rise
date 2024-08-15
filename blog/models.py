@@ -67,7 +67,7 @@ class Comment(models.Model):
 
 class Category(models.Model):
     """
-    slug field with ctegory name for category list and Q-search
+    slug field with category name for category list and Q-search
     """
 
     name = models.CharField(max_length=60, unique=True)

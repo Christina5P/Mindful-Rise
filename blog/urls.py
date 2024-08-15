@@ -26,7 +26,6 @@ urlpatterns = [
    path('course/<slug:slug>/', views.course_detail, name='course_detail'), # open a course card
    path('accounts/', include('allauth.urls')),  # Djangos path incl to register and login
    path('', home_view.as_view(), name='home'), 
-   path('login/', login_view, name='login'),  # Login URL
-   path('signup/', signup_view, name='signup'),  # Signup URL
+   path('<path:resource>', TemplateView.as_view(template_name='404.html'), name='404'),
     ]    
 

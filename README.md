@@ -1,5 +1,10 @@
 # Introduction
 
+Mindful Rise is a platform to look up and deepen in mindfulness, self development and methods for reach a significant and higher self.
+Its´s a place where you can reach loke minded and new friends from comments view.
+You can see the post likes on indexpage, so you can choose the ost interesting blogs.
+You can sign in as a member and get full access to everything.
+
 ### Live web site: https://mindfulrise-f0e0db837715.herokuapp.com/
 
 ## Content
@@ -16,6 +21,8 @@
 * Courses
 * Nav Bar
 * Footer
+* 404-page
+* Favicon 
 * Register section
 * Setting up workspace
 * Design
@@ -135,7 +142,6 @@ If you´re not signed in, you´ll se a form in the center of the page with links
 The course material will not be able for unauthorized users and you will not see them.
  
 
-
 ## Nav Bar
 
 There is a navbar on top of page.
@@ -154,6 +160,16 @@ There is links to social media in footer and a copyright text
 
 I have a register section from Django allauth, there you can register with a username and password.
 The sign up button is styled with MDB.
+
+## 404 error
+I have included an 404-page for more personal interaction and more clear you still are in Mindful Rise community, but there is an error. From this page, its easy to go back with a link.  
+
+![Screenshot of footer](static/img_readme/404error.png)
+
+## Favicon
+I created a favicon that is a logo in head, customized to my blogsite
+
+![Screenshot of footer](static/img_readme/favicon.png)
 
 ## Setting up workspace
 
@@ -229,6 +245,7 @@ I didnt install anything from MDB since I used CDN installment. It is the easies
 * Python Test
 * Manual Test
 
+I have tested "forgot password" by add a backend email in settings.
 ## Bugs
 
 ### Fixed Bugs
@@ -277,8 +294,14 @@ I got help from tutor to find out, so when I chenged, everything was working wel
 * Problem with migration of category model 
 I add and changed the logic of categories and search in models. When I migrated, I got an error because of existing posts without category slug. Step 1 was to try to make a migrationfile to change. When it didn´t work, I deleted the last file and tried to migrate again. Mu third tried was to delete the new category model and to prevent the clash and migrate again.
 When nothing of that worked, I got tutorhelp, but the only suggestion was to delete the db and recover with a new.
-I wasn´t happy withthat suggestion, since I worked with the db in several weeks.
+I wasn´t happy with that suggestion, since I worked with the db in several weeks.
 In the end, it appeared that it was a general db problem, so when that was resolved, I could reach my db, erase all the categories of posts and migrate my new function and everything worked!
+
+* Coursematerial was shown in blog index.
+Since I have the same database for blogpost and coursematerial, I made a tag "is_course_material" so I could manipulate with an exclude to get those posts be filtered out and just shown in the Courses page.
+It didn´t work and I guess it had something to "ManytoMany" relationship.
+I made a walkaround by get a new category=coursemateral and tagged those post with that category as well.
+Then I could do a filter of that category to exklude them in category list and search.
 
 ### Unfixed Bugs
 
@@ -385,6 +408,8 @@ CI Database https://dbs.ci-dbs.net/
 ## Icons
 
 * https://www.flaticon.com/free-icons/author
+* https://www.flaticon.com/free-icon/philosophy_4576683?term=mindfulness&page=1&position=3&origin=tag&related_id=4576683
+
 
 # Media
 
@@ -393,6 +418,8 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.verywellhealth.com/what-is-self-esteem-5205044
 * https://www.yin-yoga.se/yinyoga/
 * https://www.masterclass.com/articles/how-to-value-yourself
+* https://www.shutterstock.com/
+
 
 
 ## Images
@@ -414,8 +441,12 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc* 'monica.im GPT chat to help explain where to put url and meaning of django functions.
 * ChatGPT.com to help me with adding category search button and clear search button with MDB style,
 Suggestion to create excerpt automatically sav
+* https://www.w3schools.com/howto/howto_website_static.asp
 
 ### Inspiration of blogs and teaching equpment
 * https://www.progressme.se/sv
 * https://www.everydayhealth.com/mindfulness/
+
+### Tutoring help
+### Help and discusses with mu studyfellow Josefin Dahlquist
 

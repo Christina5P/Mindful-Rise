@@ -2,7 +2,7 @@ from django.contrib import admin
 from blog.models import Category, Comment, Post
 from django_summernote.admin import SummernoteModelAdmin
 
-# Register your models here for administrative interface
+# models for administrative interface in SQL
 
 
 @admin.register(Post)

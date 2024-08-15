@@ -110,52 +110,52 @@
   </div>
 </div>
 
-
-
-              <!-- Existing comments -->
-        {% for comment in comments %}
-
-  <div class="card mb-4">
+{% for comment in comments %}
+<div class="card mb-4">
     <div class="card-body">
-      <span>{{ comment.author }}</span>
-      <span>
-        <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
-      </span>
-      <p class="font-weight-normal">{{ comment.created_on }} wrote:</p>
-      <div id="comment{{ comment.id }}">
-        {{ comment.body | linebreaks }}
-      </div>
-      {% if comment.updated_on %}
-        <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
-      {% endif %}
+        <span>{{ comment.author }}</span>
+        <span>
+            <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
+        </span>
 
-      {% if not comment.approved and comment.author == user %}
-        <p class="approval">Your comment is awaiting approval</p>
-      {% endif %}
+        <!-- Only show "wrote:" if the comment has not been updated -->
+        {% if comment.updated_on %}
+            <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
+        {% else %}
+            <p class="font-weight-normal">{{ comment.created_on }} wrote:</p>
+        {% endif %}
 
-      {% if user.is_authenticated and comment.author == user %}
-        <button class="btn btn-edit" onclick="showEditForm ({{ comment.id }})">Update</button>
-        
-    <!-- Hidden edit form -->
- 
+        <div id="comment{{ comment.id }}">
+            {{ comment.body | linebreaks }}
+        </div>
+
+        {% if not comment.approved and comment.author == user %}
+            <p class="approval">Your comment is awaiting approval</p>
+        {% endif %}
+
+        {% if user.is_authenticated and comment.author == user %}
+            <!-- Update Button -->
+            <button class="btn custom-btn-blue btn-edit me-2">Update</button>
+            <!-- Delete Button -->
+            <button class="btn btn-dark btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Hidden edit form -->
 <div id="editForm{{ comment.id }}" style="display: none;">
-  <br>
-  <form method="post" action="{% url 'comment_edit' post.slug comment.id %}">
-    {% csrf_token %}
-    <textarea name="body" class="form-control mb-3">{{ comment.body }}</textarea>
-    <button type="submit" class="btn btn-primary me-2">Save Changes</button>
-  </form>
+    <br>
+    <form method="post" action="{% url 'comment_edit' post.slug comment.id %}">
+        {% csrf_token %}
+        <textarea name="body" class="form-control mb-3">{{ comment.body }}</textarea>
+        <button type="submit" class="btn btn-primary me-2">Save Changes</button>
+    </form>
 </div>
 <hr>
-    {% endif %}
 
-       <!-- Delete a comment with deletemodal-->
-       <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-       <hr>
-
-       {% empty %}
-       <p>No comments yet.</p>
-     {% endfor %}
+{% empty %}
+<p>No comments yet.</p>
+{% endfor %}
 
    </div>
  </div>

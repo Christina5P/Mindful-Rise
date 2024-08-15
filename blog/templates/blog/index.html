@@ -38,13 +38,16 @@
             All Categories
           </a>
         </div>
+       
         {% for category in categories %}
         <div class="col-md-4 mb-3">
-          <a href="{% url 'blog_category' category.slug %}" class="btn btn-outline-primary btn-block {% if category == current_category %}active{% endif %}">
+        {% if category.slug != 'coursematerial' %}
+        <a href="/category/{{ category.slug }}/" class="btn btn-outline-primary btn-block">
             {{ category.name }}
-          </a>
+        </a>
         </div>
-        {% endfor %}
+          {% endif %}
+          {% endfor %}
       </div>
     </div>
     

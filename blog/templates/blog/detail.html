@@ -87,23 +87,29 @@
         <div class="row d-flex justify-content-center">
           <div class="col-md-8 col-lg-6">
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+              
+<!-- Create comments -->
+<div class="card-body p-4">
+  <div class="form-outline mb-4">
+    {% if user.is_authenticated %}
+      <label class="form-label" for="addANote"><span>Add a comment</span></label>
+      <form method="post" style="margin-top: 1.3em;">
+        {% csrf_token %}
+        {{ comment_form|crispy }}
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    {% else %}
+      <p>Please <a href="{% url 'account_login' %}">Log in</a> to write a comment.</p>
+      <hr>
+      <p>If you're not a member yet?<br><a href="{% url 'account_signup' %}">Sign up here.</a></p>
+    {% endif %}
+    {% if error %}
+  <p style="color: red;">{{ error }}</p>
+{% endif %}
 
-              <!-- Create comments -->
-              <div class="card-body p-4">
-                <div class="form-outline mb-4">
-                  {% if user.is_authenticated %}
-                    <label class="form-label" for="addANote"><span>Add a comment</span></label>
-                    <input type="text" id="addANote" class="form-control" placeholder="Write your comment here" />
-                    <form method="post" style="margin-top: 1.3em;">
-                      {% csrf_token %}
-                      {{ comment_form | crispy }}
-                      <button class="btn btn-primary">Submit</button>
-                    </form>
-                  {% else %}
-                  <p>Please Log in to write a comment.<hr>If you're not a member yet?<a href="{% url 'signup' %}"><br>Sign up here.</a></p>
-                  {% endif %}
-                </div>
-              </div>
+  </div>
+</div>
+
 
 
               <!-- Existing comments -->

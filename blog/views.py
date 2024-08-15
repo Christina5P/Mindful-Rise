@@ -6,6 +6,7 @@ from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404, redirect # basic to render
 from django.http import HttpResponseRedirect, JsonResponse # Json need for ajax to likes
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.views import generic, View
@@ -18,55 +19,52 @@ from django.core.exceptions import ObjectDoesNotExist       #need for ajax to li
 from django.core.paginator import Paginator
 from django.utils import timezone
 
-# Create your views here.
 
-# View for home-page
 
 class home_view(TemplateView):
     template_name = 'blog/home.html'
 
-# View for class Post with category search, paginator,post likes
-
+# View for class Post with category search, paginator,postlikes
 def blog_index(request):
     search_query = request.GET.get('q', '')
     category_slug = request.GET.get('category', 'all')
 
-    if category_slug == 'all':
-          posts = Post.objects.filter(status=1, is_course_material=False).order_by('-created_on')
-          current_category = None
-    else:
+    # Hämta inlägg som inte är kopplade till kategorin "coursematerial"
+    posts = Post.objects.filter(status=1).exclude(categories__slug='coursematerial')
+
+    if category_slug != 'all':
         category = get_object_or_404(Category, slug=category_slug)
-        posts = Post.objects.filter(categories=category, status=1, is_course_material=False).order_by('-created_on')
-        current_category = category
+        posts = posts.filter(categories=category)
 
     if search_query:
         posts = posts.filter(Q(title__icontains=search_query) | Q(excerpt__icontains=search_query))
 
-    paginator = Paginator(posts, 6)  # Show 6 posts per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    categories = Category.objects.all()
-
-    if request.user.is_authenticated:
-        user_liked_posts = set(request.user.like_post.values_list('id', flat=True))
-    else:
-        user_liked_posts = set()
-
-    # Annotate posts with likes and comments counts
+    # Annotera inlägg med antal gillningar och kommentarer
     posts = posts.annotate(
         likes_count=Count('likes'),
         comments_count=Count('comments')
     )
 
+    paginator = Paginator(posts, 6)  # Visa 6 inlägg per sida
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Filtrera bort kategorin "coursematerial" från de tillgängliga kategorierna
+    categories = Category.objects.exclude(slug='coursematerial')
+
+    user_liked_posts = set(request.user.like_post.values_list('id', flat=True)) if request.user.is_authenticated else set()
+
     context = {
         "page_obj": page_obj,
         "categories": categories,
         "query": search_query,
-        "current_category": current_category,
+        "current_category": category if category_slug != 'all' else None,
         "is_paginated": page_obj.has_other_pages(),
-         'user_liked_posts': user_liked_posts,
+        'user_liked_posts': user_liked_posts,
     }
+
     return render(request, "blog/index.html", context)
+
 
 # 
 def blog_detail(request, slug):
@@ -255,7 +253,13 @@ def login_view(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-    if user is not None:
+        
+        if user is not None:
             login(request, user)
             return redirect('home')
-            
+        else:
+            # Om autentiseringen misslyckas, rendera om sidan med ett felmeddelande
+            return render(request, 'login.html', {'error': 'Invalid username or password'})
+    
+    # Om metoden inte är POST, rendera bara login-sidan
+    return render(request, 'login.html')

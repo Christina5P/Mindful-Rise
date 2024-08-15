@@ -9,6 +9,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
 
+
 urlpatterns = [
  
    path('blog/', views.blog_index, name='blog_index'),  # url for posts from navbar

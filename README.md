@@ -288,7 +288,7 @@ Then I was back to the "Welcome-issue" and resolved it by an own styleshhet for 
 My tries to resolve it, I got through every file and url. I compared my reqirements with other works and installed missing auth compenents, whitenoise.
 I moved the account folder to the root template.
 I created an account/base.html to structure the codes, so you don´t have to repeat the codes in every template.
-What I missed was that I used {% block content%} in onte template and {% block page_content%} in another, so they didn´t match.
+What I missed was that I used  block content in onte template and block page_content in another, so they didn´t match.
 I got help from tutor to find out, so when I chenged, everything was working well.
 
 * Problem with migration of category model 

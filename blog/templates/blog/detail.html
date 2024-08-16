@@ -19,6 +19,7 @@
     <!-- Post details -->
     <div class="row">
       <div class="col-md-8 mb-4">
+
         <!-- Post Image and Title -->
         <section class="border-bottom mb-4">
           <div class="text-center mb-3">
@@ -32,6 +33,7 @@
           </div>
 
         </section>
+
         <!-- Post Content -->
         <div class="card-body">
           <p class="card-text">{{ post.content | safe }}</p>
@@ -131,7 +133,8 @@
         {% endif %}
 
         {% if user.is_authenticated and comment.author == user %}
-            <!-- Update Button -->
+          
+        <!-- Update Button -->
             <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Update</button>
           
             <!-- Delete Button -->
@@ -167,42 +170,41 @@
 
 
 
-
 <script>
-const editButtons = document.querySelectorAll('.btn-edit');
-const commentText = document.querySelector('textarea[name="body"]'); // Justera om det finns flera textareas
-const submitButton = document.querySelector('.btn-primary'); // Justera om det finns flera submit-knappar
-const commentForm = document.querySelector('form'); // Justera om det finns flera formulär
+  const editButtons = document.querySelectorAll('.btn-edit');
+  const commentText = document.querySelector('textarea[name="body"]'); // Justera om det finns flera textareas
+  const submitButton = document.querySelector('.btn-primary'); // Justera om det finns flera submit-knappar
+  const commentForm = document.querySelector('form'); // Justera om det finns flera formulär
+  
+  for (let button of editButtons) {
+      button.addEventListener("click", (e) => {
+          let commentId = e.target.getAttribute("data-comment_id");
+          let commentContent = document.getElementById(`comment${commentId}`).innerText;
+          commentText.value = commentContent;
+          submitButton.innerText = "Update";
+          const slug = window.slug;
+          commentForm.setAttribute("action", `/post/${slug}/comment/${commentId}/edit/`);
+          
+          console.log("Editing comment ID:", commentId);
+          console.log("Comment content:", commentContent);
+          
+          // Visa edit-formuläret
+          showEditForm(commentId);
+      });
+  }
+  
+  // Funktion för att visa/dölja edit-formuläret
+  function showEditForm(commentId) {
+      var form = document.getElementById('editForm' + commentId);
+      if (form.style.display === 'none' || form.style.display === '') {
+          form.style.display = 'block';
+      } else {
+          form.style.display = 'none';
+      }
+  }
+  </script>
 
-for (let button of editButtons) {
-    button.addEventListener("click", (e) => {
-        let commentId = e.target.getAttribute("data-comment_id");
-        let commentContent = document.getElementById(`comment${commentId}`).innerText;
-        commentText.value = commentContent;
-        submitButton.innerText = "Update";
-        const slug = window.slug;
-        commentForm.setAttribute("action", `/post/${slug}/comment/${commentId}/edit/`);
-        
-        console.log("Editing comment ID:", commentId);
-        console.log("Comment content:", commentContent);
-        
-        // Visa edit-formuläret
-        showEditForm(commentId);
-    });
-}
-
-// Funktion för att visa/dölja edit-formuläret
-function showEditForm(commentId) {
-    var form = document.getElementById('editForm' + commentId);
-    if (form.style.display === 'none' || form.style.display === '') {
-        form.style.display = 'block';
-    } else {
-        form.style.display = 'none';
-    }
-}
-</script>
-
-                          
+       
 
         <!-- Delete confirmation modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">

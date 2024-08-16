@@ -268,7 +268,7 @@ After a while, I realized from inspection in browswer, that it was something wit
 I had missed to refer to static/comment.js in base.html and that was a problemsolver. 
 
 * You could only see the navbar on home page 
-I tried to inspect the navbar onother pages and check so I had { block page on right spot}
+I tried to inspect the navbar onother pages and check so I had block page on right spot
 I also tried to put in a navbar on the other pages, but you couldn`t see anything.
 Then I realized it was a stylingproblem, wich came from bootstrap:
 <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">

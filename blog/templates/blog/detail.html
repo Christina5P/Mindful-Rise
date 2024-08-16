@@ -108,9 +108,7 @@
 {% endif %}
 
   </div>
-</div>
-
-{% for comment in comments %}
+</div>{% for comment in comments %}
 <div class="card mb-4">
     <div class="card-body">
         <span>{{ comment.author }}</span>
@@ -118,7 +116,6 @@
             <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
         </span>
 
-        <!-- Only show "wrote:" if the comment has not been updated -->
         {% if comment.updated_on %}
             <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
         {% else %}
@@ -135,7 +132,8 @@
 
         {% if user.is_authenticated and comment.author == user %}
             <!-- Update Button -->
-            <button class="btn custom-btn-blue btn-edit me-2">Update</button>
+            <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Update</button>
+          
             <!-- Delete Button -->
             <button class="btn btn-dark btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
         {% endif %}
@@ -147,7 +145,8 @@
     <br>
     <form method="post" action="{% url 'comment_edit' post.slug comment.id %}">
         {% csrf_token %}
-        <textarea name="body" class="form-control mb-3">{{ comment.body }}</textarea>
+        <label for="body{{ comment.id }}">Edit Comment:</label>
+        <textarea id="body{{ comment.id }}" name="body" class="form-control mb-3">{{ comment.body }}</textarea>
         <button type="submit" class="btn btn-primary me-2">Save Changes</button>
     </form>
 </div>
@@ -156,6 +155,7 @@
 {% empty %}
 <p>No comments yet.</p>
 {% endfor %}
+
 
    </div>
  </div>
@@ -169,15 +169,39 @@
 
 
 <script>
+const editButtons = document.querySelectorAll('.btn-edit');
+const commentText = document.querySelector('textarea[name="body"]'); // Justera om det finns flera textareas
+const submitButton = document.querySelector('.btn-primary'); // Justera om det finns flera submit-knappar
+const commentForm = document.querySelector('form'); // Justera om det finns flera formulär
+
+for (let button of editButtons) {
+    button.addEventListener("click", (e) => {
+        let commentId = e.target.getAttribute("data-comment_id");
+        let commentContent = document.getElementById(`comment${commentId}`).innerText;
+        commentText.value = commentContent;
+        submitButton.innerText = "Update";
+        const slug = window.slug;
+        commentForm.setAttribute("action", `/post/${slug}/comment/${commentId}/edit/`);
+        
+        console.log("Editing comment ID:", commentId);
+        console.log("Comment content:", commentContent);
+        
+        // Visa edit-formuläret
+        showEditForm(commentId);
+    });
+}
+
+// Funktion för att visa/dölja edit-formuläret
 function showEditForm(commentId) {
-  var form = document.getElementById('editForm' + commentId);
-  if (form.style.display === 'none') {
-      form.style.display = 'block';
-  } else {
-      form.style.display = 'none';
-  }
+    var form = document.getElementById('editForm' + commentId);
+    if (form.style.display === 'none' || form.style.display === '') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
 }
 </script>
+
                           
 
         <!-- Delete confirmation modal -->
@@ -199,4 +223,6 @@ function showEditForm(commentId) {
           </div>
         </div>
      
+        <script src="{% static 'js/comments.js' %}"></script>
+
 {% endblock page_content %}

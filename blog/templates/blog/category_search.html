@@ -1,56 +1,56 @@
 {% extends 'base.html' %}
 
-
- 
 {% block page_content %}
 
-
-<main class="my-5">
+<div class="my-5">
     <div class="container">
-<h1 class="mb-4">Search Results for: {{ query }}</h1>
-     <!-- Category list -->
-     <div class="mb-4">
-        <h2>Matching Categories</h2>
-        <div class="row">
-            {% for category in categories %}
-            <div class="col-md-4 mb-3">
-                <a href="{% url 'blog_category' category.slug %}" class="btn btn-outline-primary btn-block">{{ category.name }}</a>
+        <h1 class="mb-4">Search Results for: {{ query }}</h1>
+
+        <!-- Category list -->
+        <div class="mb-4">
+            <h2>Matching Categories</h2>
+            <div class="row">
+                {% for category in categories %}
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'blog_category' category.slug %}" class="btn btn-outline-primary btn-block">{{ category.name }}</a>
+                    </div>
+                {% empty %}
+                    <p>No matching categories found.</p>
+                {% endfor %}
             </div>
-            {% empty %}
-            <p>No matching categories found.</p>
-            {% endfor %}
         </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+            <nav class="my-4" aria-label="Page navigation">
+                <ul class="pagination pagination-circle justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
     </div>
 </div>
-
-<!-- Pagination -->
-{% if is_paginated %}
-<nav class="my-4" aria-label="...">
-  <ul class="pagination pagination-circle justify-content-center">
-    {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Previous</a>
-      </li>
-    {% endif %}
-
-    {% for num in page_obj.paginator.page_range %}
-      {% if page_obj.number == num %}
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">{{ num }}</span>
-        </li>
-      {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
-        <li class="page-item"><a class="page-link" href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}">{{ num }}</a></li>
-      {% endif %}
-    {% endfor %}
-
-    {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">Next</a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
-{% endif %}
-</main>
 
 {% endblock page_content %}

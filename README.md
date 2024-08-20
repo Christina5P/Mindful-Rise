@@ -10,7 +10,7 @@ You can sign in as a member and get full access to everything.
 ## Content
 
 * Project Set Up
-* User stories
+* Agile method - User stories
 * Mindmap
 * ERD
 * Wireframes
@@ -55,18 +55,22 @@ After that, I created an ERD to plan how to build the project.
 In Gitpod, I decided to only have one app, because Blog and Courses are mixed, but filtered on their pages.
 I created different templates, to make it easy to work with.
 
-## User Stories
+### Agile methods - User stories
 
-There is a project in GitHub, linked to Mindful_Rise repository
-https://github.com/users/Christina5P/projects/5/views/1
+In the project set up, I made a repository with name Mindful Growth and a projekt for that.
+I had a lot of issues with the project in Gitpod, so I decided to start all over again from scratch with a new repository and renamed the blog to Mindful Rise.
+I link the project I had made to my new repository. After a while I realized the link didn´t seem to work and I couldn´t connect to my userstories from Mindful Rise, so I made a new project, called Mindful Rise and created new Milestones and userstories/tasks.
+My decision to create new project was to structure and clean up the agile jobstructure.
+
 
 In the backlog I worked with different stories/task and moved them in steps until they where done.
-
 I created user stories with acceptance critera to get MVP.
 
+Link to my project in GitHub:
 
-I also made some tasks
+https://github.com/users/Christina5P/projects/7/views/1?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Milestone%22%5D
 
+![Screenshot of Userstories](static/img_readme/userstories.png)
 
 
 ## Mindmap
@@ -84,15 +88,19 @@ Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp
 
 Wireframe is created in https://balsamiq.cloud/srvezeo/phn02iw/r3EBE
 Home page:
+
 ![Screenshot of Home](static/img_readme/wireframehome.png)
 
 Blog page:
+
 ![Screenshot of Blog](static/img_readme/wireframeblog.png)
 
 Courses:
+
 ![Screenshot of Courses](static/img_readme/wireframecourses.png)
 
 Blogpost:
+
 ![Screenshot of Post](static/img_readme/wireframedetail.png)
 
 ## CRUD 
@@ -164,12 +172,12 @@ The sign up button is styled with MDB.
 ## 404 error
 I have included an 404-page for more personal interaction and more clear you still are in Mindful Rise community, but there is an error. From this page, its easy to go back with a link.  
 
-![Screenshot of footer](static/img_readme/404error.png)
+![Screenshot of error404](static/img_readme/error404.png)
 
 ## Favicon
 I created a favicon that is a logo in head, customized to my blogsite
 
-![Screenshot of footer](static/img_readme/favicon.png)
+![Screenshot of favicon](static/img_readme/favicon.png)
 
 ## Setting up workspace
 
@@ -241,11 +249,28 @@ Blogpage for unauthorized users and courses for signed up users are separated, t
 I didnt install anything from MDB since I used CDN installment. It is the easiest way, since you only need to add MDB:s link tap in <head> in your base.html 
 
 ## Testing
-* Validating Test
-* Python Test
-* Manual Test
+
+* Manual testing.
+Testing has taken place continuously throughout the development of the project. Each view was tested regularly. When the outcome was not as expected, debugging took place at that point.
+
 
 I have tested "forgot password" by add a backend email in settings.
+
+* Validating Test
+- HTML Validation 
+W3C Validator HTML
+
+- CSS validation
+W3C Validator CSS
+
+- Javascript
+JS Hint
+
+-Lighthouse
+
+* Python Test -PEP8
+
+
 ## Bugs
 
 ### Fixed Bugs
@@ -323,7 +348,7 @@ I have make a filter function that blog index should never view post "is course_
 
 
 ## Technologies
-*Python - Language of this project
+* Python - Language of this project
 * Javascript
 * JQuery
 * HTML
@@ -438,7 +463,7 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.youtube.com/watch?v=PXqRPqDjDgc
 * https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg
 * https://medium.com/@peter.bulyaki/ho-to-edit-or-delete-your-comments-responses-on-medium-com-in-2019-2a87eb8da79b
-* https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc* 'monica.im GPT chat to help explain where to put url and meaning of django functions.
+* https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc* 'monica.im GPT chat to help explain where to put url and meaning of    django functions.
 * ChatGPT.com to help me with adding category search button and clear search button with MDB style,
 Suggestion to create excerpt automatically sav
 * https://www.w3schools.com/howto/howto_website_static.asp

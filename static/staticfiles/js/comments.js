@@ -6,9 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const deleteModal = new mdb.Modal(document.getElementById("deleteModal"));
     const deleteButtons = document.getElementsByClassName("btn-delete");
     const deleteConfirm = document.getElementById("deleteConfirm");
-    //const likeIcons = document.querySelectorAll('.like-icon');
-    //const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
+   
     console.log("everything loaded");
         
     
@@ -37,45 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error("Comment ID not found.");
             }
         });
+       
     }
         
 });
     
-    /*event listeners for span likeIcons
-    likeIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            const postId = this.getAttribute('data-post-id');
-            const form = this.closest('.like-form');
-            const likeCountElement = document.getElementById(`like-count-${postId}`);
-            const iconElement = this.querySelector('i'); // Hämta ikonen direkt här
-    
-            fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Received data:', data);
-                if (data.success) {
-                    likeCountElement.textContent = data.new_like_count;
-                    console.log("Like icons found:", likeIcons.length);
-    
-                    // Byt ikonens klass här
-                    if (iconElement.classList.contains('far')) {
-                        iconElement.classList.remove('far');
-                        iconElement.classList.add('fas');
-                    } else {
-                        iconElement.classList.remove('fas');
-                        iconElement.classList.add('far');
-                    }
-                } else {
-                    console.error('Något gick fel.');
-                }
-            })
-            .catch(error => console.error('Fel:', error));
-        });
-    });*/

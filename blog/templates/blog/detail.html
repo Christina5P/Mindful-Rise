@@ -2,13 +2,10 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block page_title %}
-<h2>{{ post.title }}</h2>
-{% endblock %}
 
 {% block page_content %}
 
-<main class="my-5">
+<div class="my-5">
   <div class="container">
 
     <!-- Back button to index -->
@@ -31,7 +28,6 @@
               {% endif %}
             </div>
           </div>
-
         </section>
 
         <!-- Post Content -->
@@ -40,35 +36,33 @@
         </div>
         <hr>
 
-<!-- Comment and Likes -->
-<div class="row align-items-center mb-2">
-
-  <!-- Like Button -->
-  <div class="col-auto">
-      <div class="likes-section d-flex align-items-center">
-          <div class="like-form">
-            <a href="{% url 'like_post' post.id %}" class="like-button">
-              {% csrf_token %}
-              {% if user in post.likes.all %}
-                  <i class="fas fa-heart" style="color: red;"></i>
-              {% else %}
-                  <i class="far fa-heart" style="color: red;"></i>
-              {% endif %}
-          </a>
-          <span class="likes-count">{{ post.likes.count }}</span>
+        <!-- Comment and Likes -->
+        <div class="row align-items-center mb-2">
+          <!-- Like Button -->
+          <div class="col-auto">
+            <div class="likes-section d-flex align-items-center">
+              <div class="like-form">
+                <a href="{% url 'like_post' post.id %}" class="like-button">
+                  {% csrf_token %}
+                  {% if user in post.likes.all %}
+                    <i class="fas fa-heart" style="color: red;"></i>
+                  {% else %}
+                    <i class="far fa-heart" style="color: red;"></i>
+                  {% endif %}
+                </a>
+                <span class="likes-count">{{ post.likes.count }}</span>
+              </div>
+            </div>
           </div>
-      </div>
-  </div>
 
-  <!-- Comment Count -->
-  <div class="col-auto">
-      <div class="comments-section d-flex align-items-center">
-          <i class="far fa-comments me-2"></i>
-          <strong class="text-secondary">{{ comment_count }}</strong>
-      </div>
-  </div>
-
-</div>  <!-- div to div class row align-->
+          <!-- Comment Count -->
+          <div class="col-auto">
+            <div class="comments-section d-flex align-items-center">
+              <i class="far fa-comments me-2"></i>
+              <strong class="text-secondary">{{ comment_count }}</strong>
+            </div>
+          </div>
+        </div>
 
         <!-- Share buttons -->
         <section class="text-center border-top border-bottom py-4 mb-4">
@@ -84,127 +78,130 @@
           </a>
         </section>
 
-       <!-- Comments Section -->
-       <section>
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-8 col-lg-6">
-            <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-              
-<!-- Create comments -->
-<div class="card-body p-4">
-  <div class="form-outline mb-4">
-    {% if user.is_authenticated %}
-      <label class="form-label" for="addANote"><span>Add a comment</span></label>
-      <form method="post" style="margin-top: 1.3em;">
-        {% csrf_token %}
-        {{ comment_form|crispy }}
-        <button class="btn btn-primary">Submit</button>
-      </form>
-    {% else %}
-      <p>Please <a href="{% url 'account_login' %}">Log in</a> to write a comment.</p>
-      <hr>
-      <p>If you're not a member yet?<br><a href="{% url 'account_signup' %}">Sign up here.</a></p>
-    {% endif %}
-    {% if error %}
-  <p style="color: red;">{{ error }}</p>
-{% endif %}
+        <!-- Comments Section -->
+        <section>
+          <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
+              <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                <!-- Create comments -->
+                <div class="card-body p-4">
+                  <div class="form-outline mb-4">
+                    {% if user.is_authenticated %}
+                      <label class="form-label" for="addANote"><span>Add a comment</span></label>
+                      <form method="post" style="margin-top: 1.3em;">
+                        {% csrf_token %}
+                        {{ comment_form|crispy }}
+                        <button class="btn btn-primary">Submit</button>
+                      </form>
+                    {% else %}
+                      <p>Please <a href="{% url 'account_login' %}">Log in</a> to write a comment.</p>
+                      <hr>
+                      <p>If you're not a member yet?<br><a href="{% url 'account_signup' %}">Sign up here.</a></p>
+                    {% endif %}
+                    {% if error %}
+                      <p style="color: red;">{{ error }}</p>
+                    {% endif %}
+                  </div>
+                </div>
 
-  </div>
-</div>{% for comment in comments %}
-<div class="card mb-4">
-    <div class="card-body">
-        <span>{{ comment.author }}</span>
-        <span>
-            <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
-        </span>
+                <!-- Display comments -->
+                {% for comment in comments %}
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <span>{{ comment.author }}</span>
+                      <span>
+                        <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
+                      </span>
 
-        {% if comment.updated_on %}
-            <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
-        {% else %}
-            <p class="font-weight-normal">{{ comment.created_on }} wrote:</p>
-        {% endif %}
+                      {% if comment.updated_on and comment.updated_on > comment.created_on %}
+                        <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
+                      {% else %}
+                        <p class="font-weight-normal">{{ comment.created_on }} wrote:</p>
+                      {% endif %}
 
-        <div id="comment{{ comment.id }}">
-            {{ comment.body | linebreaks }}
-        </div>
+                      <div id="comment{{ comment.id }}">
+                        {{ comment.body | linebreaks }}
+                      </div>
 
-        {% if not comment.approved and comment.author == user %}
-            <p class="approval">Your comment is awaiting approval</p>
-        {% endif %}
+                      {% if not comment.approved and comment.author == user %}
+                        <p class="approval">Your comment is awaiting approval</p>
+                      {% endif %}
 
-        {% if user.is_authenticated and comment.author == user %}
-          
-        <!-- Update Button -->
-            <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Update</button>
-          
-            <!-- Delete Button -->
-            <button class="btn btn-dark btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-        {% endif %}
-    </div>
+                      {% if user.is_authenticated and comment.author == user %}
+                        <!-- Update Button -->
+                        <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Update</button>
+                        <!-- Delete Button -->
+                        <button class="btn btn-dark btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <!-- Hidden edit form -->
+                  <div id="editForm{{ comment.id }}" style="display: none;">
+                    <br>
+                    <form method="post" action="{% url 'comment_edit' post.slug comment.id %}">
+                      {% csrf_token %}
+                      <label for="body{{ comment.id }}">Edit Comment:</label>
+                      <textarea id="body{{ comment.id }}" name="body" class="form-control mb-3">{{ comment.body }}</textarea>
+                      <button type="submit" class="btn btn-primary me-2">Save Changes</button>
+                    </form>
+                  </div>
+                  <hr>
+                {% empty %}
+                  <p>No comments yet.</p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div> <!-- col-md-8 -->
+    </div> <!-- row -->
+  </div> <!-- container -->
 </div>
-
-<!-- Hidden edit form -->
-<div id="editForm{{ comment.id }}" style="display: none;">
-    <br>
-    <form method="post" action="{% url 'comment_edit' post.slug comment.id %}">
-        {% csrf_token %}
-        <label for="body{{ comment.id }}">Edit Comment:</label>
-        <textarea id="body{{ comment.id }}" name="body" class="form-control mb-3">{{ comment.body }}</textarea>
-        <button type="submit" class="btn btn-primary me-2">Save Changes</button>
-    </form>
-</div>
-<hr>
-
-{% empty %}
-<p>No comments yet.</p>
-{% endfor %}
-
-
-   </div>
- </div>
-</div>
-</section>
-
-  </div>  <!-- div to comment and likes row-->
-</div>  <!-- div to container-->
-
-
 
 <script>
+document.addEventListener("DOMContentLoaded", function() {
   const editButtons = document.querySelectorAll('.btn-edit');
-  const commentText = document.querySelector('textarea[name="body"]'); // Justera om det finns flera textareas
-  const submitButton = document.querySelector('.btn-primary'); // Justera om det finns flera submit-knappar
-  const commentForm = document.querySelector('form'); // Justera om det finns flera formulär
-  
-  for (let button of editButtons) {
-      button.addEventListener("click", (e) => {
-          let commentId = e.target.getAttribute("data-comment_id");
-          let commentContent = document.getElementById(`comment${commentId}`).innerText;
-          commentText.value = commentContent;
-          submitButton.innerText = "Update";
-          const slug = window.slug;
-          commentForm.setAttribute("action", `/post/${slug}/comment/${commentId}/edit/`);
-          
-          console.log("Editing comment ID:", commentId);
-          console.log("Comment content:", commentContent);
-          
-          // Visa edit-formuläret
-          showEditForm(commentId);
-      });
-  }
-  
-  // Funktion för att visa/dölja edit-formuläret
-  function showEditForm(commentId) {
-      var form = document.getElementById('editForm' + commentId);
-      if (form.style.display === 'none' || form.style.display === '') {
-          form.style.display = 'block';
-      } else {
-          form.style.display = 'none';
-      }
-  }
-  </script>
 
-       
+  editButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const commentId = this.getAttribute("data-comment_id");
+      const editForm = document.getElementById(`editForm${commentId}`);
+      const commentText = document.getElementById(`comment${commentId}`);
+
+      // Log if error
+      if (commentText && editForm) {
+        console.log("Editing comment ID:", commentId);
+        console.log("Comment content:", commentText.innerHTML);
+
+        // Toggle visibility between first comment and edit
+        if (editForm.style.display === "none") {
+          editForm.style.display = "block";
+          commentText.style.display = "none";
+        } else {
+          editForm.style.display = "none";
+          commentText.style.display = "block";
+        }
+      } else {
+        console.error("EditForm or CommentText is not found for comment ID:", commentId);
+      }
+    });
+  });
+});
+
+function showEditForm(commentId) {
+  const editForms = document.querySelectorAll('[id^="editForm"]');
+  editForms.forEach(form => {
+    form.style.display = 'none';
+  });
+
+  var formToShow = document.getElementById('editForm' + commentId);
+  if (formToShow) {
+    formToShow.style.display = 'block';
+  }
+}
+</script>
+
 
         <!-- Delete confirmation modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -226,5 +223,5 @@
         </div>
      
         <script src="{% static 'js/comments.js' %}"></script>
-
+        
 {% endblock page_content %}

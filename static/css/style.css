@@ -28,3 +28,9 @@
     }
   }
   
+  .custom-max-width {
+    max-width: 1200px; /* Justera detta värde efter behov */
+    margin-left: auto;
+    margin-right: auto;
+}
+

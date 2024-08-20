@@ -28,8 +28,6 @@ class home_view(TemplateView):
 def blog_index(request):
     search_query = request.GET.get('q', '')
     category_slug = request.GET.get('category', 'all')
-
-    # Hämta inlägg som inte är kopplade till kategorin "coursematerial"
     posts = Post.objects.filter(status=1).exclude(categories__slug='coursematerial')
 
     if category_slug != 'all':
@@ -39,17 +37,17 @@ def blog_index(request):
     if search_query:
         posts = posts.filter(Q(title__icontains=search_query) | Q(excerpt__icontains=search_query))
 
-    # Annotera inlägg med antal gillningar och kommentarer
+    # count of likes and comments to blogindex
     posts = posts.annotate(
         likes_count=Count('likes'),
         comments_count=Count('comments')
     )
 
-    paginator = Paginator(posts, 6)  # Visa 6 inlägg per sida
+    # paginator with 6 posts per side
+    paginator = Paginator(posts, 6)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # Filtrera bort kategorin "coursematerial" från de tillgängliga kategorierna
     categories = Category.objects.exclude(slug='coursematerial')
 
     user_liked_posts = set(request.user.like_post.values_list('id', flat=True)) if request.user.is_authenticated else set()
@@ -66,7 +64,8 @@ def blog_index(request):
     return render(request, "blog/index.html", context)
 
 
-# 
+# blogpost with comments, count of likes and comment
+
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by("-created_on")
@@ -100,6 +99,7 @@ def blog_detail(request, slug):
 
     return render(request, "blog/detail.html", context)
 
+# like post
 def like_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
@@ -118,15 +118,13 @@ def like_post(request, post_id):
 
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
+    # Display blog posts filtered by category name
 
 def blog_category(request, category_slug):
-    """
-    Display blog posts filtered by category name.
-    """
-
+    
     if category_slug == 'all':
         posts = Post.objects.filter(status=1).order_by('-created_on')
-        current_category = None  # Ingen specifik kategori vald
+        current_category = None  
     else:
         category = get_object_or_404(Category, slug=category_slug)
         posts = Post.objects.filter(categories=category, status=1).order_by('-created_on')
@@ -151,7 +149,8 @@ def blog_category(request, category_slug):
         'querystring': querystring,
     })
 
-
+# searchfield for categories
+ 
 def category_search(request):
     query = request.GET.get('q')
     categories = Category.objects.filter(name__icontains=query)
@@ -169,12 +168,15 @@ def category_search(request):
         'query': query,
     })
 
+# login check on course page
+
 @login_required
 def course_detail(request, slug):
     course = get_object_or_404(Post, slug=slug, is_course_material=True)
 
     return render(request, 'courses/courses_detail.html', {'course': course})
 
+# index for course material
 
 def courses_view(request):
     courses = Post.objects.filter(is_course_material=True, status=1)
@@ -186,6 +188,7 @@ def courses_view(request):
         
     })
 
+# comment edits with update and hidden form
 
 def comment_edit(request, slug, comment_id):
     """
@@ -211,6 +214,8 @@ def comment_edit(request, slug, comment_id):
         comment_form = CommentForm(instance=comment)
 
     return render(request, "post_detail", {'comment_form': comment_form, 'post': post})
+
+# delete comment
 
 def comment_delete(request, slug, comment_id):
     """
@@ -241,10 +246,9 @@ def signup_view(request):
             login(request, user)
             return redirect('home')
         else:
-            # Om formuläret inte är giltigt, rendera om sidan med formulärfel
-            return render(request, 'account/signup.html', {'form': form})
+          return render(request, 'account/signup.html', {'form': form})
     else:
-        # Om det inte är en POST-förfrågan, rendera en tom version av formuläret
+       
         form = UserCreationForm()
         return render(request, 'account/signup.html', {'form': form})
 
@@ -258,8 +262,8 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            # Om autentiseringen misslyckas, rendera om sidan med ett felmeddelande
+           
             return render(request, 'login.html', {'error': 'Invalid username or password'})
     
-    # Om metoden inte är POST, rendera bara login-sidan
+    
     return render(request, 'login.html')

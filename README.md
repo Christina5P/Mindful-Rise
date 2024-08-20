@@ -182,6 +182,8 @@ There is links to social media in footer and a copyright text
 
 ## Register section
 
+<details><summary>Sign Up/Sign In</summary>
+
 I have a register section from Django allauth, there you can register with a username and password.
 The sign up button is styled with MDB.
 
@@ -191,6 +193,7 @@ The sign up button is styled with MDB.
 
 ![Screenshot of logout](static/img_readme/logout.png)
 
+</details>
 ## 404 error
 I have included an 404-page for more personal interaction and more clear you still are in Mindful Rise community, but there is an error. From this page, its easy to go back with a link.  
 
@@ -210,6 +213,7 @@ I choosed cokie libary Cookie Consent by Insites, which I think it´s the easies
 </details>
 
 ## Setting up workspace
+<details><summary>Set up Gitpod</summary>
 
 * Run this command to install django:
  pip3 install 'django<4'  
@@ -270,6 +274,8 @@ Before deploying on heroku make sure: DEBUG = False
 web: gunicorn basic_mind.wsgi
 hint: It´s important to spell Procfile with a capital
 
+</details>
+
 ## Design
 
 I have used MBD for design and a carousel of pictures at home page.
@@ -280,26 +286,38 @@ I didnt install anything from MDB since I used CDN installment. It is the easies
 
 ## Testing
 
-* Manual testing.
-Testing has taken place continuously throughout the development of the project. Each view was tested regularly. When the outcome was not as expected, debugging took place at that point.
+<details><summary>Validators</summary>
 
-
-I have tested "forgot password" by add a backend email in settings.
-
-* Validating Test
-- HTML Validation 
+* Validating Test* HTML Validation 
 W3C Validator HTML
 
-- CSS validation
+![Screenshot of HTML](static/img_readme/htmlvalidator.png)
+
+* CSS validation
 W3C Validator CSS
 
-- Javascript
+![Screenshot of CSS](static/img_readme/cssvalidator.png)
+
+* Javascript
 JS Hint
+
+![Screenshot of cs](static/img_readme/commentsjs.png)
+
+![Screenshot of ajax](static/img_readme/ajaxjs.png)
+
 
 -Lighthouse
 
+![Screenshot of lighthouse](static/img_readme/lighthouse.png)
+
+![Screenshot of lighthouse](static/img_readme/lighthousemobile.png)
+
 * Python Test -PEP8
 
+</details>
+
+
+I have tested "forgot password" by add a backend email in settings.
 
 ## Bugs
 
@@ -396,12 +414,10 @@ I have make a filter function that blog index should never view post "is course_
 * Cloudinary
 
 # Deployment
-
+<details><summary>Deployment</summary>
 For deploying, I use the Heroku app.
 At first, you commit everything to GitHub.
 In Heroku, you set up an app for the project and deploy the changes you make to the public site.
-
-
 
 ## Heroku
 You connect the app to your repository in GitHub with the same name.
@@ -410,8 +426,6 @@ I chose to make a manual deployment, so I can see that everything goes ok and ha
 You need to create an app for your project in Heroku.
 In settings you also need to fill in the URL:s in Config Var
 ![Screenshot of settings](static/img_readme/herokusettings.png)
-
-![Screenshot of deployment1](static/img_readme/configvars.png)
 
 After that you go to Herokus deployment section 
 ![Screenshot of deployment1](static/img_readme/herokudeploy1.png)
@@ -427,10 +441,13 @@ If there is any error, you can find the logs if you click "more" button.
 
 ## Git Hub / Gitpod
 I created a repository in Git Hub and connected a project to the repository.
-In the project, I worked with the canban and created the user stories there.
-From Gitpod, I pushed my changes to GitHub with the commands 
 
-When I add, deleated or changed anything, I committed them back to GitHub using the following commands in the codespace terminal: Git add .
+![Screenshot of Github](static/img_readme/github.png)
+In the project, I worked with the canban and created the user stories there.
+
+![Screenshot of canban](static/img_readme/canban1.png)
+
+When I add, deleated or changed anything in Gitpod, I committed them back to GitHub using the following commands in the codespace terminal: Git add .
 Git commit -m"text"
 Git push
 
@@ -450,6 +467,8 @@ This creates a remote link to the original repo, allowing you to work in your co
 Open your repo and click the green "Code" button on the right-hand side. The easiest way is to open it with GitHub Desktop.
 
 You can read more information on cloning at the GitHub : https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+</details>
 
 ## Font
 * Roboto
@@ -493,9 +512,11 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.youtube.com/watch?v=PXqRPqDjDgc
 * https://dev.to/radualexandrub/how-to-add-like-unlike-button-to-your-django-blog-5gkg
 * https://medium.com/@peter.bulyaki/ho-to-edit-or-delete-your-comments-responses-on-medium-com-in-2019-2a87eb8da79b
-* https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc* 'monica.im GPT chat to help explain where to put url and meaning of    django functions.
-* ChatGPT.com to help me with adding category search button and clear search button with MDB style,
-Suggestion to create excerpt automatically sav
+* https://www.youtube.com/watch?app=desktop&v=PXqRPqDjDgc
+* https://monica.im/home GPT chat to help explain where to put url, create cookies content,
+  explain of Django functions.
+* https://chatgpt.com to help me with adding category search button and clear search button with MDB style,
+  Suggestion to create excerpt automatically save
 * https://www.w3schools.com/howto/howto_website_static.asp
 
 ### Inspiration of blogs and teaching equpment
@@ -503,5 +524,5 @@ Suggestion to create excerpt automatically sav
 * https://www.everydayhealth.com/mindfulness/
 
 ### Tutoring help
-### Help and discusses with mu studyfellow Josefin Dahlquist
+### Help and discusses with my studyfellow Josefin Dahlquist
 

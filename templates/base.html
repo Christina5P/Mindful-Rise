@@ -9,136 +9,141 @@
 {% url 'category_search' as category_search_url %}
 {% url 'courses' as courses_url %}
 
-<!-- templates/base.html  Other templates inherit from this -->
+<!DOCTYPE html>
+<html lang="en">
 
- 
- <!DOCTYPE html>
- <html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="description" content="blog">
+    
 
- <head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="csrf-token" content="{{ csrf_token }}">
-     
-
- 
-     <title>
+    <title>
         {% block title %}Mindful Rise{% endblock %}
     </title>
- 
-     <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
- 
-     <!-- Font Awesome -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-     <!-- Google Fonts -->
-     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
 
-     <!-- MDB -->
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet">
-     
-     <!-- Custom CSS -->
-     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-   
- </head>
- 
- <body>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Cookies -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
     
- <header>
-     <!-- Navbar -->
+    <script>
+         document.addEventListener("DOMContentLoaded", function() {
+            // Initiera cookie consent här
+            window.cookieconsent.initialise({
+                palette: {
+                    popup: { background: "#afdbf6" },
+                    button: { background: "#f4f4f4" }
+                },
+                theme: "edgeless",
+                content: {
+                        header: "We use cookies",
+                        message: "This website uses cookies to ensure you get the best experience.",
+                        dismiss: "I agree",
+                    }
+                });
+            });
+    </script>
+    
+</head>
 
-     <nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %} d-none d-lg-block" style="z-index: 2000;">
-         <div class="container-fluid">
-            
-             <!-- Navbar brand -->
-             <a class="navbar-brand nav-link" href="{% url 'home' %}">
-                 <strong>Mindful Rise</strong>
-             </a>
-             <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="collapse" data-bs-target="#navbarText"
-                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                 <i class="fas fa-bars"></i>
-             </button>
-             <div class="collapse navbar-collapse" id="navbarText">
-                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                     <li class="nav-item">
-                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link {% if request.path == blog_index_url %}active{% endif %}" aria-current="page" href="{% url 'blog_index' %}">Blog</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link {% if request.path == courses_url %}active{% endif %}" aria-current="page" href="{% url 'courses' %}">Courses</a>
-                     </li>
-                     {% if user.is_authenticated %}
-                     <li class="nav-item">
-                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
-                     </li>
-                     {% else %}
-                     <li class="nav-item">
-                         <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page" href="{% url 'account_signup' %}">Register</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
-                     </li>
-                     {% endif %}
-                 </ul>
-                 <span class="navbar-text ml-auto logged-in">
-                     {% if user.is_authenticated %}
-                     Welcome {{ user }}. You are logged in
-                     {% else %}
-                     You are not logged in
-                     {% endif %}
-                 </span>
-             </div>
-         </div>
-     </nav>
- </header>
- 
- <main>
-     {% block page_content %}
-     Default content can go here 
-     {% endblock page_content %}
- </main>
- 
- <!-- Footer -->
- <footer class="bg-light text-lg-start">
-     <hr class="m-0">
-     <div class="text-center py-4 align-items-center">
-         <p>Mindful Rise on social media</p>
-         <a href="https://www.linkedin.com" class="btn btn-primary m-1" data-mdb-ripple-init role="button" rel="nofollow" target="_blank">
-             <i class="fab fa-linkedin"></i>
-         </a>
-         <a href="https://www.facebook.com" class="btn btn-primary m-1" data-mdb-ripple-init role="button" rel="nofollow" target="_blank">
-             <i class="fab fa-facebook-f"></i>
-         </a>
-         <a href="https://www.instagram.com" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
-             <i class="fab fa-instagram"></i>
-         </a>
-     </div>
- 
-     <!-- Copyright -->
-     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-         © 2024 Copyright:
-         <a class="text-dark">Mindful Growth by Christina Åhman</a>
-     </div>
- </footer>
- 
- 
-     <!-- jQuery -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %} d-none d-lg-block" style="z-index: 2000;">
+            <div class="container-fluid">
+                <a class="navbar-brand nav-link" href="{% url 'home' %}">
+                    <strong>Mindful Rise</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="collapse" data-bs-target="#navbarText"
+                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == blog_index_url %}active{% endif %}" aria-current="page" href="{% url 'blog_index' %}">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == courses_url %}active{% endif %}" aria-current="page" href="{% url 'courses' %}">Courses</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page" href="{% url 'account_signup' %}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <span class="navbar-text ml-auto logged-in">
+                        {% if user.is_authenticated %}
+                        Welcome {{ user }}. You are logged in
+                        {% else %}
+                        You are not logged in
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-     <!-- MDB JS-->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+    <main>
+        {% block page_content %}
+        Default content can go here 
+        {% endblock page_content %}
+    </main>
 
- <!-- To check that MDB js is loading-->
-    console.log(mdb); // Check if mdb is define
+    <!-- Footer -->
+    <footer class="bg-light text-lg-start">
+        <hr class="m-0">
+        <div class="text-center py-4 align-items-center">
+            <p>Mindful Rise on social media</p>
+            <a href="https://www.linkedin.com" class="btn btn-primary m-1" data-mdb-ripple-init role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://www.facebook.com" class="btn btn-primary m-1" data-mdb-ripple-init role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
 
- 
-    <script src="{% static 'js/ajax.js' %}"></script> 
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 Copyright:
+            <a href="https://mindfulrise-f0e0db837715.herokuapp.com/" class="text-dark" title="christina">Mindful Growth av Christina Åhman</a>
+        </div>
+    </footer>
 
- {% block extras %}
- {% endblock %}
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
- </body>
- </html>
- 
+    <!-- MDB JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+
+    <script src="{% static 'js/ajax.js' %}"></script>
+</body>
+</html>

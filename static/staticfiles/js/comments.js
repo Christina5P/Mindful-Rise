@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("everything loaded");
         
     
-    // event listeners for edit Buttons
+    /* event listeners for edit Buttons
     for (let button of editButtons) {
         button.addEventListener("click", (e) => {
             let commentId = e.target.getAttribute("data-comment_id");
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Editing comment ID:", commentId);
             console.log("Comment content:", commentContent);
         });
-    }
+    }*/
     // event listeners for delete Buttons
     for (let button of deleteButtons) {
         button.addEventListener("click", (e) => {

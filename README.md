@@ -23,6 +23,7 @@ You can sign in as a member and get full access to everything.
 * Footer
 * 404-page
 * Favicon 
+* Cookies
 * Register section
 * Setting up workspace
 * Design
@@ -57,11 +58,10 @@ I created different templates, to make it easy to work with.
 
 ### Agile methods - User stories
 
-In the project set up, I made a repository with name Mindful Growth and a projekt for that.
+In the project set up, I made a repository with name Mindful Growth and a project for that.
 I had a lot of issues with the project in Gitpod, so I decided to start all over again from scratch with a new repository and renamed the blog to Mindful Rise.
-I link the project I had made to my new repository. After a while I realized the link didn´t seem to work and I couldn´t connect to my userstories from Mindful Rise, so I made a new project, called Mindful Rise and created new Milestones and userstories/tasks.
+I linked the project I had made to my new repository. After a while I realized the link didn´t seem to work and I couldn´t connect to my userstories from Mindful Rise, so I made a new project, called Mindful Rise and created new Milestones and userstories/tasks.
 My decision to create new project was to structure and clean up the agile jobstructure.
-
 
 In the backlog I worked with different stories/task and moved them in steps until they where done.
 I created user stories with acceptance critera to get MVP.
@@ -74,12 +74,14 @@ https://github.com/users/Christina5P/projects/7/views/1?visibleFields=%5B%22Titl
 
 
 ## Mindmap
+
 ![Screenshot of Mindmap](static/img_readme/mindmap.png)
 
 
 link to my mindmap: https://miro.com/app/board/uXjVK1IKqsk=/
 
 ## Relationship diagram ERD
+
 ![Screenshot of ERD](static/img_readme/erd.png)
 
 Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp=sharing
@@ -87,21 +89,17 @@ Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp
 ## Wireframes
 
 Wireframe is created in https://balsamiq.cloud/srvezeo/phn02iw/r3EBE
+<details><summary>Wireframes</summary>
+
 Home page:
-
 ![Screenshot of Home](static/img_readme/wireframehome.png)
-
 Blog page:
-
 ![Screenshot of Blog](static/img_readme/wireframeblog.png)
-
 Courses:
-
 ![Screenshot of Courses](static/img_readme/wireframecourses.png)
-
 Blogpost:
-
 ![Screenshot of Post](static/img_readme/wireframedetail.png)
+</details>
 
 ## CRUD 
 
@@ -109,18 +107,24 @@ In use the operation CRUD :
 
 Create - Users can create comments and like posts
        - User can register an account
+       <br>
 Read - Users can read the homepage, blogpost and Course material
+ <br>
 Update- Users can edit their own comments or unlike their likes if they have created an account and are logged in.
+ <br>
 Delete - Users can delete their own comments if  they have created an account and are logged in.
 
 # Features
 
-## Home Page
 
+<details><summary>Features</summary>
+## Home Page
 Homepage is the first impression and decides if you can catch the users interest.
 My Homepage includes halfcarousel with pictures for people who is interested to invest in yourself.
 Under  the pictures, I have a short resume of myself to get close to users and  build confiedence.
 I also put in a picture of myself to strengthen the connection between me and interested users.
+
+![Screenshot of homepage](static/img_readme/homepage.png)
 
 ## Blog Page
 Blog page is for all visitors and if you havn´t signed up, you can use it for readable.
@@ -129,7 +133,12 @@ You would be able to choose a category you are interested in and you should see 
 I made that with a calm headlight color.
 It also starts with "All Categories" button, so its clear and easy too navigate.
 I also implemented a free text search bar (check of containing letters ) for a blog by category. And you have a clear button to quickly navigate to all posts and get easy to make searches.
+
+![Screenshot of blogpage](static/img_readme/blogpage.png)
+
 When you open  a post, you see a button to quickly come back to the index again.
+
+![Screenshot of backblog](static/img_readme/backblog.png)
 
 If you find an interersting post, you have an option to share it in social media below the posts.
 
@@ -137,6 +146,8 @@ You have to be loggedd in to like or comment a post, in a easy way.
 As an admin, it should be easy to approve comments, so you have a filter choice and can approve multiple comments at same time.
 You are also able to edit or delete your comment and receive alerts of update or a flag if you are sure that you want to delete a post.
 There is also a vounter of likes and comments.
+
+![Screenshot of blogpage](static/img_readme/blogpage.png)
 
 If there´s no post in a category, you get a message,so you understand that there is no published posts.
 
@@ -149,6 +160,9 @@ You also have the course material under the picture with the message.
 If you´re not signed in, you´ll se a form in the center of the page with links to log in or sign up form.
 The course material will not be able for unauthorized users and you will not see them.
  
+![Screenshot of coursepage](static/img_readme/coursepagelogin.png)
+
+![Screenshot of course](static/img_readme/courses.png)
 
 ## Nav Bar
 
@@ -157,6 +171,8 @@ Its the same information, but it changes color when you move to another page, to
 At right you can see if you are logged in or not.
 If you are logged in, you have a "Logout" option and if you are not logged in, there is a "Register" and "Login" option instead.
 It´s too keep you informed of your status.
+
+![Screenshot of navbar](static/img_readme/navbar.png)
 
 ## Footer
 
@@ -169,6 +185,12 @@ There is links to social media in footer and a copyright text
 I have a register section from Django allauth, there you can register with a username and password.
 The sign up button is styled with MDB.
 
+![Screenshot of register](static/img_readme/register.png)
+
+![Screenshot of login](static/img_readme/login.png)
+
+![Screenshot of logout](static/img_readme/logout.png)
+
 ## 404 error
 I have included an 404-page for more personal interaction and more clear you still are in Mindful Rise community, but there is an error. From this page, its easy to go back with a link.  
 
@@ -178,6 +200,14 @@ I have included an 404-page for more personal interaction and more clear you sti
 I created a favicon that is a logo in head, customized to my blogsite
 
 ![Screenshot of favicon](static/img_readme/favicon.png)
+
+## Cookies
+As a step of best practices from lighthouse, I have implemented cookie consent to inform user of cookies.
+I choosed cokie libary Cookie Consent by Insites, which I think it´s the easiest way to implement.
+
+![Screenshot of cookies](static/img_readme/cookies.png)
+
+</details>
 
 ## Setting up workspace
 

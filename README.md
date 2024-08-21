@@ -1,9 +1,6 @@
 ## Introduction
 
-Mindful Rise is a platform to look up and deepen in mindfulness, self development and methods for reach a significant and higher self.
-Its´s a place where you can reach loke minded and new friends from comments view.
-You can see the post likes on indexpage, so you can choose the ost interesting blogs.
-You can sign in as a member and get full access to everything.
+Mindful Rise is a platform designed to explore and deepen your understanding of mindfulness, self-development, and methods to achieve a more significant and elevated self. It's a place where you can connect with like-minded individuals and make new friends through engaging with comments and discussions. The platform also features a like system on the index page, helping you easily find the most popular and interesting blogs. By signing up as a member, you gain full access to all content and features.
 
 #### Live web site: https://mindfulrise-f0e0db837715.herokuapp.com/
 
@@ -44,27 +41,19 @@ You can sign in as a member and get full access to everything.
 
 
 ### Project Set Up
+ began this project with the idea of creating a blog just for myself. To add more exclusive content, I decided to include a page with courses to further delve into self-development.
 
-I Started this project with an idea to create a blog with posts only for me.
-And to ad more exclusive content, I choosed to make a page eith Courses, to deep down with the development of yourself.
+I started with a mindmap to brainstorm ideas and drew wireframes for the content and design of the site. I initiated the project in GitHub, where I created user stories to guide development.
 
-I started with a mindmap to brainstorm and draw wireframes of content and look of the site.
-I started making a project in GitHub, there I created user stories.
+Afterwards, I created an ERD (Entity Relationship Diagram) to plan out the structure of the project.
 
-After that, I created an ERD to plan how to build the project.
-
-In Gitpod, I decided to only have one app, because Blog and Courses are mixed, but filtered on their pages.
-I created different templates, to make it easy to work with.
+In Gitpod, I chose to have a single app since the blog and courses are integrated but filtered on their respective pages. I created different templates to streamline the workflow.
 
 #### Agile methods - User stories
 
-In the project set up, I made a repository with name Mindful Growth and a project for that.
-I had a lot of issues with the project in Gitpod, so I decided to start all over again from scratch with a new repository and renamed the blog to Mindful Rise.
-I linked the project I had made to my new repository. After a while I realized the link didn´t seem to work and I couldn´t connect to my userstories from Mindful Rise, so I made a new project, called Mindful Rise and created new Milestones and userstories/tasks.
-My decision to create new project was to structure and clean up the agile jobstructure.
+During the project setup, I created a repository named "Mindful Growth" and a project to accompany it. However, I encountered numerous issues in Gitpod, leading me to start over from scratch with a new repository, renaming the blog to "Mindful Rise." I linked the original project to the new repository, but later realized that the link wasn't functioning correctly, preventing me from connecting to my user stories. Consequently, I created a new project named "Mindful Rise" and developed new milestones and user stories/tasks. This decision helped me restructure and clean up the agile workflow.
 
-In the backlog I worked with different stories/task and moved them in steps until they where done.
-I created user stories with acceptance critera to get MVP.
+In the backlog, I worked through different stories/tasks, moving them through stages until they were completed. I created user stories with acceptance criteria to achieve a Minimum Viable Product (MVP).
 
 Link to my project in GitHub:
 
@@ -88,7 +77,7 @@ Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp
 
 ### Wireframes
 
-Wireframe is created in https://balsamiq.cloud/srvezeo/phn02iw/r3EBE
+The Wireframe were created using https://balsamiq.cloud/srvezeo/phn02iw/r3EBE
 <details><summary>Wireframes</summary>
 
 Home page:
@@ -103,36 +92,39 @@ Blogpost:
 
 ### CRUD 
 
-In use the operation CRUD :
+ICRUD Operations
+The platform utilizes the following CRUD operations:
 
-Create - Users can create comments and like posts
-       - User can register an account
-       <br>
-Read - Users can read the homepage, blogpost and Course material
- <br>
-Update- Users can edit their own comments or unlike their likes if they have created an account and are logged in.
- <br>
-Delete - Users can delete their own comments if  they have created an account and are logged in.
+Create: Users can create comments and like posts, as well as register an account.
+<br>
+Read: Users can view the homepage, blog posts, and course material.
+<br>
+Update: Users can edit their own comments or unlike their likes if they have created an account and are logged in.
+<br>
+Delete: Users can delete their own comments if they have created an account and are logged in.
 
 ## Features
 
 
 <details><summary>Features</summary>
+
 ## Home Page
-Homepage is the first impression and decides if you can catch the users interest.
-My Homepage includes halfcarousel with pictures for people who is interested to invest in yourself.
-Under  the pictures, I have a short resume of myself to get close to users and  build confiedence.
-I also put in a picture of myself to strengthen the connection between me and interested users.
+
+The homepage serves as the first impression and plays a crucial role in capturing users' interest. 
+It features a half-carousel with images appealing to those interested in self-investment. 
+Below the images, I included a brief introduction of myself to build trust and connection with the users, 
+along with a photo of myself to strengthen that bond.
 
 ![Screenshot of homepage](static/img_readme/homepage.png)
 
 ### Blog Page
-Blog page is for all visitors and if you havn´t signed up, you can use it for readable.
-In blog page, I would like to have a clean and calm style.
-You would be able to choose a category you are interested in and you should see on the buttons which choice you have done.
-I made that with a calm headlight color.
-It also starts with "All Categories" button, so its clear and easy too navigate.
-I also implemented a free text search bar (check of containing letters ) for a blog by category. And you have a clear button to quickly navigate to all posts and get easy to make searches.
+The blog page is accessible to all visitors. 
+If you haven't signed up, you can still read the posts. 
+The blog page features a clean and calm design. Users can select categories of interest,
+and the buttons reflect the chosen category through a calm highlight color.
+It also starts with an "All Categories" button to ensure clear and easy navigation.
+
+Additionally, a free text search bar allows for searching blog posts by category. A clear button lets users quickly return to all posts, making searches easy.
 
 ![Screenshot of blogpage](static/img_readme/blogpage.png)
 
@@ -140,25 +132,20 @@ When you open  a post, you see a button to quickly come back to the index again.
 
 ![Screenshot of backblog](static/img_readme/backblog.png)
 
-If you find an interersting post, you have an option to share it in social media below the posts.
+If you find an interesting post, you have the option to share it on social media below the posts.
 
-You have to be loggedd in to like or comment a post, in a easy way.
-As an admin, it should be easy to approve comments, so you have a filter choice and can approve multiple comments at same time.
-You are also able to edit or delete your comment and receive alerts of update or a flag if you are sure that you want to delete a post.
-There is also a vounter of likes and comments.
+Users must be logged in to like or comment on a post. For admins, it’s easy to approve comments using a filter option that allows multiple comments to be approved simultaneously. Users can also edit or delete their comments and receive alerts or flags to confirm actions like deleting a post. The page also features counters for likes and comments.
 
 ![Screenshot of blogpage](static/img_readme/blogpage.png)
 
 If there´s no post in a category, you get a message,so you understand that there is no published posts.
 
 ### Courses
-There is also a page for courses.
-I want that page to be more exclusive and is only for members.
-When you enter this page as logged in, you welcome with a message.
-You also have the course material under the picture with the message.
+The courses page is more exclusive and available only to members.
+When logged in, users are greeted with a welcome message and can access the course material below the message.
 
-If you´re not signed in, you´ll se a form in the center of the page with links to log in or sign up form.
-The course material will not be able for unauthorized users and you will not see them.
+If you're not signed in, you'll see a form in the center of the page with links to log in or sign up.
+The course material is not visible to unauthorized users.
  
 ![Screenshot of coursepage](static/img_readme/coursepagelogin.png)
 
@@ -166,17 +153,16 @@ The course material will not be able for unauthorized users and you will not see
 
 ### Nav Bar
 
-There is a navbar on top of page.
-Its the same information, but it changes color when you move to another page, too keep the contrast.
-At right you can see if you are logged in or not.
-If you are logged in, you have a "Logout" option and if you are not logged in, there is a "Register" and "Login" option instead.
-It´s too keep you informed of your status.
+The navbar is located at the top of the page and contains the same information across pages,
+with the color changing to maintain contrast as you navigate. 
+On the right side, users can see whether they are logged in or not. If logged in, 
+there's a "Logout" option; otherwise, "Register" and "Login" options are displayed.
 
 ![Screenshot of navbar](static/img_readme/navbar.png)
 
 ### Footer
 
-There is links to social media in footer and a copyright text
+The footer contains links to social media and a copyright text.
 
 ![Screenshot of footer](static/img_readme/footer.png)
 
@@ -184,8 +170,8 @@ There is links to social media in footer and a copyright text
 
 <details><summary>Sign Up/Sign In</summary>
 
-I have a register section from Django allauth, there you can register with a username and password.
-The sign up button is styled with MDB.
+The register section, powered by Django Allauth, allows users to register with a username and password. 
+The sign-up button is styled with MDB.
 
 ![Screenshot of register](static/img_readme/register.png)
 
@@ -195,18 +181,17 @@ The sign up button is styled with MDB.
 
 </details>
 ## 404 error
-I have included an 404-page for more personal interaction and more clear you still are in Mindful Rise community, but there is an error. From this page, its easy to go back with a link.  
-
+A custom 404-page is included for a more personal interaction, ensuring users remain within the Mindful Rise community even when an error occurs. A link is provided to easily return to the previous page.
 ![Screenshot of error404](static/img_readme/error404.png)
 
 ### Favicon
-I created a favicon that is a logo in head, customized to my blogsite
+A custom favicon, designed as a logo, is included in the head section of the blog site.
 
 ![Screenshot of favicon](static/img_readme/favicon.png)
 
 ### Cookies
-As a step of best practices from lighthouse, I have implemented cookie consent to inform user of cookies.
-I choosed cokie libary Cookie Consent by Insites, which I think it´s the easiest way to implement.
+As a best practice from Lighthouse, I implemented a cookie consent to inform users about the use of cookies.
+I chose the Cookie Consent library by Insites for its ease of implementation.
 
 ![Screenshot of cookies](static/img_readme/cookies.png)
 
@@ -214,73 +199,71 @@ I choosed cokie libary Cookie Consent by Insites, which I think it´s the easies
 
 ### Setting up workspace
 <details><summary>Set up Gitpod</summary>
+Run this command to install Django:
 
-* Run this command to install django:
- pip3 install 'django<4'  
+arduino
+Copy code
+pip3 install 'django<4'
+Next, install these libraries:
 
-* Next, install these libraries: 
+Copy code
 pip3 install dj_database_url psycopg2
 pip3 install dj3-cloudinary-storage
+Create a requirements.txt file to save all the installed libraries:
 
-* Create a requirements.txt file to save all the installed libraries:
+bash
+Copy code
 pip3 freeze --local > requirements.txt
+Create a project and add your apps:
 
-* You need to create a project and add my apps:
+Copy code
 django-admin startproject mindfulgrowth
 python3 manage.py startapp blog
-Remember to add your apps in to the 'INSTALLED_APPS' in setting.py
+Remember to add your apps to the INSTALLED_APPS in settings.py.
 
-* Add your DB and CLoudinary library to your project:
- Copy the DATABASE_URL
- create a new file manual with name: env.py
- This file need to be placed in the project cataloge
- Import the os library:
- import os
+Add your database and Cloudinary library to your project:
+
+Copy the DATABASE_URL.
+Create a new file named env.py.
+Place this file in the project directory.
+Import the os library:
+python
+Copy code
+import os
 Set environment variables:
-os.environ.setdefault(
-    "DATABASE_URL", "postgres://uottaphddte:1ZsY6k60KNPN@ep-gentle-mountain-a23bxz6h.eu-central-1.aws.neon.tech/vocal_moan_poem_31644")
- 
-os.environ.setdefault(
-    "SECRET_KEY", "django-insecure-%s0!8rr$!pbkcomh1bmeybs4nldjtws=8n%pffttkm%(-nrrma")    
-
-os.environ.setdefault(
-    "CLOUDINARY_URL", "cloudinary://618768418781469:Q8KVKcOdIzeC4kCaKocmseNCHmM@dvh69l0yv")
-
-os.environ["SECRET_KEY"] = "mysecretkey"
-
-Add the env.py-file to the setting.py file with commando in the file:
+python
+Copy code
+os.environ.setdefault("DATABASE_URL", "your_database_url_here")
+os.environ.setdefault("SECRET_KEY", "your_secret_key_here")
+Link this to your settings.py by importing the env file at the top:
+python
+Copy code
 import env
+Run the following command:
 
-You also need to put this in the setting.py file under :
+Copy code
+python3 manage.py migrate
+Create a superuser for your database to access the admin panel:
 
-ALLOWED_HOSTS = ['rise-f0e0db837715.herokuapp.com',
-    '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
-    '8080-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net']
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://*8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net",
-    "https://*mindfulrise-hzzi4mxch9a.herokuapp.com" 
-]
-
-Dont forget to add apps and libraries in 
-
-INSTALLED_APPS = []
-
-Before deploying on heroku make sure: DEBUG = False
-
-* Create 3 new folders on the root directory: media, static, templates
-
-* Create Procfile (needed for Heroku) on the root directory and inside the file type:
-web: gunicorn basic_mind.wsgi
-hint: It´s important to spell Procfile with a capital
+Copy code
+python3 manage.
 
 </details>
 
 ### Design
 
-I have used MBD for design and a carousel of pictures at home page.
-I want it to be clean and calm too read and use and buttons is indicatuve.
-Blogpage for unauthorized users and courses for signed up users are separated, to make it clean.
+<details><summary>Colors, Typography, and Animations</summary>
+Colors:
+I chose earthy and neutral tones to enhance a calm and mindful feeling. Light colors dominate the site to avoid overwhelming users.
+
+
+Typography:
+Heading: 'Roboto', sans-serif; with styles ranging from light to bold.
+Body: 'Noto Serif', serif; for a calm and professional look.
+Animations:
+Animations, such as hover effects, add interactivity. Subtle effects enhance the experience without overwhelming the user.
+
+</details>
 
 I didnt install anything from MDB since I used CDN installment. It is the easiest way, since you only need to add MDB:s link tap in <head> in your base.html 
 
@@ -320,6 +303,7 @@ JS Hint
 
 I have tested every function throughout the work.
 In the end, I have tested every user story in Herokuapp, 
+
 check my document: https://docs.google.com/document/d/1hwgkt8NEOS9-HmkjSEQ4gG_kMfmFePpCXCL0mPBnGMg/edit?usp=drive_link
 
 ![Screenshot of test](static/img_readme/test.png)
@@ -333,7 +317,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 check my document for bugs and status:
 https://docs.google.com/document/d/1TzJtZ0N6RMryrJDhrG67TnzF51-qiSbdxDfFVO30f38/edit?usp=sharing
 
-
+![Screenshot of bug](static/img_readme/bug.png)
 
 ### Technologies
 * Python - Language of this project
@@ -445,6 +429,9 @@ CI Database https://dbs.ci-dbs.net/
 
 ## Acknowledgement
 
+I would like to thank my tutor for their guidance throughout this project. 
+Additional thanks go to my studyfellow Josefin Dahlquist,all time she has spend on me to help, inspirate and stay with my side the whole project.
+
 #### for tutoring Django:
 * https://youtube.com/playlist?list=PLXuTq6OsqZjbCSfiLNb2f1FOs8viArjWy&si=9t7TdLJVAM9BM9Ga
 * https://realpython.com/build-a-blog-from-scratch-django/#set-up-the-development-environment 
@@ -463,9 +450,4 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.progressme.se/sv
 * https://www.everydayhealth.com/mindfulness/
 
-#### Tutoring help
-
-#### My mentor Gareth Mc Girr
-
-#### Help and discusses with my studyfellow Josefin Dahlquist
 

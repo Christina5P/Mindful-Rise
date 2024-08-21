@@ -92,7 +92,7 @@ Blogpost:
 
 ### CRUD 
 
-ICRUD Operations
+CRUD Operations
 The platform utilizes the following CRUD operations:
 
 Create: Users can create comments and like posts, as well as register an account.
@@ -199,55 +199,47 @@ I chose the Cookie Consent library by Insites for its ease of implementation.
 
 ### Setting up workspace
 <details><summary>Set up Gitpod</summary>
-Run this command to install Django:
+1.Run this command to install Django:
 
-arduino
-Copy code
-pip3 install 'django<4'
+![Screenshot of install](static/img_readme/installdjango.png)
+
+
 Next, install these libraries:
 
-Copy code
-pip3 install dj_database_url psycopg2
-pip3 install dj3-cloudinary-storage
+![Screenshot of libary](static/img_readme/2ilibary.png)
+
 Create a requirements.txt file to save all the installed libraries:
 
-bash
-Copy code
-pip3 freeze --local > requirements.txt
+![Screenshot of requirement](static/img_readme/requirement.png)
+
 Create a project and add your apps:
 
-Copy code
-django-admin startproject mindfulgrowth
-python3 manage.py startapp blog
+![Screenshot of app](static/img_readme/app.png)
+
 Remember to add your apps to the INSTALLED_APPS in settings.py.
 
 Add your database and Cloudinary library to your project:
 
-Copy the DATABASE_URL.
-Create a new file named env.py.
-Place this file in the project directory.
-Import the os library:
-python
-Copy code
-import os
+* Copy the DATABASE_URL.
+* Create a new file named env.py.
+* Place this file in the project directory.
+* Import the os library:
+
 Set environment variables:
-python
-Copy code
-os.environ.setdefault("DATABASE_URL", "your_database_url_here")
-os.environ.setdefault("SECRET_KEY", "your_secret_key_here")
+
+![Screenshot of enviroment](static/img_readme/enviroment.png)
+
 Link this to your settings.py by importing the env file at the top:
-python
-Copy code
-import env
+
+![Screenshot of env](static/img_readme/env.png)
+ 
 Run the following command:
 
-Copy code
-python3 manage.py migrate
+![Screenshot of migrate](static/img_readme/migrate.png)
+
 Create a superuser for your database to access the admin panel:
 
-Copy code
-python3 manage.
-
+![Screenshot of superuser](static/img_readme/superuser.png)
 </details>
 
 ### Design
@@ -259,10 +251,8 @@ I chose earthy and neutral tones to enhance a calm and mindful feeling. Light co
 
 Typography:
 Heading: 'Roboto', sans-serif; with styles ranging from light to bold.
-Body: 'Noto Serif', serif; for a calm and professional look.
-Animations:
-Animations, such as hover effects, add interactivity. Subtle effects enhance the experience without overwhelming the user.
 
+Body: 'Noto Serif', serif; for a calm and professional look.
 </details>
 
 I didnt install anything from MDB since I used CDN installment. It is the easiest way, since you only need to add MDB:s link tap in <head> in your base.html 
@@ -308,6 +298,7 @@ check my document: https://docs.google.com/document/d/1hwgkt8NEOS9-HmkjSEQ4gG_kM
 
 ![Screenshot of test](static/img_readme/test.png)
 
+
 I have tested "forgot password" in the Log In section, by add a backend email in settings.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -315,6 +306,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ### Bugs
 
 check my document for bugs and status:
+
 https://docs.google.com/document/d/1TzJtZ0N6RMryrJDhrG67TnzF51-qiSbdxDfFVO30f38/edit?usp=sharing
 
 ![Screenshot of bug](static/img_readme/bug.png)

@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<script src="{% static 'js/ajax.js' %}"></script>
-
 
 <!-- index.html content starts here -->
 {% block page_content %}
-
 
 <!-- Main layout -->
 <div class="my-5">
@@ -78,16 +75,24 @@
   <!-- Like and Comment Section -->
   <div class="d-flex justify-content-start align-items-center">
 
-            <!-- Like Button -->
+            <!-- Like Button 
             <div class="d-flex align-items-center me-4">
               <a href="{% url 'like_post' post.id %}" class="like-button">
                 {% if user in post.likes.all %}
-                    <i class="fas fa-heart" style="color: red;"></i> <!-- Gillat -->
+                    <i class="fas fa-heart" style="color: red;"></i> 
                 {% else %}
-                    <i class="far fa-heart" style="color: red;"></i> <!-- Inte gillat -->
+                    <i class="far fa-heart" style="color: red;"></i> 
                 {% endif %}
             </a>
             <span class="likes-count">{{ post.likes.count }}</span>
+            </div>-->
+
+            <div class="d-flex align-items-center me-4">
+              <a href="#" class="like-button" data-post-id="{{ post.id }}">
+                {% csrf_token %}
+                <i class="{% if user in post.likes.all %}fas{% else %}far{% endif %} fa-heart" style="color: red;"></i>
+              </a>
+              <span class="likes-count">{{ post.likes.count }}</span>
             </div>
 
             <!-- Comment Count -->

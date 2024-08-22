@@ -95,28 +95,45 @@ def blog_detail(request, slug):
                 request, messages.SUCCESS,
                 'Comment submitted and awaiting approval'
             )
-            return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+            return HttpResponseRedirect(reverse('post_detail', args=[slug]) + "#comments")
 
     return render(request, "blog/detail.html", context)
 
 # like post
+#def like_post(request, post_id):
+ #   post = get_object_or_404(Post, id=post_id)
+  #  if request.method == 'POST':
+
+   #     if request.user in post.likes.all():
+    #        post.likes.remove(request.user)
+     #       status = 'unliked'
+      #  else:
+       #     post.likes.add(request.user)
+        #    status = 'liked'
+
+       # return JsonResponse({
+        #    'status': status,
+         #   'likes_count': post.likes.count()
+        #})
+    #return JsonResponse({'error': 'Invalid request'}, status=400)
+
+    
+@login_required
+@require_POST
 def like_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-
-    if request.method == 'POST':
-        if request.user in post.likes.all():
-            post.likes.remove(request.user)
-            status = 'unliked'
-        else:
-            post.likes.add(request.user)
-            status = 'liked'
-
-        return JsonResponse({
-            'status': status,
-            'likes_count': post.likes.count()
-        })
-
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+    is_liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        is_liked = False
+    else:
+        post.likes.add(request.user)
+        is_liked = True
+    
+    return JsonResponse({
+        'likes_count': post.likes.count(),
+        'is_liked': is_liked
+    })
 
     # Display blog posts filtered by category name
 
@@ -208,8 +225,7 @@ def comment_edit(request, slug, comment_id):
             comment.updated_on = timezone.now()
             comment.save()
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
-            return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
+            return HttpResponseRedirect(reverse('post_detail', args=[slug]) + f"#comment-{comment_id}")
     else:
         comment_form = CommentForm(instance=comment)
 
@@ -231,7 +247,7 @@ def comment_delete(request, slug, comment_id):
     else:
         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    return HttpResponseRedirect(reverse('post_detail', args=[slug])+'#comments')
 
     
 
@@ -267,3 +283,5 @@ def login_view(request):
     
     
     return render(request, 'login.html')
+
+    

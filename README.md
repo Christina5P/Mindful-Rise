@@ -13,15 +13,6 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 * Wireframes
 * CRUD
 * Features
-* Homepage
-* Blog Page
-* Courses
-* Nav Bar
-* Footer
-* 404-page
-* Favicon 
-* Cookies
-* Register section
 * Setting up workspace
 * Design
 * Testing
@@ -29,21 +20,20 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 * Technologies
 * Packages
 * Deployment
-* Media
-* Images
-* Font
 * Database
 * Framework
-* Media
 * Icons
+* Media
 * Images
 * Acknowledgements
 
 
 ### Project Set Up
- began this project with the idea of creating a blog just for myself. To add more exclusive content, I decided to include a page with courses to further delve into self-development.
+I began this project with the idea of creating a blog.
+To add more exclusive content, I decided to include a page with courses to further delve into self-development.
 
-I started with a mindmap to brainstorm ideas and drew wireframes for the content and design of the site. I initiated the project in GitHub, where I created user stories to guide development.
+I started with a mindmap to brainstorm ideas and drew wireframes for the content and design of the site.
+I initiated the project in GitHub, where I created user stories to guide development.
 
 Afterwards, I created an ERD (Entity Relationship Diagram) to plan out the structure of the project.
 
@@ -51,13 +41,19 @@ In Gitpod, I chose to have a single app since the blog and courses are integrate
 
 #### Agile methods - User stories
 
-During the project setup, I created a repository named "Mindful Growth" and a project to accompany it. However, I encountered numerous issues in Gitpod, leading me to start over from scratch with a new repository, renaming the blog to "Mindful Rise." I linked the original project to the new repository, but later realized that the link wasn't functioning correctly, preventing me from connecting to my user stories. Consequently, I created a new project named "Mindful Rise" and developed new milestones and user stories/tasks. This decision helped me restructure and clean up the agile workflow.
+During the project setup, I created a repository named "Mindful Growth" and a project to accompany it. 
+However, I encountered numerous issues in Gitpod, leading me to start over from scratch with a new repository,
+renaming the blog to "Mindful Rise."
+I linked the original project to the new repository, but later realized that the link wasn't functioning correctly, preventing me from connecting to my user stories.
+Consequently, I created a new project named "Mindful Rise" and developed new milestones and user stories/tasks.
+This decision helped me restructure and clean up the agile workflow.
 
 In the backlog, I worked through different stories/tasks, moving them through stages until they were completed. I created user stories with acceptance criteria to achieve a Minimum Viable Product (MVP).
 
 Link to my project in GitHub:
 
 https://github.com/users/Christina5P/projects/7/views/1?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Milestone%22%5D
+
 
 ![Screenshot of Userstories](static/img_readme/userstories.png)
 
@@ -244,9 +240,10 @@ Create a superuser for your database to access the admin panel:
 
 ### Design
 
-<details><summary>Colors, Typography, and Animations</summary>
+<details><summary>Colors, Typography,</summary>
 Colors:
-I chose earthy and neutral tones to enhance a calm and mindful feeling. Light colors dominate the site to avoid overwhelming users.
+I chose earthy and neutral tones to enhance a calm and mindful feeling. 
+Light colors dominate the site to avoid overwhelming users.
 
 
 Typography:
@@ -261,7 +258,8 @@ I didnt install anything from MDB since I used CDN installment. It is the easies
 
 <details><summary>Validators</summary>
 
-* Validating Test* HTML Validation 
+
+* HTML Validation 
 W3C Validator HTML
 
 ![Screenshot of HTML](static/img_readme/htmlvalidator.png)
@@ -289,7 +287,7 @@ JS Hint
 
 </details>
 
-#### Manual testing
+#####  Manual testing
 
 I have tested every function throughout the work.
 In the end, I have tested every user story in Herokuapp, 
@@ -386,9 +384,6 @@ You can read more information on cloning at the GitHub : https://docs.github.com
 
 </details>
 
-### Font
-* Roboto
-
 ### Databas
 CI Database https://dbs.ci-dbs.net/
 
@@ -438,7 +433,7 @@ Additional thanks go to my studyfellow Josefin Dahlquist,all time she has spend 
   Suggestion to create excerpt automatically save
 * https://www.w3schools.com/howto/howto_website_static.asp
 
-#### Inspiration of blogs and teaching equpment
+#### Inspiration of blogs and course material
 * https://www.progressme.se/sv
 * https://www.everydayhealth.com/mindfulness/
 

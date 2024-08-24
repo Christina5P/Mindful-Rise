@@ -26,15 +26,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
         
 });
-
-document.addEventListener("DOMContentLoaded", function() {
-    const notLoggedInButtons = document.querySelectorAll('.not-logged-in');
-  
-    notLoggedInButtons.forEach(button => {
-      button.addEventListener("click", function(event) {
-        event.preventDefault();
-        alert("You must be logged in to like this post.");
-      });
-    });
-  });
-

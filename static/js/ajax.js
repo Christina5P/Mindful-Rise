@@ -27,8 +27,25 @@ $(document).ready(function() {
                         $this.find('i').removeClass('fas').addClass('far');
                     }
                     $this.siblings('.likes-count').text(data.likes_count);
+                    console.log(data);
                 },
-                
+
+                error: function(xhr) {
+                    if (xhr.status === 403) {
+                        document.getElementById('alert-container').classList.remove('d-none');
+                    } else {
+                        console.error("Error occurred: ", xhr.responseText);
+                    }
+                }
             });
         });
     });
+    // event listener for close alert
+document.addEventListener('DOMContentLoaded', function() {
+    const closeButton = document.querySelector('.btn-close');
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            document.getElementById('alert-container').classList.add('d-none');
+        });
+    }
+});

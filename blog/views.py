@@ -99,11 +99,15 @@ def blog_detail(request, slug):
 
     return render(request, "blog/detail.html", context)
     
-@login_required
+
 @require_POST
 def like_post(request, post_id):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'You must be logged in to like a post.'}, status=403)
+
     post = get_object_or_404(Post, id=post_id)
     is_liked = False
+    
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
         is_liked = False

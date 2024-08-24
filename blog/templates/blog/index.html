@@ -48,6 +48,8 @@
       </div>
     </div>
     
+    <div id="alert-container" class="alert-container p-3"></div>
+    
     <!-- Blog posts -->
     <div class="row">
       {% for post in page_obj %}
@@ -74,27 +76,27 @@
 
   <!-- Like and Comment Section -->
   <div class="d-flex justify-content-start align-items-center">
-
-            <!-- Like Button 
-            <div class="d-flex align-items-center me-4">
-              <a href="{% url 'like_post' post.id %}" class="like-button">
-                {% if user in post.likes.all %}
-                    <i class="fas fa-heart" style="color: red;"></i> 
-                {% else %}
-                    <i class="far fa-heart" style="color: red;"></i> 
-                {% endif %}
-            </a>
-            <span class="likes-count">{{ post.likes.count }}</span>
-            </div>-->
-
-            <div class="d-flex align-items-center me-4">
-              <a href="#" class="like-button" data-post-id="{{ post.id }}">
-                {% csrf_token %}
-                <i class="{% if user in post.likes.all %}fas{% else %}far{% endif %} fa-heart" style="color: red;"></i>
-              </a>
-              <span class="likes-count">{{ post.likes.count }}</span>
+              <div class="col-auto">
+              <div class="d-flex align-items-center me-4">
+                <div class="like-form">
+                  <a href="{% url 'like_post' post.id %}" class="like-button" data-post-id="{{ post.id }}">
+                    {% csrf_token %}
+                    {% if user in post.likes.all %}
+                      <i class="fas fa-heart" style="color: red;"></i>
+                    {% else %}
+                      <i class="far fa-heart" style="color: red;"></i>
+                    {% endif %}
+                  </a>
+                  <span class="likes-count">{{ post.likes.count }}</span>
+                  
+            
+                </div>
+              </div>
+              
             </div>
-
+        
+  
+           
             <!-- Comment Count -->
           
               <div class="comments-section d-flex align-items-center">
@@ -105,6 +107,8 @@
           </div>
         </div>
       </div>
+
+   
 
       <!-- No Posts Message -->
       {% empty %}

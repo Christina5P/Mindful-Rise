@@ -130,7 +130,8 @@ When you open  a post, you see a button to quickly come back to the index again.
 
 If you find an interesting post, you have the option to share it on social media below the posts.
 
-Users must be logged in to like or comment on a post. For admins, it’s easy to approve comments using a filter option that allows multiple comments to be approved simultaneously. Users can also edit or delete their comments and receive alerts or flags to confirm actions like deleting a post. The page also features counters for likes and comments.
+Users must be logged in to like or comment on a post. For admins, it’s easy to approve comments using a filter option that allows multiple comments to be approved simultaneously. After a while I decided the comments should be proved without admins authorization.
+Users can also edit or delete their comments and receive alerts or flags to confirm actions like deleting a post. The page also features counters for likes and comments.
 
 ![Screenshot of blogpage](static/img_readme/blogpage.png)
 

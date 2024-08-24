@@ -98,25 +98,6 @@ def blog_detail(request, slug):
             return HttpResponseRedirect(reverse('post_detail', args=[slug]) + "#comments")
 
     return render(request, "blog/detail.html", context)
-
-# like post
-#def like_post(request, post_id):
- #   post = get_object_or_404(Post, id=post_id)
-  #  if request.method == 'POST':
-
-   #     if request.user in post.likes.all():
-    #        post.likes.remove(request.user)
-     #       status = 'unliked'
-      #  else:
-       #     post.likes.add(request.user)
-        #    status = 'liked'
-
-       # return JsonResponse({
-        #    'status': status,
-         #   'likes_count': post.likes.count()
-        #})
-    #return JsonResponse({'error': 'Invalid request'}, status=400)
-
     
 @login_required
 @require_POST

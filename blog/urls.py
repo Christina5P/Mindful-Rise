@@ -17,8 +17,7 @@ urlpatterns = [
    path('post/<slug:slug>/', views.blog_detail, name='post_detail'),  # detail view by slug  
    path('category/<slug:category_slug>/', views.blog_category, name='blog_category'),
    path('search/', views.category_search, name='category_search'),
-   #path('like_post/<int:post_id>/', like_post, name='like_post'),
-   path('like/<int:post_id>/', views.like_post, name='like_post'),
+   path('like_post/<int:post_id>/', like_post, name='like_post'),
    path('post/<slug:slug>/edit_comment/<int:comment_id>',
       views.comment_edit, name='comment_edit'),
    path('post/<slug:slug>/delete_comment/<int:comment_id>',

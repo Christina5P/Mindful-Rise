@@ -20,7 +20,6 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 
 
-
 class home_view(TemplateView):
     template_name = 'blog/home.html'
 

@@ -6,26 +6,26 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 
 ### Content
 
-* Project Set Up
-* Agile method - User stories
-* Mindmap
-* ERD
-* Wireframes
-* CRUD
-* Features
-* Setting up workspace
-* Design
-* Testing
-* Bugs
-* Technologies
-* Packages
-* Deployment
-* Database
-* Framework
-* Icons
-* Media
-* Images
-* Acknowledgements
+* [projectsetup](Project Set Up)
+* [agilemethod-userstories](Agile method - User stories)
+* [mindmap](Mindmap)
+* [erd](ERD)
+* [wireframes](Wireframes)
+* [crud](CRUD)
+* [feature](Features)
+* [settingupworkspace](Setting up workspace)
+* [design](Design)
+* [testing](Testing)
+* [bugs](Bugs)
+* [technologies](Technologies)
+* [packages](Packages)
+* [deployment](Deployment)
+* [database](Database)
+* [framework](Framework)
+* [icons](Icons)
+* [media](Media)
+* [image](Images)
+* [acknowledgements](Acknowledgements)
 
 
 ### Project Set Up

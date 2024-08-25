@@ -1,3 +1,4 @@
+console.log("cookies loaded");
 
 window.addEventListener("load", function() {
     window.cookieconsent.initialise({
@@ -10,6 +11,15 @@ window.addEventListener("load", function() {
             header: "We use cookies",
             message: "This website uses cookies to ensure you get the best experience.",
             dismiss: "I agree",
+        },
+  
+        
+        onStatusChange: function(status) {
+            if (this.hasConsented()) {
+            document.cookie = "authToken=token123; path=/; max-age=" + 60 * 60 * 24; 
+            }
         }
     });
 });
+
+

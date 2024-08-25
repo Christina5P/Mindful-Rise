@@ -16,8 +16,8 @@
     }
 
     .carousel-item:nth-child(1) {
-  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1/static/images/invest in yourself.f70c996c2708.png");
-      background-repeat: no-repeat;
+      background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1724585749/investinyourself_wzqd7s.png");
+            background-repeat: no-repeat;
       background-size: cover;
       background-position: center top;
     }
@@ -35,6 +35,7 @@
       background-size: cover;
       background-position: center center;
     }
+
 
     /* Height for devices larger than 576px */
     @media (min-width: 992px) {

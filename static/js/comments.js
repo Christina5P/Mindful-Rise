@@ -1,24 +1,21 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const deleteModal = new mdb.Modal(document.getElementById("deleteModal"));
-    const deleteButtons = document.getElementsByClassName("btn-delete");
+
+console.log("comment loaded");
+
+$(document).ready(function() {
     const deleteConfirm = document.getElementById("deleteConfirm");
-   
-    console.log("everything loaded");
-        
-   
-    // event listeners for delete Buttons
-    for (let button of deleteButtons) {
-        button.addEventListener("click", (e) => {
-            let commentId = e.target.getAttribute("data-comment_id");
-            
-            if (commentId) {
-                deleteConfirm.href = `delete_comment/${commentId}`;
-                deleteModal.show();
-            } else {
-                console.error("Comment ID not found.");
-            }
-        });
-       
-    }
-        
+
+    $('.btn-delete').on('click', function() {
+        console.log("Delete button clicked!"); // Kontrollera om detta visas i konsolen
+        //const commentId = $(this).data("comment_id");
+        const deleteUrl = $(this).data("delete-url"); // Hämta delete-url från data-attributet
+        deleteConfirm.setAttribute('href', deleteUrl); // Sätt rätt URL på deleteConfirm-länken
+
+         // const postSlug = $(".my-5").data("post-slug");
+        // const deleteUrl = `{% url 'comment_delete' post.slug '' %}${commentId}/`; // Skapa URL för att radera kommentaren
+        deleteConfirm.setAttribute('href', deleteUrl); // Sätt rätt URL på deleteConfirm-länken
+
+        const deleteModalElement = document.getElementById("deleteModal");
+        const deleteModal = new mdb.Modal(deleteModalElement);
+        deleteModal.show(); // Öppnar modalen
+    });
 });

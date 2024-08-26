@@ -217,6 +217,7 @@ def comment_edit(request, slug, comment_id):
 
 # delete comment
 
+
 def comment_delete(request, slug, comment_id):
     """
     View to delete comment
@@ -268,4 +269,8 @@ def login_view(request):
     
     return render(request, 'login.html')
 
-    
+   # block third party cookies
+def my_view(request):
+    response = HttpResponse("My cookie is safe")
+    response.set_cookie('mycookie', 'cookie_value', samesite='Strict')
+    return response 

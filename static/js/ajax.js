@@ -1,8 +1,6 @@
 
 console.log("ajax loaded");
         
-console.log(typeof $);
-
 
 $(document).ready(function() {
     $(document).on('click', '.like-button', function(e) {
@@ -40,6 +38,7 @@ $(document).ready(function() {
             });
         });
     });
+    
     // event listener for close alert
 document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.btn-close');

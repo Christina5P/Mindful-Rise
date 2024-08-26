@@ -20,8 +20,7 @@ urlpatterns = [
    path('like_post/<int:post_id>/', like_post, name='like_post'),
    path('post/<slug:slug>/edit_comment/<int:comment_id>',
       views.comment_edit, name='comment_edit'),
-   path('post/<slug:slug>/delete_comment/<int:comment_id>',
-      views.comment_delete, name='comment_delete'),
+   path('post/<slug:slug>/comment_delete/<int:comment_id>/', views.comment_delete, name='comment_delete'),
    path('courses/', views.courses_view, name='courses'), # url to course index
    path('course/<slug:slug>/', views.course_detail, name='course_detail'), # open a course card
    path('accounts/', include('allauth.urls')),  # Djangos path incl to register and login

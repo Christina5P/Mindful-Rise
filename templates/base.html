@@ -45,52 +45,53 @@
 <body>
     <header>
 
-      
+       
       
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %} d-none d-lg-block" style="z-index: 2000;">
-            <div class="container-fluid">
-                <a class="navbar-brand nav-link" href="{% url 'home' %}">
-                    <strong>Mindful Rise</strong>
-                </a>
-                <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="collapse" data-bs-target="#navbarText"
-                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarText">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == blog_index_url %}active{% endif %}" aria-current="page" href="{% url 'blog_index' %}">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == courses_url %}active{% endif %}" aria-current="page" href="{% url 'courses' %}">Courses</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page" href="{% url 'account_signup' %}">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    <span class="navbar-text ml-auto logged-in">
-                        {% if user.is_authenticated %}
-                        Welcome {{ user }}. You are logged in
-                        {% else %}
-                        You are not logged in
-                        {% endif %}
-                    </span>
-                </div>
-            </div>
-        </nav>
+       <!-- Navbar -->
+<nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %}" style="z-index: 2000;">
+    <div class="container-fluid">
+        <a class="navbar-brand nav-link" href="{% url 'home' %}">
+            <strong>Mindful Rise</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == blog_index_url %}active{% endif %}" aria-current="page" href="{% url 'blog_index' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == courses_url %}active{% endif %}" aria-current="page" href="{% url 'courses' %}">Courses</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page" href="{% url 'account_signup' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+            <span class="navbar-text ml-auto logged-in">
+                {% if user.is_authenticated %}
+                Welcome {{ user }}. You are logged in
+                {% else %}
+                You are not logged in
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</nav>
+
     </header>
 
     <main>
@@ -130,7 +131,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- MDB JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
 
 <!-- Local Scripts -->
 <script src="{% static 'js/ajax.js' %}"></script>

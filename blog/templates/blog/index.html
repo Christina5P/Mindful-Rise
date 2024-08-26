@@ -10,25 +10,26 @@
   <div class="container">
 
     <!-- Blog Posts Header -->
-    <h1 class="mb-4 text-primary">Blog Posts</h1>
+    <h3 class="mb-4 text-primary">Blog Posts</h3>
 
     <!-- Section: Content -->
 
     <!-- Category search form  -->
     <div class="d-flex mb-4 align-items-center">
       <form method="GET" action="{% url 'blog_index' %}" class="d-flex flex-grow-1">
-        <input type="text" name="q" class="form-control me-2" placeholder="Search categories..." value="{{ query }}">
+      <input type="text"  id="searchInput" name="q" class="form-control me-2" placeholder="Search categories..." value="{{ query }}">
+      <label for="searchInput" class="visually-hidden">Search categories</label>
         <button class="btn btn-primary" type="submit">Search</button>
       </form>
       <!-- Clear search link (show if there's a query or a category selected) -->
       {% if query or current_category %}
-      <a href="{% url 'blog_index' %}" class="btn btn-secondary ms-2">Clear Search</a>
+      <a href="{% url 'blog_index' %}" class="btn btn-dark ms-2">Clear Search</a>
       {% endif %}
     </div>
 
     <!-- Category list -->
     <div class="mb-4">
-      <h2>Categories</h2>
+      <h3>Categories</h3>
       <div class="row">
         <div class="col-md-4 mb-3">
           <a href="{% url 'blog_index' %}" class="btn btn-outline-primary btn btn-block {% if not current_category %}active{% endif %}">
@@ -76,7 +77,7 @@
             <p class="card-text">{{ post.excerpt|safe }}...</p>
             <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read</a>
             <hr>
-            <p class="card-text text-muted h6">{{ post.created_on }}</p>
+            <p class="card-text text-dark h6">{{ post.created_on }}</p>
 
             
 
@@ -85,7 +86,7 @@
               <div class="col-auto">
               <div class="d-flex align-items-center me-4">
                 <div class="like-form">
-                  <a href="{% url 'like_post' post.id %}" class="like-button" data-post-id="{{ post.id }}">
+                  <a href="{% url 'like_post' post.id %}" class="like-button" data-post-id="{{ post.id }}"  aria-label="Like this post">
                     {% csrf_token %}
                     {% if user in post.likes.all %}
                       <i class="fas fa-heart" style="color: red;"></i>
@@ -107,7 +108,7 @@
           
               <div class="comments-section d-flex align-items-center">
                 <i class="far fa-comments me-2"></i>
-                <strong class="text-secondary">{{ post.comments.count }}</strong>
+                <strong class="text-black">{{ post.comments.count }}</strong>
               </div>
             </div>
           </div>

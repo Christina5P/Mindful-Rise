@@ -45,7 +45,7 @@
           <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="text-white text-center" data-mdb-theme="dark">
               <h1 class="mb-3">Invest in yourself</h1>
-              <a class="btn btn-outline-light btn-lg m-2" href="{% url 'blog' %}" role="button">Read Blogs</a>
+              <a class="btn btn-outline-light btn-lg m-2" style="color: #e9f5f5;"href="{% url 'blog' %}" role="button">Read Blogs</a>
               <a class="btn btn-outline-light btn-lg m-2" href="{% url 'courses' %}" role="button">Course material</a>
             </div>
           </div>
@@ -98,8 +98,7 @@
       <div class="row">
         <div class="col-md-2 gx-5 mb-2">
           <div class="bg-image hover-overlay shadow-2-strong">
-            <img src="{% static 'images/profile.jpg' %}" class="img-fluid" alt="Profile Image">
-            <a href="#!">
+            <img src="{% static 'images/profile.jpg' %}" class="img-fluid" alt="about me">
               <div class="mask" style="background-color: transparent;"></div>
 
             </a>
@@ -136,9 +135,8 @@
             Join me on my blog and explore my materials for self-actualization and personal growth.
           </h5>
         </div>
-    </section>
-  </div>
-</div>
+   </div>
+  </section>
 
 
 {% endblock page_content %}

@@ -7,7 +7,7 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 ### Content
 
 * [project set up](projectsetUp)
-* [Agilem ethod- User stories](agilemethod-User stories)
+* [Agil method](agilemethod)
 * [mindmap](Mindmap)
 * [erd](ERD)
 * [wireframes](Wireframes)
@@ -277,7 +277,7 @@ JS Hint
 
 ![Screenshot of ajax](static/img_readme/ajaxjs.png)
 
-* PEP8
+* Python PEP8
 
 
 ![Screenshot of Settings](static/img_readme/settingpy.png)
@@ -296,17 +296,24 @@ JS Hint
 
 
 ![Screenshot of course](static/img_readme/courses.png)
+</details>
 
+<details><summary>Other Tests</summary>
 
--Lighthouse
+* Lighthouse
 
 ![Screenshot of lighthouse](static/img_readme/lighthouse.png)
 
 ![Screenshot of lighthouse](static/img_readme/lighthousemobile.png)
 
-* Python Test -PEP8
+* Wave
 
-</details>
+![Screenshot of Wave Home](static/img_readme/wavehome.png)
+
+![Screenshot of Wave Blog](static/img_readme/waveblog.png)
+
+![Screenshot of Wave Courses](static/img_readme/wavecourses.png)
+
 
 #####  Manual testing
 
@@ -322,6 +329,7 @@ I have tested "forgot password" in the Log In section, by add a backend email in
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+</details>
 ### Bugs
 
 check my document for bugs and status:

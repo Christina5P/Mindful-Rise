@@ -52,6 +52,9 @@
 
     
 .carousel-control-prev,
-.carousel-control-next {
+.carousel-control-next,
+.carousel-control-next-icon {
   color: black;
 }
+
+

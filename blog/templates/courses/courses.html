@@ -24,7 +24,7 @@
       }
   
       .navbar .nav-link {
-        color: #fff !important;
+        color: black;
       }
     </style>
      <script>
@@ -90,7 +90,7 @@
                       <p class="card-text">{{ course.excerpt|safe }}...</p>
                       <a href="{% url 'course_detail' course.slug %}" class="btn btn-primary">View Course</a>
                       <hr>
-                      <p class="card-text text-muted h6">{{ course.created_on }}</p>
+                      <p class="card-text text-secondary h6">{{ course.created_on }}</p>
                   </div>
               </div>
           </div>

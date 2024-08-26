@@ -1,15 +1,6 @@
 
 console.log("comment loaded");
 
-window.onload = function() {
-    var commentTextarea = document.getElementById('id_body');
-    if (commentTextarea) {
-        console.log("Textarea found:", commentTextarea);
-    }
-};
-
-
-
 // Open edit form for comment edits
 
 document.addEventListener("DOMContentLoaded", function() {

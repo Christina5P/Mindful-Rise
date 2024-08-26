@@ -99,6 +99,8 @@ def blog_detail(request, slug):
     return render(request, "blog/detail.html", context)
     
 
+# like/unlike post
+
 @require_POST
 def like_post(request, post_id):
     if not request.user.is_authenticated:
@@ -268,9 +270,3 @@ def login_view(request):
     
     
     return render(request, 'login.html')
-
-   # block third party cookies
-def my_view(request):
-    response = HttpResponse("My cookie is safe")
-    response.set_cookie('mycookie', 'cookie_value', samesite='Strict')
-    return response 

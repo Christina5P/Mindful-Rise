@@ -1,6 +1,7 @@
 
 console.log("ajax loaded");
         
+// ajax for like-button without refresh browser
 
 $(document).ready(function() {
     $(document).on('click', '.like-button', function(e) {

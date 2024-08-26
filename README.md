@@ -6,14 +6,14 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 
 ### Content
 
-* [projectsetup](Project Set Up)
-* [agilemethod-userstories](Agile method - User stories)
+* [project set up](projectsetUp)
+* [Agilem ethod- User stories](agilemethod-User stories)
 * [mindmap](Mindmap)
 * [erd](ERD)
 * [wireframes](Wireframes)
 * [crud](CRUD)
 * [feature](Features)
-* [settingupworkspace](Setting up workspace)
+* [Setting up workspace](settingupworkspace)
 * [design](Design)
 * [testing](Testing)
 * [bugs](Bugs)
@@ -276,6 +276,26 @@ JS Hint
 ![Screenshot of cs](static/img_readme/commentsjs.png)
 
 ![Screenshot of ajax](static/img_readme/ajaxjs.png)
+
+* PEP8
+
+
+![Screenshot of Settings](static/img_readme/settingpy.png)
+
+
+![Screenshot of Views](static/img_readme/viewspy.png)
+
+
+![Screenshot of url](static/img_readme/urlpy.png)
+
+
+![Screenshot of models](static/img_readme/modelspy.png)
+
+
+![Screenshot of admin](static/img_readme/aminpy.png)
+
+
+![Screenshot of course](static/img_readme/courses.png)
 
 
 -Lighthouse

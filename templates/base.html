@@ -45,10 +45,7 @@
 <body>
     <header>
 
-       
-      
-        <!-- Navbar -->
-       <!-- Navbar -->
+    <!-- Navbar -->
 <nav class="navbar navbar-expand-lg {% if has_carousel %}navbar-dark{% else %}navbar-light{% endif %}" style="z-index: 2000;">
     <div class="container-fluid">
         <a class="navbar-brand nav-link" href="{% url 'home' %}">
@@ -130,8 +127,7 @@
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- MDB JS-->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script> -->
+    <!-- MDB JS downgrade from 7.3.2 to resolve error for navbar and deletemodal backdrop-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
 
 <!-- Local Scripts -->

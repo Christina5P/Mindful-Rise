@@ -97,7 +97,46 @@
           <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
 
-              <!-- Create comments -->
+              <!-- Create comments-->
+
+              <div class="card-body p-4">
+                <div class="form-outline mb-4">
+                    {% if user.is_authenticated %}
+                       <form method="post" style="margin-top: 1.3em;">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_body">Your Comment:</label>
+                                <textarea name="body" 
+                                          class="form-control w-100" 
+                                          required 
+                                          id="id_body" 
+                                          rows="5" 
+                                          placeholder="Write your comment here..."></textarea>
+                            </div>
+                            <button class="btn btn-primary mt-2">Submit</button>
+                        </form>
+                    {% else %}
+                        <p>Please <a href="{% url 'account_login' %}">Log in</a> to write a comment.</p>
+                        <hr>
+                        <p>If you're not a member yet?<br><a href="{% url 'account_signup' %}">Sign up here.</a></p>
+                    {% endif %}
+                    
+                    {% if error %}
+                        <p class="text-danger mt-2">{{ error }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if messages %}
+                <div>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+
+              <!-- Create comments 
               <div class="card-body p-4">
                 <div class="form-outline mb-4">
                   {% if user.is_authenticated %}
@@ -107,7 +146,7 @@
                       <div class="form-group">
                         <label for="id_body"></label>
                         <textarea name="body" class="form-control w-100" required id="id_body" rows="10"></textarea>
-                     <!-- {{ comment_form|crispy }}-->
+                   {{ comment_form|crispy }}
                     </div>
                     <button class="btn btn-primary">Submit</button>
                     </form>
@@ -128,7 +167,7 @@
                     <div class="alert alert-{{ message.tags }}">{{ message }}</div>
                   {% endfor %}
                 </div>
-              {% endif %}
+              {% endif %}-->
 
               <!-- Display comments -->
               {% for comment in comments %}
@@ -140,14 +179,15 @@
                         <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
                       </span>
 
-                      {% if comment.updated_on and comment.updated_on > comment.created_on %}
-                        <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
-                      {% else %}
-                        <p class="font-weight-normal">{{ comment.created_on }} wrote:</p>
-                      {% endif %}
-                      <div id="comment{{ comment.id }}">
-                        {{ comment.body | linebreaks }}
-                      </div>
+                      {% if comment.updated_on %}
+                      <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
+                    {% else %}
+                      <p class="font-weight-normal">Created on: {{ comment.created_on }} wrote:</p>
+                    {% endif %}
+                    <div id="comment{{ comment.id }}">
+                      {{ comment.body | linebreaks }}
+                    </div>
+                    
 
                       {% if user.is_authenticated and comment.author == user %}
                         <!-- Update Button -->
@@ -171,7 +211,7 @@
                         <hr>
                       {% endif %}
                     </div>
->
+
 
       <!-- Hidden edit form -->
       <div id="editForm{{ comment.id }}" style="display: none;"> <br> 
@@ -203,30 +243,6 @@
   </div> 
 </div>
 
-<!-- Open edit form for comment edits-->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const editButtons = document.querySelectorAll('.btn-edit');
-
-  editButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const commentId = this.getAttribute("data-comment_id");
-      const editForm = document.getElementById(`editForm${commentId}`);
-      const commentText = document.getElementById(`comment${commentId}`);
-
-      if (commentText && editForm) {
-        if (editForm.style.display === "none") {
-          editForm.style.display = "block";
-          commentText.style.display = "none";
-        } else {
-          editForm.style.display = "none";
-          commentText.style.display = "block";
-        }
-      }
-    });
-  });
-});
-</script>
 
 
 <!-- Delete confirmation button Modal -->

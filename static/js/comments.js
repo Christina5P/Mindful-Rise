@@ -1,21 +1,51 @@
 
 console.log("comment loaded");
 
+window.onload = function() {
+    var commentTextarea = document.getElementById('id_body');
+    if (commentTextarea) {
+        console.log("Textarea found:", commentTextarea);
+    }
+};
+
+
+
+// Open edit form for comment edits
+
+document.addEventListener("DOMContentLoaded", function() {
+    const editButtons = document.querySelectorAll('.btn-edit');
+  
+    editButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const commentId = this.getAttribute("data-comment_id");
+        const editForm = document.getElementById(`editForm${commentId}`);
+        const commentText = document.getElementById(`comment${commentId}`);
+  
+        if (commentText && editForm) {
+          if (editForm.style.display === "none") {
+            editForm.style.display = "block";
+            commentText.style.display = "none";
+          } else {
+            editForm.style.display = "none";
+            commentText.style.display = "block";
+          }
+        }
+      });
+    });
+  });
+
+
+// to push delete Modal
 $(document).ready(function() {
     const deleteConfirm = document.getElementById("deleteConfirm");
 
     $('.btn-delete').on('click', function() {
-        console.log("Delete button clicked!"); // Kontrollera om detta visas i konsolen
-        //const commentId = $(this).data("comment_id");
-        const deleteUrl = $(this).data("delete-url"); // Hämta delete-url från data-attributet
-        deleteConfirm.setAttribute('href', deleteUrl); // Sätt rätt URL på deleteConfirm-länken
+        const deleteUrl = $(this).data("delete-url"); 
+        deleteConfirm.setAttribute('href', deleteUrl); 
 
-         // const postSlug = $(".my-5").data("post-slug");
-        // const deleteUrl = `{% url 'comment_delete' post.slug '' %}${commentId}/`; // Skapa URL för att radera kommentaren
-        deleteConfirm.setAttribute('href', deleteUrl); // Sätt rätt URL på deleteConfirm-länken
 
         const deleteModalElement = document.getElementById("deleteModal");
         const deleteModal = new mdb.Modal(deleteModalElement);
-        deleteModal.show(); // Öppnar modalen
+        deleteModal.show(); 
     });
 });

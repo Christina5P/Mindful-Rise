@@ -1,6 +1,6 @@
 
 .navbar-light .navbar-text{
-    color: white;
+    color: black;
 }
 
 .btn-outline-primary.active {
@@ -50,6 +50,8 @@
       }
     }
 
-    .navbar .nav-link {
-      color: #fff !important;
-    }
+    
+.carousel-control-prev,
+.carousel-control-next {
+  color: black;
+}

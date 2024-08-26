@@ -92,7 +92,7 @@ def blog_detail(request, slug):
             comment.save()
             messages.add_message(
                 request, messages.SUCCESS,
-                'Comment submitted and awaiting approval'
+                'Comment created and awaiting approval'
             )
             return HttpResponseRedirect(reverse('post_detail', args=[slug]) + "#comments")
 

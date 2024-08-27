@@ -280,7 +280,7 @@ JS Hint
 * Python PEP8
 
 
-![Screenshot of Settings](static/img_readme/settingpy.png)
+![Screenshot of Settings](static/img_readme/settingspy.png)
 
 
 ![Screenshot of Views](static/img_readme/viewspy.png)
@@ -292,7 +292,7 @@ JS Hint
 ![Screenshot of models](static/img_readme/modelspy.png)
 
 
-![Screenshot of admin](static/img_readme/aminpy.png)
+![Screenshot of admin](static/img_readme/adminpy.png)
 
 
 ![Screenshot of course](static/img_readme/courses.png)
@@ -330,6 +330,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 </details>
+
 ### Bugs
 
 check my document for bugs and status:

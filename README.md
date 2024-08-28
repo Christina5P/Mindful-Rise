@@ -6,7 +6,7 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 
 ### Content
 
-* [project set up](#ProjectsetUp)
+* [project set up](#projectsetUp)
 * [Agil method](agilemethod)
 * [mindmap](Mindmap)
 * [erd](ERD)

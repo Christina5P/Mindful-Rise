@@ -55,19 +55,19 @@ Link to my project in GitHub:
 https://github.com/users/Christina5P/projects/7/views/1?visibleFields=%5B%22Title%22%2C%22Assignees%22%2C%22Status%22%2C%22Milestone%22%5D
 
 
-![Screenshot of Userstories](static/img_readme/userstories.png)
+![Screenshot of Userstories](img_readme/userstories.png)
 
 
 ### Mindmap
 
-![Screenshot of Mindmap](static/img_readme/mindmap.png)
+![Screenshot of Mindmap](img_readme/mindmap.png)
 
 
 link to my mindmap: https://miro.com/app/board/uXjVK1IKqsk=/
 
 ### Relationship diagram ERD
 
-![Screenshot of ERD](static/img_readme/erd.png)
+![Screenshot of ERD](img_readme/erd.png)
 
 Link: https://drive.google.com/file/d/1SYwaMzGs6PuOuEuA6Yi4T2Q0p8dvmSvd/view?usp=sharing
 
@@ -77,13 +77,13 @@ The Wireframe were created using https://balsamiq.cloud/srvezeo/phn02iw/r3EBE
 <details><summary>Wireframes</summary>
 
 Home page:
-![Screenshot of Home](static/img_readme/wireframehome.png)
+![Screenshot of Home](img_readme/wireframehome.png)
 Blog page:
-![Screenshot of Blog](static/img_readme/wireframeblog.png)
+![Screenshot of Blog](img_readme/wireframeblog.png)
 Courses:
-![Screenshot of Courses](static/img_readme/wireframecourses.png)
+![Screenshot of Courses](img_readme/wireframecourses.png)
 Blogpost:
-![Screenshot of Post](static/img_readme/wireframedetail.png)
+![Screenshot of Post](img_readme/wireframedetail.png)
 </details>
 
 ### CRUD 
@@ -111,7 +111,7 @@ It features a half-carousel with images appealing to those interested in self-in
 Below the images, I included a brief introduction of myself to build trust and connection with the users, 
 along with a photo of myself to strengthen that bond.
 
-![Screenshot of homepage](static/img_readme/homepage.png)
+![Screenshot of homepage](img_readme/homepage.png)
 
 ### Blog Page
 The blog page is accessible to all visitors. 
@@ -122,18 +122,18 @@ It also starts with an "All Categories" button to ensure clear and easy navigati
 
 Additionally, a free text search bar allows for searching blog posts by category. A clear button lets users quickly return to all posts, making searches easy.
 
-![Screenshot of blogpage](static/img_readme/blogpage.png)
+![Screenshot of blogpage](img_readme/blogpage.png)
 
 When you open  a post, you see a button to quickly come back to the index again.
 
-![Screenshot of backblog](static/img_readme/backblog.png)
+![Screenshot of backblog](img_readme/backblog.png)
 
 If you find an interesting post, you have the option to share it on social media below the posts.
 
 Users must be logged in to like or comment on a post. For admins, it’s easy to approve comments using a filter option that allows multiple comments to be approved simultaneously. After a while I decided the comments should be proved without admins authorization.
 Users can also edit or delete their comments and receive alerts or flags to confirm actions like deleting a post. The page also features counters for likes and comments.
 
-![Screenshot of blogpage](static/img_readme/blogpage.png)
+![Screenshot of blogpage](img_readme/blogpage.png)
 
 If there´s no post in a category, you get a message,so you understand that there is no published posts.
 
@@ -146,9 +146,9 @@ When logged in, users are greeted with a welcome message and can access the cour
 If you're not signed in, you'll see a form in the center of the page with links to log in or sign up.
 The course material is not visible to unauthorized users.
  
-![Screenshot of coursepage](static/img_readme/coursepagelogin.png)
+![Screenshot of coursepage](img_readme/coursepagelogin.png)
 
-![Screenshot of course](static/img_readme/courses.png)
+![Screenshot of course](img_readme/courses.png)
 
 I didn´t fint it necessary to have a paginator to this page.
 
@@ -159,13 +159,13 @@ with the color changing to maintain contrast as you navigate.
 On the right side, users can see whether they are logged in or not. If logged in, 
 there's a "Logout" option; otherwise, "Register" and "Login" options are displayed.
 
-![Screenshot of navbar](static/img_readme/navbar.png)
+![Screenshot of navbar](img_readme/navbar.png)
 
 ### Footer
 
 The footer contains links to social media and a copyright text.
 
-![Screenshot of footer](static/img_readme/footer.png)
+![Screenshot of footer](img_readme/footer.png)
 
 ### Register section
 
@@ -174,27 +174,27 @@ The footer contains links to social media and a copyright text.
 The register section, powered by Django Allauth, allows users to register with a username and password. 
 The sign-up button is styled with MDB.
 
-![Screenshot of register](static/img_readme/register.png)
+![Screenshot of register](img_readme/register.png)
 
-![Screenshot of login](static/img_readme/login.png)
+![Screenshot of login](img_readme/login.png)
 
-![Screenshot of logout](static/img_readme/logout.png)
+![Screenshot of logout](img_readme/logout.png)
 
 </details>
 ## 404 error
 A custom 404-page is included for a more personal interaction, ensuring users remain within the Mindful Rise community even when an error occurs. A link is provided to easily return to the previous page.
-![Screenshot of error404](static/img_readme/error404.png)
+![Screenshot of error404](img_readme/error404.png)
 
 ### Favicon
 A custom favicon, designed as a logo, is included in the head section of the blog site.
 
-![Screenshot of favicon](static/img_readme/favicon.png)
+![Screenshot of favicon](img_readme/favicon.png)
 
 ### Cookies
 As a best practice from Lighthouse, I implemented a cookie consent to inform users about the use of cookies.
 I chose the Cookie Consent library by Insites for its ease of implementation.
 
-![Screenshot of cookies](static/img_readme/cookies.png)
+![Screenshot of cookies](img_readme/cookies.png)
 
 </details>
 
@@ -202,20 +202,20 @@ I chose the Cookie Consent library by Insites for its ease of implementation.
 <details><summary>Set up Gitpod</summary>
 1.Run this command to install Django:
 
-![Screenshot of install](static/img_readme/installdjango.png)
+![Screenshot of install](img_readme/installdjango.png)
 
 
 Next, install these libraries:
 
-![Screenshot of libary](static/img_readme/2ilibary.png)
+![Screenshot of libary](img_readme/2ilibary.png)
 
 Create a requirements.txt file to save all the installed libraries:
 
-![Screenshot of requirement](static/img_readme/requirement.png)
+![Screenshot of requirement](img_readme/requirement.png)
 
 Create a project and add your apps:
 
-![Screenshot of app](static/img_readme/app.png)
+![Screenshot of app](img_readme/app.png)
 
 Remember to add your apps to the INSTALLED_APPS in settings.py.
 
@@ -228,19 +228,19 @@ Add your database and Cloudinary library to your project:
 
 Set environment variables:
 
-![Screenshot of enviroment](static/img_readme/enviroment.png)
+![Screenshot of enviroment](img_readme/enviroment.png)
 
 Link this to your settings.py by importing the env file at the top:
 
-![Screenshot of env](static/img_readme/env.png)
+![Screenshot of env](img_readme/env.png)
  
 Run the following command:
 
-![Screenshot of migrate](static/img_readme/migrate.png)
+![Screenshot of migrate](img_readme/migrate.png)
 
 Create a superuser for your database to access the admin panel:
 
-![Screenshot of superuser](static/img_readme/superuser.png)
+![Screenshot of superuser](img_readme/superuser.png)
 </details>
 
 ### Design
@@ -267,56 +267,56 @@ I didnt install anything from MDB since I used CDN installment. It is the easies
 * HTML Validation 
 W3C Validator HTML
 
-![Screenshot of HTML](static/img_readme/htmlvalidator.png)
+![Screenshot of HTML](img_readme/htmlvalidator.png)
 
 * CSS validation
 W3C Validator CSS
 
-![Screenshot of CSS](static/img_readme/cssvalidator.png)
+![Screenshot of CSS](img_readme/cssvalidator.png)
 
 * Javascript
 JS Hint
 
-![Screenshot of cs](static/img_readme/commentsjs.png)
+![Screenshot of cs](img_readme/commentsjs.png)
 
-![Screenshot of ajax](static/img_readme/ajaxjs.png)
+![Screenshot of ajax](img_readme/ajaxjs.png)
 
 * Python PEP8
 
 
-![Screenshot of Settings](static/img_readme/settingspy.png)
+![Screenshot of Settings](img_readme/settingspy.png)
 
 
-![Screenshot of Views](static/img_readme/viewspy.png)
+![Screenshot of Views](img_readme/viewspy.png)
 
 
-![Screenshot of url](static/img_readme/urlpy.png)
+![Screenshot of url](img_readme/urlpy.png)
 
 
-![Screenshot of models](static/img_readme/modelspy.png)
+![Screenshot of models](img_readme/modelspy.png)
 
 
-![Screenshot of admin](static/img_readme/adminpy.png)
+![Screenshot of admin](img_readme/adminpy.png)
 
 
-![Screenshot of course](static/img_readme/courses.png)
+![Screenshot of course](img_readme/courses.png)
 </details>
 
 <details><summary>Other Tests</summary>
 
 * Lighthouse
 
-![Screenshot of lighthouse](static/img_readme/lighthouse.png)
+![Screenshot of lighthouse](img_readme/lighthouse.png)
 
-![Screenshot of lighthouse](static/img_readme/lighthousemobile.png)
+![Screenshot of lighthouse](img_readme/lighthousemobile.png)
 
 * Wave
 
-![Screenshot of Wave Home](static/img_readme/wavehome.png)
+![Screenshot of Wave Home](img_readme/wavehome.png)
 
-![Screenshot of Wave Blog](static/img_readme/waveblog.png)
+![Screenshot of Wave Blog](img_readme/waveblog.png)
 
-![Screenshot of Wave Courses](static/img_readme/wavecourses.png)
+![Screenshot of Wave Courses](img_readme/wavecourses.png)
 
 
 #####  Manual testing
@@ -326,7 +326,7 @@ In the end, I have tested every user story in Herokuapp,
 
 check my document: https://docs.google.com/document/d/1hwgkt8NEOS9-HmkjSEQ4gG_kMfmFePpCXCL0mPBnGMg/edit?usp=drive_link
 
-![Screenshot of test](static/img_readme/test.png)
+![Screenshot of test](img_readme/test.png)
 
 
 I have tested "forgot password" in the Log In section, by add a backend email in settings.
@@ -341,7 +341,7 @@ check my document for bugs and status:
 
 https://docs.google.com/document/d/1TzJtZ0N6RMryrJDhrG67TnzF51-qiSbdxDfFVO30f38/edit?usp=sharing
 
-![Screenshot of bug](static/img_readme/bug.png)
+![Screenshot of bug](img_readme/bug.png)
 
 ### Technologies
 * Python - Language of this project
@@ -373,27 +373,27 @@ I chose to make a manual deployment, so I can see that everything goes ok and ha
 
 You need to create an app for your project in Heroku.
 In settings you also need to fill in the URL:s in Config Var
-![Screenshot of settings](static/img_readme/herokusettings.png)
+![Screenshot of settings](img_readme/herokusettings.png)
 
 After that you go to Herokus deployment section 
-![Screenshot of deployment1](static/img_readme/herokudeploy1.png)
+![Screenshot of deployment1](img_readme/herokudeploy1.png)
 
 Scroll down to the bottom and click the "deploy button
 
-![Screenshot of deployment1](static/img_readme/herokudeploy.png)
+![Screenshot of deployment1](img_readme/herokudeploy.png)
 
 On the top at right hand side, you can click "open app" to see public site.
 If there is any error, you can find the logs if you click "more" button.
 
-![Screenshot of app](static/img_readme/herokuapp.png)
+![Screenshot of app](img_readme/herokuapp.png)
 
 ### Git Hub / Gitpod
 I created a repository in Git Hub and connected a project to the repository.
 
-![Screenshot of Github](static/img_readme/github.png)
+![Screenshot of Github](img_readme/github.png)
 In the project, I worked with the canban and created the user stories there.
 
-![Screenshot of canban](static/img_readme/canban.png)
+![Screenshot of canban](img_readme/canban.png)
 
 When I add, deleated or changed anything in Gitpod, I committed them back to GitHub using the following commands in the codespace terminal: Git add .
 Git commit -m"text"

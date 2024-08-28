@@ -15,7 +15,7 @@
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-init data-mdb-ripple-color="light">
                     <div class="image-container"></div>
                         {% if "placeholder" in course.featured_image.url %}
-                            <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
+                            <img class="card-img-top" src="{% static 'images/favicon.png' %}" alt="placeholder image">
                         {% else %}
                             <img class="card-img-top" src="{{ course.featured_image.url }}" alt="{{ course.title }}">
                         {% endif %}

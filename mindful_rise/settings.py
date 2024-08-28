@@ -1,9 +1,12 @@
-
 from pathlib import Path
 import os
 import sys
 from django.utils.text import slugify
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 if os.path.isfile('env.py'):
     import env
 from decouple import config
@@ -17,12 +20,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  os.environ.get ('DEBUG', False)
- 
+# DEBUG = os.environ.get('DEBUG', False)
+DEBUG = True
 
-ALLOWED_HOSTS = ['mindfulrise-f0e0db837715.herokuapp.com',
+ALLOWED_HOSTS = [
+    'mindfulrise-f0e0db837715.herokuapp.com',
     '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
-    '8080-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net']
+    '8080-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
+]
 
 
 # Application definition
@@ -33,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'cloudinary',
     'django.contrib.sites',
     'allauth',
@@ -43,18 +48,18 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'blog',
-   ]
+]
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'home'
 
-#CRISPY_TEMPLATE_PACK = "bootstrap4"
+# CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'Whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,14 +67,14 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+]
 
 ROOT_URLCONF = 'mindful_rise.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-         'DIRS': [TEMPLATES_DIR],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,11 +86,10 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'mindful_rise.wsgi.application'
 
 
-#local DB before change to my created one:
+# local DB before change to my created one:
 
 #  DATABASES = {
 #      'default': {
@@ -93,15 +97,13 @@ WSGI_APPLICATION = 'mindful_rise.wsgi.application'
 #          'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 
-  
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
- }
+
+DATABASES = {'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.mindful_rise.com",
     "https://*.herokuapp.com",
-    "https://*8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net"
+    "https://*8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net",
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -135,15 +137,15 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Static files configuration
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-
-#STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# Media files configuration
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

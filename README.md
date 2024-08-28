@@ -137,6 +137,8 @@ Users can also edit or delete their comments and receive alerts or flags to conf
 
 If there´s no post in a category, you get a message,so you understand that there is no published posts.
 
+The blog index has a paginator, allowing you to navigate between pages using "previous" and "next," and see how many pages there are.
+
 ### Courses
 The courses page is more exclusive and available only to members.
 When logged in, users are greeted with a welcome message and can access the course material below the message.
@@ -147,6 +149,8 @@ The course material is not visible to unauthorized users.
 ![Screenshot of coursepage](static/img_readme/coursepagelogin.png)
 
 ![Screenshot of course](static/img_readme/courses.png)
+
+I didn´t fint it necessary to have a paginator to this page.
 
 ### Nav Bar
 
@@ -434,6 +438,10 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.yin-yoga.se/yinyoga/
 * https://www.masterclass.com/articles/how-to-value-yourself
 * https://www.shutterstock.com/
+* https://www.betterup.com/blog/manifestation-methods
+* https://www.youtube.com/watch?v=1vx8iUvfyCY&list=PLO9OtUmChpP-yR2HBZyf-5MGOtOWlfPil
+
+
 
 
 
@@ -442,6 +450,8 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.wfla.com/bloom-tampa-bay/unlocking-your-inner-confidence-the-power-of-self-esteem/
 * https://www.yin-yoga.se/yinyoga/
 * https://www.psychalive.org/self-worth/
+* https://foreverconscious.com/really-manifest-life-want
+
 
 
 ## Acknowledgement

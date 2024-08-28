@@ -24,12 +24,15 @@
     <section class="border-bottom mb-4">
       <div class="text-center mb-3">
         <div class="image-container">
-          {% if "placeholder" in post.featured_image.url %}
-            <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
-          {% else %}
-            <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-          {% endif %}
+          <div class="image-container">
+            {% if post.featured_image %}
+                  <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                {% else %}
+                  <img class="card-img-top" src="{% static 'images/favicon.png' %}" alt="{{ post.title }}">
+                {% endif %}
         </div>
+        
+        </div> 
       </div>
     </section>
 

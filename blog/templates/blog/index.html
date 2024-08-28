@@ -64,11 +64,14 @@
         <div class="card">
           <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
             <div class="image-container">
-              {% if "placeholder" in post.featured_image.url %}
-              <img class="card-img-top" src="{% static 'images/default.jpg' %}" alt="placeholder image">
-              {% else %}
-              <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
-              {% endif %}
+              <div class="image-container">
+                {% if post.featured_image %}
+                  <img class="card-img-top" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                {% else %}
+                  <img class="card-img-top" src="{% static 'images/favicon.png' %}" alt="{{ post.title }}">
+                {% endif %}
+              </div>
+              
             </div>
             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
           </div>

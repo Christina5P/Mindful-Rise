@@ -1,60 +1,55 @@
-
-.navbar-light .navbar-text{
-    color: black;
+.navbar-light .navbar-text {
+  color: black;
 }
 
 .btn-outline-primary.active {
-    background-color: #007bff; /* Adjust color as needed */
-    color: #fff;
-    border-color: #007bff;
+  background-color: #007bff; /* Adjust color as needed */
+  color: #fff;
+  border-color: #007bff;
+}
+#introCarousel,
+.carousel-inner,
+.carousel-item,
+.carousel-item.active {
+  height: 100vh;
+}
+
+.carousel-item:nth-child(1) {
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1724585749/investinyourself_wzqd7s.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+}
+
+.carousel-item:nth-child(2) {
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723497686/img2carousel_x7vsij.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.carousel-item:nth-child(3) {
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723497686/img3carousel_cdijtc.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+/* Height for devices larger than 576px */
+@media (min-width: 992px) {
+  #introCarousel {
+    margin-top: -58.59px;
   }
   #introCarousel,
-    .carousel-inner,
-    .carousel-item,
-    .carousel-item.active {
-      height: 100vh;
-    }
+  .carousel-inner,
+  .carousel-item,
+  .carousel-item.active {
+    height: 50vh;
+  }
+}
 
-    .carousel-item:nth-child(1) {
-      background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1724585749/investinyourself_wzqd7s.png");
-            background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center top;
-    }
-
-    .carousel-item:nth-child(2) {
-      background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723497686/img2carousel_x7vsij.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    }
-
-    .carousel-item:nth-child(3) {
-      background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723497686/img3carousel_cdijtc.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-    }
-
-
-    /* Height for devices larger than 576px */
-    @media (min-width: 992px) {
-      #introCarousel {
-        margin-top: -58.59px;
-      }
-      #introCarousel,
-      .carousel-inner,
-      .carousel-item,
-      .carousel-item.active {
-        height: 50vh;
-      }
-    }
-
-    
 .carousel-control-prev,
 .carousel-control-next,
 .carousel-control-next-icon {
   color: black;
 }
-
-

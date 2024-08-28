@@ -7,7 +7,7 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 ### Content
 
 * [Project Set Up](#project-set-up)
-* [Agil method](#agile-method)
+* [Agile methods - User stories](#agile-methods-user-stories)
 * [mindmap](#Mindmap)
 * [erd](#erd)
 * [wireframes](#Wireframes)
@@ -356,7 +356,7 @@ https://docs.google.com/document/d/1TzJtZ0N6RMryrJDhrG67TnzF51-qiSbdxDfFVO30f38/
 * Github - Save the project in a repository
 * Heroku - Deploy it to a public website
 
-#### Package
+#### Packages
 * Whitenoise
 * Summernote
 * Cloudinary
@@ -418,7 +418,7 @@ You can read more information on cloning at the GitHub : https://docs.github.com
 
 </details>
 
-### Databas
+### Database
 CI Database https://dbs.ci-dbs.net/
 
 ### Framework 
@@ -454,7 +454,7 @@ CI Database https://dbs.ci-dbs.net/
 
 
 
-## Acknowledgement
+## Acknowledgements
 
 I would like to thank my tutor for their guidance throughout this project. 
 Additional thanks go to my studyfellow Josefin Dahlquist,all time she has spend on me to help, inspirate and stay with my side the whole project.

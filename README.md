@@ -7,7 +7,7 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 ### Content
 
 * [Project Set Up](#project-set-up)
-* [Agile methods - User stories](#agile-methods-user-stories)
+* [Agile methods](#agile-methods)
 * [mindmap](#Mindmap)
 * [Relationship diagram ERD](#relationship-diagram-ERD)
 * [wireframes](#Wireframes)
@@ -39,7 +39,7 @@ Afterwards, I created an ERD (Entity Relationship Diagram) to plan out the struc
 
 In Gitpod, I chose to have a single app since the blog and courses are integrated but filtered on their respective pages. I created different templates to streamline the workflow.
 
-#### Agile methods - User stories
+#### Agile methods 
 
 During the project setup, I created a repository named "Mindful Growth" and a project to accompany it. 
 However, I encountered numerous issues in Gitpod, leading me to start over from scratch with a new repository,
@@ -181,7 +181,8 @@ The sign-up button is styled with MDB.
 ![Screenshot of logout](img_readme/logout.png)
 
 </details>
-## 404 error
+
+###   404 error
 A custom 404-page is included for a more personal interaction, ensuring users remain within the Mindful Rise community even when an error occurs. A link is provided to easily return to the previous page.
 ![Screenshot of error404](img_readme/error404.png)
 
@@ -281,8 +282,7 @@ JS Hint
 
 ![Screenshot of ajax](img_readme/ajaxjs.png)
 
-* Python PEP8
-
+* <details><summary>python PEP8 </summary>
 
 ![Screenshot of Settings](img_readme/settingspy.png)
 
@@ -299,7 +299,7 @@ JS Hint
 ![Screenshot of admin](img_readme/adminpy.png)
 
 
-![Screenshot of course](img_readme/courses.png)
+</details>
 </details>
 
 <details><summary>Other Tests</summary>
@@ -341,6 +341,7 @@ check my document for bugs and status:
 
 https://docs.google.com/document/d/1TzJtZ0N6RMryrJDhrG67TnzF51-qiSbdxDfFVO30f38/edit?usp=sharing
 
+Example:
 ![Screenshot of bug](img_readme/bug.png)
 
 ### Technologies

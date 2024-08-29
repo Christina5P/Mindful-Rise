@@ -2,6 +2,9 @@
 
 Mindful Rise is a platform designed to explore and deepen your understanding of mindfulness, self-development, and methods to achieve a more significant and elevated self. It's a place where you can connect with like-minded individuals and make new friends through engaging with comments and discussions. The platform also features a like system on the index page, helping you easily find the most popular and interesting blogs. By signing up as a member, you gain full access to all content and features.
 
+![Screenshot of responsive](img_readme/responsive.png)
+
+
 #### Live web site: https://mindfulrise-f0e0db837715.herokuapp.com/
 
 ### Content

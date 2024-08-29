@@ -39,7 +39,7 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(
         blank=True
-    )  # to show short beginning from textfield
+    )  
     likes = models.ManyToManyField(User, related_name='like_post', blank=True)
     is_course_material = models.BooleanField(default=False)
 
@@ -64,8 +64,8 @@ class Comment(models.Model):
         User, on_delete=models.CASCADE, related_name="commenter"
     )
     body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)
 
     class Meta:
@@ -96,3 +96,4 @@ class Category(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+

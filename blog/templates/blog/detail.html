@@ -146,7 +146,7 @@
                         <img src="{% static 'images/copywriter.png' %}" alt="Author Icon" style="width: 20px; height: 20px;">
                       </span>
 
-                      {% if comment.updated_on %}
+                      {% if comment.updated_on > comment.created_on %}
                       <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
                     {% else %}
                       <p class="font-weight-normal">Created on: {{ comment.created_on }} wrote:</p>

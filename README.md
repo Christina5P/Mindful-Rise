@@ -285,8 +285,6 @@ JS Hint
 
 ![Screenshot of ajax](img_readme/ajaxjs.png)
 
-* <details><summary>python PEP8 </summary>
-
 ![Screenshot of Settings](img_readme/settingspy.png)
 
 
@@ -302,7 +300,6 @@ JS Hint
 ![Screenshot of admin](img_readme/adminpy.png)
 
 
-</details>
 </details>
 
 <details><summary>Other Tests</summary>
@@ -444,6 +441,10 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.shutterstock.com/
 * https://www.betterup.com/blog/manifestation-methods
 * https://www.youtube.com/watch?v=1vx8iUvfyCY&list=PLO9OtUmChpP-yR2HBZyf-5MGOtOWlfPil
+* https://tinybuddha.com/blog/the-secret-to-high-self-esteem/
+* https://www.unchainyourbrain.org/2019/11/14/why-clarifying-your-values-boosts-self-esteem-the-hawaiian-concept-of-pono/
+
+
 
 
 
@@ -455,12 +456,15 @@ CI Database https://dbs.ci-dbs.net/
 * https://www.yin-yoga.se/yinyoga/
 * https://www.psychalive.org/self-worth/
 * https://foreverconscious.com/really-manifest-life-want
+* https://garybrowntherapy.com/11-tips-to-recover-from-a-breakup/
+
+
 
 
 
 ## Acknowledgements
 
-I would like to thank my tutor for their guidance throughout this project. 
+I would like to thank my mentor for their guidance throughout this project. 
 Additional thanks go to my studyfellow Josefin Dahlquist,all time she has spend on me to help, inspirate and stay with my side the whole project.
 
 #### for tutoring Django:

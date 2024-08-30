@@ -1,15 +1,17 @@
 from pathlib import Path
 import os
-import sys
-from django.utils.text import slugify
+
+# import sys
+# from django.utils.text import slugify
 import dj_database_url
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# import cloudinary
+# import cloudinary.uploader
+
+# import cloudinary.api
 
 if os.path.isfile('env.py'):
-    import env
-from decouple import config
+   import env
+# from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +22,11 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
-# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'mindfulrise-f0e0db837715.herokuapp.com',
     '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
-    '8080-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
 ]
 
 
@@ -86,16 +86,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mindful_rise.wsgi.application'
 
 
-# local DB before change to my created one:
-
-#  DATABASES = {
-#      'default': {
-#          'ENGINE': 'django.db.backends.sqlite3',
-#          'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-
-
-DATABASES = {'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.mindful_rise.com",

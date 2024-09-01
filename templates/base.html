@@ -39,7 +39,25 @@
 
     <!-- Cookies -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" >
-   
+ 
+    <style>
+        #intro {
+          background-image: url("{% static 'images/mindfulcourse.jpg' %}");
+          height: 100vh;
+        }
+    
+        /* Height for devices larger than 576px */
+        @media (min-width: 992px) {
+          #intro {
+            margin-top: -58.59px;
+          }
+        }
+    
+        .navbar .nav-link {
+          color: black;
+        }
+      </style>
+      
 </head>
 
 <body>

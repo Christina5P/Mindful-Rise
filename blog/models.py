@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
-from django.conf import settings
+#from django.conf import settings
 from django.utils.text import slugify
 
 STATUS = ((0, "Draft"), (1, "Published"))
@@ -21,7 +21,7 @@ class Post(models.Model):
     """
     Model for blogpost with fields for unique title,author,content,
     created, modified, many categories, draft or published,
-    short excerpt, likes
+    likes
     """
 
     title = models.CharField(max_length=255, unique=True)
@@ -39,7 +39,7 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(
         blank=True
-    )  
+    )
     likes = models.ManyToManyField(User, related_name='like_post', blank=True)
     is_course_material = models.BooleanField(default=False)
 
@@ -95,5 +95,4 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
+        super().save(*args, **kwargs) 

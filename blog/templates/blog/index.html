@@ -77,10 +77,10 @@
           </div>
           <div class="card-body">
             <h2 class="card-title h5">{{ post.title }}</h2>
-            <p class="card-text">{{ post.excerpt|safe }}...</p>
+            <p class="card-text"></p>
             <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read</a>
             <hr>
-            <p class="card-text text-dark h6">{{ post.created_on }}</p>
+            <p class="card-text text-dark h6">{{ post.created_on }} UTC </p>
 
             
 

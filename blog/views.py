@@ -23,7 +23,7 @@ from django.views.decorators.http import require_POST
 # from django.views.decorators.csrf import csrf_exempt  # need for ajax to likes
 # from django.core.exceptions import ObjectDoesNotExist  # need for ajax to likes
 from django.core.paginator import Paginator
-from django.utils import timezone
+from django.utils import timezone 
 
 
 class home_view(TemplateView):

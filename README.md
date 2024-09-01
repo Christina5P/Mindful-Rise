@@ -271,7 +271,11 @@ I didnt install anything from MDB since I used CDN installment. It is the easies
 * HTML Validation 
 W3C Validator HTML
 
-![Screenshot of HTML](img_readme/htmlvalidator.png)
+![Screenshot of HTML Home](img_readme/htmlvalidatorhome.png)
+
+![Screenshot of HTML Blog](img_readme/htmlvalidatorblog.png)
+
+![Screenshot of HTML Courses](img_readme/htmlvalidatorcourses.png)
 
 * CSS validation
 W3C Validator CSS
@@ -284,6 +288,10 @@ JS Hint
 ![Screenshot of cs](img_readme/commentsjs.png)
 
 ![Screenshot of ajax](img_readme/ajaxjs.png)
+
+<details><summary>Python PEP8</summary>
+
+I have used CI Python Linter and Flake8 to validate python
 
 ![Screenshot of Settings](img_readme/settingspy.png)
 
@@ -302,15 +310,27 @@ JS Hint
 
 </details>
 
-<details><summary>Other Tests</summary>
+#### Other tests:
 
-* Lighthouse
+<details><summary>Lighthouse</summary>
 
-![Screenshot of lighthouse](img_readme/lighthouse.png)
 
-![Screenshot of lighthouse](img_readme/lighthousemobile.png)
+![Screenshot of  home lighthouse](img_readme/homelighthouse.png)
 
-* Wave
+![Screenshot of home mobile lighthouse](img_readme/homelighthousemobil.png)
+
+![Screenshot of blog lighthouse](img_readme/bloglighthouse.png)
+
+![Screenshot of mobile blog lighthouse](img_readme/bloglighthousemobil.png)
+
+![Screenshot of courses lighthouse](img_readme/courseslighthouse.png)
+
+![Screenshot of courses mobile lighthouse](img_readme/courseslighhousemobil.png)
+
+</details>
+
+<details><summary>Wave</summary>
+
 
 ![Screenshot of Wave Home](img_readme/wavehome.png)
 
@@ -318,6 +338,7 @@ JS Hint
 
 ![Screenshot of Wave Courses](img_readme/wavecourses.png)
 
+</details>
 
 #####  Manual testing
 
@@ -342,6 +363,7 @@ check my document for bugs and status:
 https://docs.google.com/document/d/1TzJtZ0N6RMryrJDhrG67TnzF51-qiSbdxDfFVO30f38/edit?usp=sharing
 
 Example:
+
 ![Screenshot of bug](img_readme/bug.png)
 
 ### Technologies
@@ -478,7 +500,7 @@ Additional thanks go to my studyfellow Josefin Dahlquist,all time she has spend 
 * https://monica.im/home GPT chat to help explain where to put url, create cookies content,
   explain of Django functions.
 * https://chatgpt.com to help me with adding category search button and clear search button with MDB style,
-  Suggestion to create excerpt automatically save
+ 
 * https://www.w3schools.com/howto/howto_website_static.asp
 
 #### Inspiration of blogs and course material

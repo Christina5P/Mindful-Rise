@@ -40,7 +40,7 @@
     <div class="card-body">
       <p class="card-text">{{ post.content | safe }}</p>
     </div>
-    <hr>
+    
 
     <!-- Comment and Likes -->
     <div class="row align-items-center mb-2">
@@ -147,9 +147,9 @@
                       </span>
 
                       {% if comment.updated_on > comment.created_on %}
-                      <p class="font-weight-normal">Updated on: {{ comment.updated_on }}</p>
+                      <p class="font-weight-normal">Updated on: {{ comment.updated_on }} UTC</p>
                     {% else %}
-                      <p class="font-weight-normal">Created on: {{ comment.created_on }} wrote:</p>
+                      <p class="font-weight-normal">Created on: {{ comment.created_on }} UTC:</p>
                     {% endif %}
                     <div id="comment{{ comment.id }}">
                       {{ comment.body | linebreaks }}

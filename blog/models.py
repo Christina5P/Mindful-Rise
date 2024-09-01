@@ -1,11 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
-#from django.conf import settings
 from django.utils.text import slugify
 
 STATUS = ((0, "Draft"), (1, "Published"))
-
 
 class Home(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -34,7 +32,7 @@ class Post(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField(
         "category", related_name="posts"
-    )  # to assign many categories to many posts
+    )  
     slug = models.SlugField(max_length=255, unique=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(
@@ -95,4 +93,4 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        super().save(*args, **kwargs) 
+        super().save(*args, **kwargs)

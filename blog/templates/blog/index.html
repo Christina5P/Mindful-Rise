@@ -2,7 +2,7 @@
 {% load static %}
 
 
-<!-- index.html content starts here -->
+<!-- index.html content starts here. Blog page -->
 {% block page_content %}
 
 <!-- Main layout -->
@@ -21,6 +21,7 @@
       <label for="searchInput" class="visually-hidden">Search categories</label>
         <button class="btn btn-primary" type="submit">Search</button>
       </form>
+
       <!-- Clear search link (show if there's a query or a category selected) -->
       {% if query or current_category %}
       <a href="{% url 'blog_index' %}" class="btn btn-light ms-2">Clear Search</a>
@@ -108,8 +109,7 @@
   
            
             <!-- Comment Count -->
-          
-              <div class="comments-section d-flex align-items-center">
+               <div class="comments-section d-flex align-items-center">
                 <i class="far fa-comments me-2"></i>
                 <strong class="text-black">{{ post.comments.count }}</strong>
               </div>
@@ -118,14 +118,11 @@
         </div>
       </div>
 
-   
-
-      <!-- No Posts Message -->
+     <!-- No Posts Message -->
       {% empty %}
       <p>No published posts</p>
       {% endfor %}
     </div>
-
     <hr>
 
     <!-- Pagination -->

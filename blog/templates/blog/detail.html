@@ -2,17 +2,16 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+<!-- text in blog post-->
+
 {% block page_content %}
 <div class="my-5" data-post-slug="{{ post.slug }}">
+   <div class="container">
  
-
-  <div class="container">
-    <!-- Lägg till denna rad för att se till att slug faktiskt finns -->
-
-
     <!-- Post details -->
     <div class="row">
       <div class="col-md-8 mb-4">
+
         <!-- Back button to index -->
         <a href="{% url 'blog_index' %}" class="btn btn-secondary mb-4">
           <i class="fas fa-arrow-left"></i> Back to Blog Index
@@ -31,8 +30,7 @@
                   <img class="card-img-top" src="{% static 'images/favicon.png' %}" alt="{{ post.title }}">
                 {% endif %}
         </div>
-        
-        </div> 
+       </div> 
       </div>
     </section>
 
@@ -101,7 +99,6 @@
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
 
               <!-- Create comments-->
-
               <div class="card-body p-4">
                 <div class="form-outline mb-4">
                     {% if user.is_authenticated %}
@@ -134,8 +131,7 @@
                 </div>
             {% endif %}
             
-
-           
+         
               <!-- Display comments -->
               {% for comment in comments %}
                 <div id="comment-{{ comment.id }}">

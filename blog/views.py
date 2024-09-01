@@ -15,13 +15,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-# from django.views import generic, View
 from django.views.generic import TemplateView
-# from django.views.generic.edit import UpdateView
-# from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
-# from django.views.decorators.csrf import csrf_exempt  # need for ajax to likes
-# from django.core.exceptions import ObjectDoesNotExist  # need for ajax to likes
 from django.core.paginator import Paginator
 from django.utils import timezone 
 
@@ -80,7 +75,6 @@ def blog_index(request):
 
 # blogpost with comments, count of likes and comment
 
-
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.all().order_by("-created_on")
@@ -123,7 +117,6 @@ def blog_detail(request, slug):
 
 # like/unlike post
 
-
 @require_POST
 def like_post(request, post_id):
     if not request.user.is_authenticated:
@@ -147,18 +140,17 @@ def like_post(request, post_id):
 
     # Display blog posts filtered by category name
 
-
 def blog_category(request, category_slug):
 
     if category_slug == 'all':
         posts = Post.objects.filter(status=1).order_by('-created_on')
-        # current_category = None
+       
     else:
         category = get_object_or_404(Category, slug=category_slug)
         posts = Post.objects.filter(categories=category, status=1).order_by(
             '-created_on'
         )
-        # current_category = category
+       
 
     paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
@@ -168,8 +160,6 @@ def blog_category(request, category_slug):
     if 'page' in get_params:
         del get_params['page']
     querystring = get_params.urlencode()
-
-    # categories = Category.objects.all()
 
     return render(
         request,
@@ -186,19 +176,14 @@ def blog_category(request, category_slug):
 
 # searchfield for categories
 
-
 def category_search(request):
     query = request.GET.get('q')
     categories = Category.objects.filter(name__icontains=query)
-    # paginator = Paginator(categories, 6)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
-
+   
     get_params = request.GET.copy()
     if 'page' in get_params:
         del get_params['page']
-    # querystring = get_params.urlencode()
-
+    
     return render(
         request,
         'blog/category_search.html',
@@ -211,7 +196,6 @@ def category_search(request):
 
 # login check on course page
 
-
 @login_required
 def course_detail(request, slug):
     course = get_object_or_404(Post, slug=slug, is_course_material=True)
@@ -220,7 +204,6 @@ def course_detail(request, slug):
 
 
 # index for course material
-
 
 def courses_view(request):
     courses = Post.objects.filter(is_course_material=True, status=1)
@@ -237,7 +220,6 @@ def courses_view(request):
 
 
 # comment edits with update and hidden form
-
 
 def comment_edit(request, slug, comment_id):
     """
@@ -270,13 +252,10 @@ def comment_edit(request, slug, comment_id):
 
 # delete comment
 
-
 def comment_delete(request, slug, comment_id):
     """
     View to delete comment
     """
-    # queryset = Post.objects.filter(status=1)
-    # post = get_object_or_404(queryset, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author == request.user:

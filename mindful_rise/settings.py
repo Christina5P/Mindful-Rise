@@ -1,22 +1,14 @@
 from pathlib import Path
 import os
 
-# import sys
-# from django.utils.text import slugify
 import dj_database_url
-# import cloudinary
-# import cloudinary.uploader
-
-# import cloudinary.api
 
 if os.path.isfile('env.py'):
     import env
-# from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')

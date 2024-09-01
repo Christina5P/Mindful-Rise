@@ -4,7 +4,6 @@ from django_summernote.admin import SummernoteModelAdmin
 
 # models for administrative interface in SQL
 
-
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
@@ -30,5 +29,5 @@ class CommentAdmin(admin.ModelAdmin):
     def approve_comments(self, request, queryset):
         updated_count = queryset.update(approved=True) 
         self.message_user(request, f'{updated_count}Approved comments')
-    
+
     approve_comments.short_description = "Approve comments"

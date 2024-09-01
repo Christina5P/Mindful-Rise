@@ -17,20 +17,21 @@
 .carousel-item:nth-child(1) {
   background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1725052656/investinyourself_1_w1fncw.webp");
   
+  
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
 }
 
 .carousel-item:nth-child(2) {
-  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1725052653/img2carousel_jetybe.webp");
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723033686/static/images/img%202%20carousel.f17ccf5484c5.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
 }
 
 .carousel-item:nth-child(3) {
-  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1725052654/img3carousel_ugfnqh.webp");
+  background-image: url("https://res.cloudinary.com/dvh69l0yv/image/upload/v1723033685/static/images/img%203%20carousel.77ac91d11d1d.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;

@@ -274,6 +274,16 @@ W3C Validator HTML
 
 ![Screenshot of HTML Courses](img_readme/htmlvalidatorcourses.png)
 
+
+In this file, ther is an error of unclosed tag.
+This error is not from my written code, it comes from allauth field.html
+It´s not affecting the UX.
+
+
+![Screenshoi of HTML Signup](img_readme/htmlvalidatorsignup.png)
+
+![Screenshot of HTML login](img_readme/htmlvalidatorlogin.png)
+
 * CSS validation
 W3C Validator CSS
 

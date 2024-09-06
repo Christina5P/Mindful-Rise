@@ -1,6 +1,3 @@
-
-console.log("comment loaded");
-
 // Open edit form for comment edits
 
 document.addEventListener("DOMContentLoaded", function() {

@@ -1,6 +1,3 @@
-console.log("cookies loaded");
-
-
 // script for cookies alert
 
 window.addEventListener("load", function() {

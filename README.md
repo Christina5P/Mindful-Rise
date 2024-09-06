@@ -254,11 +254,8 @@ Colors:
 I chose earthy and neutral tones to enhance a calm and mindful feeling. 
 Light colors dominate the site to avoid overwhelming users.
 
-
 Typography:
-Heading: 'Roboto', sans-serif; with styles ranging from light to bold.
-
-Body: 'Noto Serif', serif; for a calm and professional look.
+I use standard font from MDB css.
 </details>
 
 I didnt install anything from MDB since I used CDN installment. It is the easiest way, since you only need to add MDB:s link tap in <head> in your base.html 

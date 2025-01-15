@@ -1,11 +1,11 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
-from urllib.parse import urlparse
+#from dotenv import load_dotenv
+#from urllib.parse import urlparse
 
-load_dotenv()
+#load_dotenv()
 
-#import dj_database_url
+import dj_database_url
 
 if os.path.isfile('env.py'):
     import env
@@ -83,8 +83,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mindful_rise.wsgi.application'
 
 
-tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+#tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -94,11 +95,11 @@ DATABASES = {
         'HOST': tmpPostgres.hostname,
         'PORT': 5432,
     }
-}
+}"""
 
-#DATABASES = {
-#    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-#    }
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.mindful_rise.com",

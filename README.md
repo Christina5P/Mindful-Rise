@@ -7,6 +7,9 @@ Mindful Rise is a platform designed to explore and deepen your understanding of 
 
 #### Live web site: https://mindfulrise-f0e0db837715.herokuapp.com/
 
+#### Note: Links Unavailable
+Please note that some links in this project are no longer functional because the student account that hosted these resources has been deactivated.
+
 ### Content
 
 * [Project Set Up](#project-set-up)

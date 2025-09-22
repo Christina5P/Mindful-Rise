@@ -1,27 +1,22 @@
 from pathlib import Path
 import os
-#from dotenv import load_dotenv
-#from urllib.parse import urlparse
 
-#load_dotenv()
-
-import dj_database_url
-
-if os.path.isfile('env.py'):
-    import env
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+ 
+import dj_database_url
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    'mindfulrise-f0e0db837715.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
+    # 'mindfulrise-f0e0db837715.herokuapp.com',
     '8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net',
     'mindful-rise.onrender.com'
 ]
@@ -68,7 +63,7 @@ ROOT_URLCONF = 'mindful_rise.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [TEMPLATES_DIR], # type: ignore
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,3 +146,4 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

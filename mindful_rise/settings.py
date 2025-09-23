@@ -2,6 +2,8 @@ import os
 import dj_database_url
 import environ
 from pathlib import Path
+from dotenv import load_dotenv
+from urllib.parse import urlparse
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +16,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 CLOUDINARY_URL = env("CLOUDINARY_URL", default="")
 
 SECRET_KEY = env("SECRET_KEY")
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = env.bool("DEBUG", default=True)
 
 ALLOWED_HOSTS = [
     'localhost',

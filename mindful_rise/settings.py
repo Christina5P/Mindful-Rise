@@ -1,17 +1,20 @@
-from pathlib import Path
 import os
+import dj_database_url
+import environ
+from pathlib import Path
 
+# Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
- 
-import dj_database_url
 
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / ".env")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# Cloudinary
+CLOUDINARY_URL = env("CLOUDINARY_URL", default="")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = env("SECRET_KEY")
+DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'blog',
+    'storages',
 ]
 
 SITE_ID = 1
@@ -77,28 +81,22 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = 'mindful_rise.wsgi.application'
 
-
-#tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.replace('/', ''),
-        'USER': tmpPostgres.username,
-        'PASSWORD': tmpPostgres.password,
-        'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}"""
-
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+else:    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
+
+
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.mindful_rise.com",
-    "https://*.herokuapp.com",
     "https://*8000-christina5p-mindfulrise-hzzi4mxch9a.ws.codeinstitute-ide.net",
     "https://*mindful-rise.onrender.com",
 ]
@@ -143,6 +141,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Media files configuration
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

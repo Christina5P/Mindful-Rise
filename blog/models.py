@@ -1,96 +1,95 @@
-from django.db import models
+import os
+import django
+
+# Ställ in Django settings
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mindful_rise.settings')
+django.setup()
+
+from blog.models import Post, Category
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
-from django.utils.text import slugify
 
-STATUS = ((0, "Draft"), (1, "Published"))
+# Ange användaren som ska vara författare
+author = User.objects.get(username='christina')
 
-class Home(models.Model):
-    title = models.CharField(max_length=200, unique=True)
-    profile_image = CloudinaryField('image', blank=True, null=True)
-    updated_on = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+# Lista över alla kategorier som du vill återskapa
+categories_data = [
+    'media/django-summernote/2024-08-27',
+    'media/django-summernote/2024-08-09',
+    'media/django-summernote/2024-08-08',
+    'static/img_readme',
+    'static/images',
+    'static/staticfiles/images',
+    'static/summernote',
+    'samples',
+    'samples/landscapes',
+    'samples/animals',
+    'samples/food',
+    'samples/ecommerce',
+    'samples/people',
+    'Cloudinary'
+]
 
-    def __str__(self):
-        return self.title
+# Skapa eller hämta kategorier
+categories_dict = {}
+for cat_name in categories_data:
+    category, created = Category.objects.get_or_create(name=cat_name)
+    categories_dict[cat_name] = category
 
+# Lista över blogginlägg med titel, slug och Cloudinary-URL
+posts_data = [
+    {
+        "title": "img2carousel_y9ckwt",
+        "slug": "img2carousel_y9ckwt",
+        "image_url": "https://res.cloudinary.com/dvh69l0yv/image/upload/v1725215184/img2carousel_y9ckwt",
+        "categories": ["media/django-summernote/2024-08-27"]
+    },
+    {
+        "title": "fxz5rknmf5jmnihzxk2h",
+        "slug": "fxz5rknmf5jmnihzxk2h",
+        "image_url": "https://res.cloudinary.com/dvh69l0yv/image/upload/v1725198212/fxz5rknmf5jmnihzxk2h",
+        "categories": ["static/img_readme"]
+    },
+    {
+        "title": "q7okk3ff8ucqqokazqvs",
+        "slug": "q7okk3ff8ucqqokazqvs",
+        "image_url": "https://res.cloudinary.com/dvh69l0yv/image/upload/v1725198196/q7okk3ff8ucqqokazqvs",
+        "categories": ["samples"]
+    },
+    {
+        "title": "nss9effo3jq1shb1cakp",
+        "slug": "nss9effo3jq1shb1cakp",
+        "image_url": "https://res.cloudinary.com/dvh69l0yv/image/upload/v1725197946/nss9effo3jq1shb1cakp",
+        "categories": ["samples/landscapes"]
+    },
+    {
+        "title": "e8iqem9lo1eicqsa9p8l",
+        "slug": "e8iqem9lo1eicqsa9p8l",
+        "image_url": "https://res.cloudinary.com/dvh69l0yv/image/upload/v1725093790/e8iqem9lo1eicqsa9p8l",
+        "categories": ["samples/animals"]
+    },
+    {
+        "title": "bvzaeipqipbl2ithbmuk",
+        "slug": "bvzaeipqipbl2ithbmuk",
+        "image_url": "https://res.cloudinary.com/dvh69l0yv/image/upload/v1725093413/bvzaeipqipbl2ithbmuk",
+        "categories": ["samples/food"]
+    }
+]
 
-class Post(models.Model):
-    """
-    Model for blogpost with fields for unique title,author,content,
-    created, modified, many categories, draft or published,
-    likes
-    """
-
-    title = models.CharField(max_length=255, unique=True)
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="posts"
+# Skapa inlägg och koppla kategorier
+for pdata in posts_data:
+    post = Post.objects.create(
+        title=pdata['title'],
+        author=author,
+        content="Återskapat från Cloudinary",
+        slug=pdata['slug']
     )
-    featured_image = CloudinaryField('image', blank=True, null=True)
-    content = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True)
-    categories = models.ManyToManyField(
-        "category", related_name="posts"
-    )  
-    slug = models.SlugField(max_length=255, unique=True)
-    status = models.IntegerField(choices=STATUS, default=0)
-    excerpt = models.TextField(
-        blank=True
-    )
-    likes = models.ManyToManyField(User, related_name='like_post', blank=True)
-    is_course_material = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ["-created_on"]
-
-
-def number_of_likes(self):
-    return self.likes.count()
-
-
-class Comment(models.Model):
-    """
-    Model for Comments with fields for author,content,
-    created, modified, many categories, link to blog post
-    """
-
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="comments"
-    )
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commenter"
-    )
-    body = models.TextField()
-    updated_on = models.DateTimeField(auto_now=True)
-    created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=True)
-
-    class Meta:
-        ordering = ["created_on"]
-
-    def __str__(self):
-        return f"Comment {self.body} by {self.author}"
-
-
-class Category(models.Model):
-    """
-    slug field with category name for category list and Q-search
-    """
-
-    name = models.CharField(max_length=60, unique=True)
-    description = models.TextField(blank=True, null=True)
-    slug = models.SlugField(max_length=60, unique=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name_plural = "categories"
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+    # Lägg till Cloudinary-bilden
+    if pdata.get('image_url'):
+        post.featured_image = pdata['image_url']
+        post.save()
+    
+    # Lägg till kategorier
+    for cat_name in pdata['categories']:
+        post.categories.add(categories_dict[cat_name])
+    
+    print(f"Skapade inlägg: {post.title} med kategorier {[c.name for c in post.categories.all()]}")

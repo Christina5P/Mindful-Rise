@@ -2,74 +2,41 @@ import os
 import django
 import cloudinary
 import cloudinary.api
+from cloudinary.utils import cloudinary_url
 
-# --- Setup Django ---
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mindful_rise.settings')
+# Sätt Django settings
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mindful_rise.settings")
 django.setup()
 
-# --- Importera modeller ---
 from blog.models import Post, Category
-from django.contrib.auth.models import User
 
-# --- Konfigurera Cloudinary direkt med din URL ---
+# Konfigurera Cloudinary (se till att dina miljövariabler är rätt)
 cloudinary.config(
-    cloudinary_url="cloudinary://618768418781469:Q8KVKcOdIzeC4kCaKocmseNCHmM@dvh69l0yv"
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
 )
 
-# --- Hämta första användaren som author ---
-author = User.objects.first()
-if not author:
-    print("Ingen User i databasen, skapa en först!")
-    exit()
+# Lista alla resurser från Cloudinary
+resources = cloudinary.api.resources(max_results=100)  # max_results kan ändras
 
-# --- Funktion för att skapa Post ---
-def create_post(title, url, author):
-    slug = title.lower().replace(" ", "-")
-    if not Post.objects.filter(title=title).exists():
-        post = Post.objects.create(
-            title=title,
-            content="Återställd från Cloudinary",
-            featured_image=url,
-            author=author,
-            slug=slug,
-            status=1,  # Published
-        )
-        print(f"Skapat: {title}")
-    else:
-        print(f"Finns redan: {title}")
+for r in resources.get('resources', []):
+    # Exempel: ta filväg och dela upp i kategori/filer
+    # Om filvägen är "media/django-summernote/2024-08-27/img.png"
+    folder = r.get('folder', 'Uncategorized')  # folder används som kategori
+    title = r.get('public_id').split('/')[-1]  # filnamn som titel
+    url = r.get('secure_url')  # bild-URL
 
-# --- Hämta alla Cloudinary-resurser med paginering ---
-next_cursor = None
-while True:
-    try:
-        resources = cloudinary.api.resources(
-            type="upload",
-            max_results=100,
-            next_cursor=next_cursor
-        )
-    except Exception as e:
-        print("Fel vid hämtning från Cloudinary:", e)
-        break
+    # Hitta eller skapa kategori
+    cat, created = Category.objects.get_or_create(name=folder)
 
-    for res in resources.get('resources', []):
-        title = res['public_id'].split('/')[-1]
-        url = res['secure_url']
+    # Skapa blogginlägg
+    post = Post.objects.create(
+        title=title,
+        category=cat,
+        content=f'<p>Återskapat från Cloudinary: <img src="{url}" alt="{title}"></p>',
+        # Om du har ett separat fält för bild:
+        # image_url=url
+    )
 
-        # Skapa Post
-        create_post(title, url, author)
-
-        # Skapa kategori baserat på mapp i Cloudinary (om finns)
-        folder = '/'.join(res['public_id'].split('/')[:-1])
-        if folder:
-            category, created = Category.objects.get_or_create(
-                name=folder,
-                defaults={'slug': folder.lower().replace(" ", "-")}
-            )
-            post = Post.objects.get(title=title)
-            post.categories.add(category)
-
-    next_cursor = resources.get('next_cursor')
-    if not next_cursor:
-        break
-
-print("Klart! Alla Cloudinary-bilder har nu blogposter och kategorier.")
+    print(f"Skapade post: {title} i kategori {cat.name}")
